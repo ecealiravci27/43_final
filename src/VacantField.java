@@ -18,7 +18,7 @@ public class VacantField extends PropertyField {
             return Rent;
         }
         if (value > 0 && value < 5) {
-            return house_rent[value];
+            return house_rent[value-1];
         }
         else {
             return hotel_rent;
