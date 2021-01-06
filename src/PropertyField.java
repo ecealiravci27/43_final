@@ -11,5 +11,4 @@ public abstract class PropertyField extends SuperField{
         this.Color = Colors[typeIndex];
         this.Rent = Rent;
     }
-
 }
