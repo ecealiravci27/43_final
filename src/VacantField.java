@@ -24,4 +24,11 @@ public class VacantField extends PropertyField {
             return hotel_rent;
         }
     }
+    public int getHouse_price(){
+        return house_price;
+    }
+    public int getHotel_rent(){
+        return hotel_rent;
+    }
+
 }
