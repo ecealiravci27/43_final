@@ -14,5 +14,6 @@ public abstract class PropertyField extends SuperField{
     public int getFieldPrice(){
         return price;
     }
+    abstract int getRent();
 }
 

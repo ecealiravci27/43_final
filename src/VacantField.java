@@ -13,7 +13,7 @@ public class VacantField extends PropertyField {
         this.hotel_price = hotel_price;
         }
 
-    public int getrent(int value) {
+    public int getRent(int value) {
         if (value == 0) {
             return rent;
         }
@@ -31,4 +31,8 @@ public class VacantField extends PropertyField {
         return hotel_rent;
     }
 
+    @Override
+    int getRent() {
+        return 0;
+    }
 }
