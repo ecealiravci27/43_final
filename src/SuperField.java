@@ -1,14 +1,12 @@
 public abstract class SuperField {
     protected String fieldName;
     protected String fieldDescription;
+    protected int ID;
 
-    public SuperField(String name, String description){
+    public SuperField(String name, String description, int ID){
         this.fieldName = "";
         this.fieldDescription = "";
-    }
-
-    public String getFieldName() {
-        return fieldName;
+        this.ID = ID;
     }
     public String getFieldDescription(){
         return fieldDescription;
