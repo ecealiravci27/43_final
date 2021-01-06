@@ -3,8 +3,10 @@ public class Piece {
     int totalMoves;
     String[] Color = new String[]{"Red", "Blue", "Green", "Yellow", "Orange", "Purple"};
 
-    public Piece(){
+    public Piece(int typeIndex){
+        this.pieceColor = Color[typeIndex];
         this.totalMoves = 0;
+
     }
 
     public void movePiece(int addMove) {
@@ -18,12 +20,9 @@ public class Piece {
     public int getMoves() {
         return totalMoves;
     }
+
     public String getColor(){
         return pieceColor;
     }
 
-    public String[] setColor(String[] pieceColor){
-        Color = pieceColor;
-        return Color;
-    }
 }
