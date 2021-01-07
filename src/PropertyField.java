@@ -1,8 +1,8 @@
 public abstract class PropertyField extends SuperField{
 
-    public int price;
-    public String Color;
-    public int rent;
+    protected int price;
+    protected String Color;
+    protected int rent;
     String[] Colors = new String[]{ "Blue","Orange", "light-yellow", "purple", "gray", "red", "white", "yellow"};
 
     public PropertyField(String name, String description, int ID, int price, int typeIndex, int rent) {
@@ -14,6 +14,5 @@ public abstract class PropertyField extends SuperField{
     public int getFieldPrice(){
         return price;
     }
-    abstract int getRent();
 }
 
