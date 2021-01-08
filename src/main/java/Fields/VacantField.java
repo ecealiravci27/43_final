@@ -1,3 +1,5 @@
+package Fields;
+
 public class VacantField extends PropertyField {
 
     private final int[] house_rent;

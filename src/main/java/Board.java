@@ -1,6 +1,8 @@
+import Fields.*;
+
 public class Board {
 
-    private SuperField[] fields;
+    private Fields.SuperField[] fields;
     private int totalFields;
     private Object SuperField;
 

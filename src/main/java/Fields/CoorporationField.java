@@ -1,3 +1,7 @@
+package Fields;
+
+import Fields.PropertyField;
+
 public class CoorporationField extends PropertyField {
 
     private final int multiplier_for_one;

@@ -1,3 +1,5 @@
+package Fields;
+
 public class ShippingField extends PropertyField {
 
     private int rent_for_one;

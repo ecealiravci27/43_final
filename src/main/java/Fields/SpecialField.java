@@ -1,3 +1,5 @@
+package Fields;
+
 public class SpecialField extends SuperField{
 
     private final boolean goToJail;
