@@ -18,4 +18,5 @@ public class Property {
     public int getOwner(){
         return owner;
     }
+
 }
