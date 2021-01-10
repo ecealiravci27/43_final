@@ -5,8 +5,8 @@ public class ShippingField extends PropertyField {
     private int rent_for_three;
 
 
-    public ShippingField(String name, String description, int ID, int price, int typeIndex, int rent, int rent_for_one, int rent_for_two, int rent_for_three) {
-        super(name, description, ID, price, typeIndex, rent);
+    public ShippingField(String name, String description, int ID, int price, int rent) {
+        super(name, description, ID, price, rent);
     }
 
     public int getRent(int owned_ShippinFields){
