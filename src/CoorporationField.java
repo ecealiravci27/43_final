@@ -10,7 +10,7 @@ public class CoorporationField extends PropertyField {
     }
 
     @Override
-    public int getRent(int eyesum, int owned_coorporations, int tier) {
+    public int getRent(int eyesum, int owned_coorporations) {
         if (owned_coorporations == 1) {
             rent = eyesum * multiplier_for_one;
         }
