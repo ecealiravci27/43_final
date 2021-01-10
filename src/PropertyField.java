@@ -14,4 +14,3 @@ public abstract class PropertyField extends SuperField{
 
     abstract public int getRent(int eyesum, int owned_coorporations, int tier);
 }
-
