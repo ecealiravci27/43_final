@@ -31,4 +31,8 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
+    public int getPlayerPosition() {
+
+        return player.fetchPlayerPosition();
+    }
 }
