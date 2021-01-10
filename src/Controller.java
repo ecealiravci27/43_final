@@ -3,10 +3,10 @@ public class Controller {
     private Dice dice;
     private PropertyPlayerController propertyPlayerController;
 
-    public void movePiece() {
+   /* public void movePiece() {
 
-        propertyPlayerController.movePiece(dice.fetchEyeSum());
-    }
+        propertyPlayerController.movePiece(dice.fetchEyeSum(), );
+    }*/
 
 
 
@@ -20,13 +20,13 @@ public class Controller {
 
             for (int j = 0; j < 4; j++) {
 
-                propertyPlayerController.movePiece(dice.fetchEyeSum());
+                propertyPlayerController.movePiece(dice.fetchEyeSum(), j);
 
-                System.out.println(dice.getGetEyesum());
+                System.out.println("Player " + j++ + " eye sum " + dice.getGetEyesum());
 
-                propertyPlayerController.getPlayerPosition();
+                propertyPlayerController.getPlayerPosition(j);
 
-                System.out.println(propertyPlayerController.getPlayerPosition());
+                System.out.println("Player " + j++ + " position : " + propertyPlayerController.getPlayerPosition(j++));
 
             }
 
