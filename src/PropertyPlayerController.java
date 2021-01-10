@@ -37,9 +37,9 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
-    public int getPlayerPosition() {
+    public int getPlayerPosition(int ID) {
 
-        return player.fetchPlayerPosition();
+        return playerArray[ID-1].getPlayerPosition();
     }
 
     public Player[] setupPlayer(int playerAmount) {
