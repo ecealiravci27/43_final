@@ -8,8 +8,9 @@ public class CoorporationField extends PropertyField {
         this.multiplier_for_one = 100;
         this.getMultiplier_for_two = 200;
     }
-    
-    public int getRent(int eyesum, int owned_coorporations) {
+
+    @Override
+    public int getRent(int eyesum, int owned_coorporations, int tier) {
         if (owned_coorporations == 1) {
             rent = eyesum * multiplier_for_one;
         }
