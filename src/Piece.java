@@ -1,7 +1,7 @@
 public class Piece {
-    String pieceColor;
-    int totalMoves;
-    String[] Color = new String[]{"Red", "Blue", "Green", "Yellow", "Orange", "Purple"};
+    private String pieceColor;
+    private int totalMoves;
+    private String[] Color = new String[]{"Red", "Blue", "Green", "Yellow", "Orange", "Purple"};
 
     public Piece(int typeIndex){
         this.pieceColor = Color[typeIndex];

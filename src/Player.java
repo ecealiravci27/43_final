@@ -21,4 +21,25 @@ public class Player {
         return playerPiece.getMoves();
     }
 
+    public void setPlayerPosition(int playerPosition) {
+
+        this.playerPosition = playerPosition;
+    }
+
+    public void calculatePlayerPosition() {
+
+        setPlayerPosition(getMoves()%40+1);
+    }
+
+    public int fetchPlayerPosition() {
+
+        calculatePlayerPosition();
+
+        return getPlayerPosition();
+    }
+
+    public int getPlayerPosition() {
+
+        return playerPosition;
+    }
 }

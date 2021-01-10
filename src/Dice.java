@@ -24,6 +24,11 @@ public class Dice {
 
     }
 
+    private void setCalculatedEyeSum() {
+
+        setEyeSum(calculateEyeSum());
+    }
+
     public void setEyeSum(int dicetotal) {
         eyeSum = dicetotal;
     }
@@ -32,7 +37,12 @@ public class Dice {
         return eyeSum;
     }
 
+    public int grabEyeSum() {
 
+        setCalculatedEyeSum();
+
+        return getGetEyesum();
+    }
     /*
     public void rememberDice(int diceOutcome) {
         this.diceOutcome = diceOutcome;
