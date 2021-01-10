@@ -1,3 +1,5 @@
+package Fields;
+
 public class ChanceField extends SuperField{
 
     private boolean drawCard;
