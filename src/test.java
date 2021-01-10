@@ -63,12 +63,6 @@ public class test {
         assertEquals(11, board.getFielobject(10).ID);
     }
 
-    //Piece class, testing movePiece method when typeIndex = 5
-    @Test
-    public void movePiecePosition() {
-        Piece piece = new Piece(5);
-        assertEquals(5, piece.movePiece(5));
-    }
 
     //when typeIndex = 2
     @Test

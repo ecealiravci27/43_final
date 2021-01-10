@@ -9,9 +9,8 @@ public class Piece {
 
     }
 
-    public int movePiece(int addMove) {
+    public void movePiece(int addMove) {
         totalMoves = totalMoves + addMove;
-        return addMove;
     }
 
     public void setTotalMoves(int position){
