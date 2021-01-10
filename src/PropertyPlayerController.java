@@ -10,14 +10,14 @@ public class PropertyPlayerController {
 
     }
 
-    public void movePiece(int addMove) {
+    public void movePiece(int eyeSum, int ID) {
 
-        player.movePiece(addMove);
+        playerArray[ID-1].movePiece(eyeSum);
     }
 
-    public int getPlayerPosition() {
+    public int getPlayerPosition(int ID) {
 
-        return player.fetchPlayerPosition();
+        return playerArray[ID-1].getPlayerPosition();
     }
 
     public Player[] setupPlayer(int playerAmount) {
