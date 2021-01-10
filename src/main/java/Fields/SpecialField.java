@@ -1,29 +1,19 @@
 package Fields;
 
 public class SpecialField extends SuperField{
+    private int taxes;
+    private String Type;
 
-    private final boolean goToJail;
-    private final boolean payTaxes;
-    private final boolean goPark;
-    private final int taxes;
-
-    public SpecialField(String name, String description, int ID,boolean goToJail, boolean payTaxes, boolean goPark, int taxes ) {
+    public SpecialField(String name, String description, int ID, int taxes, String type) {
         super(name, description, ID);
-        this.goToJail = goToJail;
-        this.payTaxes = payTaxes;
-        this.goPark = goPark;
         this.taxes = taxes;
+        this.Type = type;
     }
 
-    public boolean isGOtoJail(){
-        return goToJail;
+    public String getType() {
+        return Type;
     }
-    public boolean isPayTaxes(){
-        return payTaxes;
-    }
-    public boolean isGoPark(){
-        return goPark;
-    }
+
     public int getTaxes(){
         return taxes;
     }
