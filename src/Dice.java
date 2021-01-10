@@ -37,7 +37,7 @@ public class Dice {
         return eyeSum;
     }
 
-    public int grabEyeSum() {
+    public int fetchEyeSum() {
 
         setCalculatedEyeSum();
 
