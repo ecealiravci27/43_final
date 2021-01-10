@@ -5,9 +5,9 @@ public class Player {
     private Piece playerPiece;
     private Account playerAccount;
 
-    public Player(int playerNumber) {
-        this.playerID = playerNumber;
-        this.playerPiece = new Piece(playerNumber);
+    public Player(int ID) {
+        this.playerID = ID;
+        this.playerPiece = new Piece(ID);
         this.playerPosition = 0;
         this.playerAccount = new Account(30000);
     }
