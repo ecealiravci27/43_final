@@ -64,4 +64,24 @@ public class Board {
         return fields;
     }
 
+    public String[] getColors() {
+        String[] Colors = new String[21];
+
+        int j = 0;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i] instanceof VacantField) {
+                Colors[j] = ((VacantField) fields[i]).getColor();
+                j++;
+            }
+        }
+
+        return Colors;
+
+    }
+
+    public SuperField[] getFields() {
+        return fields;
+    }
+
+
 }
