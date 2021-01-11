@@ -8,6 +8,12 @@ public class SpecialField extends SuperField{
         super(name, description, ID);
         this.taxes = taxes;
         this.Type = type;
+
+        if(type == "start") {
+            this.group = 0;
+        } else if(type == "tax") {
+            this.group = 1;
+        }
     }
 
     public String getType() {
@@ -17,4 +23,6 @@ public class SpecialField extends SuperField{
     public int getTaxes(){
         return taxes;
     }
+
+
 }
