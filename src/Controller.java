@@ -18,15 +18,12 @@ public class Controller {
 
         for (int i = 0; i < 5; i++) {
 
-            for (int j = 0; j < 4; j++) {
+            for (int j = 1; j < 2; j++) {
 
-                propertyPlayerController.movePiece(dice.fetchEyeSum(), j);
-
-                System.out.println("Player " + j++ + " eye sum " + dice.getGetEyesum());
-
+                propertyPlayerController.movePiece(dice.calculateEyeSum(), j);
+                System.out.println("Player " + j + " eye sum " + dice.getDiceOutcome());
                 propertyPlayerController.getPlayerPosition(j);
-
-                System.out.println("Player " + j++ + " position : " + propertyPlayerController.getPlayerPosition(j++));
+                System.out.println("Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
 
             }
 

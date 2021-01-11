@@ -48,9 +48,10 @@ public class PropertyPlayerController {
 
         for (int i = 0; i < playerAmount; i++) {
 
-            playerArray[i] = new Player(i++);
+            playerArray[i] = new Player(i+1);
 
         }
         return playerArray;
     }
+
 }
