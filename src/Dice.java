@@ -20,37 +20,22 @@ public class Dice {
     public int calculateEyeSum() {
         int roll1 = rollDice();
         int roll2 = rollDice();
-        return roll1 + roll2;
+
+        eyeSum =  roll1 + roll2;
+        setDice(eyeSum);
+
+        return eyeSum;
 
     }
 
-    private void setCalculatedEyeSum() {
-
-        setEyeSum(calculateEyeSum());
+    public void setDice(int eyeSum){
+        diceOutcome = eyeSum ;
     }
 
-    public void setEyeSum(int dicetotal) {
-        eyeSum = dicetotal;
-    }
-
-    public int getGetEyesum() {
+    public int getDiceOutcome() {
         return eyeSum;
     }
 
-    public int fetchEyeSum() {
 
-        setCalculatedEyeSum();
-
-        return getGetEyesum();
-    }
-    /*
-    public void rememberDice(int diceOutcome) {
-        this.diceOutcome = diceOutcome;
-    }
-
-    public int getRememberDice(){
-        return diceOutcome;
-    }
-    */
 }
 
