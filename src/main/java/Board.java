@@ -55,7 +55,7 @@ public class Board {
         fields[32] = new VacantField("Vimmelskaffet", "", 33, 6000, 2, 550, 2600, 7800, 18000, 22000,25000, 4000);
         fields[33] = new ChanceField("chancefield", "", 34, true);
         fields[34] = new VacantField("Nygade", "", 35, 6400, 2, 600, 3000, 9000, 20000, 24000, 28000, 4000);
-        fields[35] = new ShippingField("Scandlines", "", 26, 4000,   500);
+        fields[35] = new ShippingField("Scandlines", "", 36, 4000,   500);
         fields[36] = new ChanceField("chancefield", "", 37, true);
         fields[37] = new VacantField("Frederiksberggade", "", 38, 7000, 3, 700, 3500, 10000, 22000, 26000, 30000, 4000);
         fields[38] = new SpecialField("Skat", "", 39, 2000, "tax");
