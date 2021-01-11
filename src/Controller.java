@@ -20,7 +20,7 @@ public class Controller {
 
             for (int j = 1; j < 3; j++) {
 
-                propertyPlayerController.movePiece(dice.calculateEyeSum(), j);
+                propertyPlayerController.movePiece(dice.rollDie(), j);
                 System.out.println("Player " + j + " eye sum " + dice.getDiceOutcome());
                 propertyPlayerController.getPlayerPosition(j);
                 System.out.println("Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
