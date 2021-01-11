@@ -17,30 +17,23 @@ public class Dice {
         return temp;
     }
 
-    public int calculateEyeSum() {
+    public int rollDie() {
         int roll1 = rollDice();
         int roll2 = rollDice();
-        return roll1 + roll2;
 
-    }
+        eyeSum =  roll1 + roll2;
 
-    public void setEyeSum(int dicetotal) {
-        eyeSum = dicetotal;
-    }
-
-    public int getGetEyesum() {
+        setDice(eyeSum);
         return eyeSum;
     }
 
-
-    /*
-    public void rememberDice(int diceOutcome) {
-        this.diceOutcome = diceOutcome;
+    public void setDice(int eyeSum){
+        diceOutcome = eyeSum ;
     }
 
-    public int getRememberDice(){
-        return diceOutcome;
+    public int getDiceOutcome() {
+        return eyeSum;
     }
-    */
+
 }
 
