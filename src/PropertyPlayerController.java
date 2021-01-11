@@ -16,7 +16,6 @@ public class PropertyPlayerController {
     }
 
     public int getPlayerPosition(int ID) {
-
         return playerArray[ID-1].getPlayerPosition();
     }
 
