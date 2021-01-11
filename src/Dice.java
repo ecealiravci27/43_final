@@ -22,8 +22,8 @@ public class Dice {
         int roll2 = rollDice();
 
         eyeSum =  roll1 + roll2;
-        setDice(eyeSum);
 
+        setDice(eyeSum);
         return eyeSum;
 
     }

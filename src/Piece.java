@@ -6,7 +6,6 @@ public class Piece {
     public Piece(int typeIndex){
         this.pieceColor = Color[typeIndex];
         this.totalMoves = 0;
-
     }
 
     public void movePiece(int addMove) {
