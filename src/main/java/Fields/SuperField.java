@@ -16,6 +16,11 @@ public abstract class SuperField {
     public String getFieldName() {
         return fieldName;
     }
+
+    public int getID() {
+        return ID;
+    }
+
     public boolean isTypeOf(Class type) {
         return this.getClass().equals(type);
     }

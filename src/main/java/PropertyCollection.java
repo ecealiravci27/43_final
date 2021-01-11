@@ -1,4 +1,3 @@
-import java.*;
 public class PropertyCollection {
 
     public Property[] properties;

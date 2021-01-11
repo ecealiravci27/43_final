@@ -1,6 +1,7 @@
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.Assert.*;
+import Fields.*;
 
 
 
@@ -53,14 +54,14 @@ public class test {
     @Test
     public void returnFieldID() {
         Board board = new Board();
-        assertEquals(20, board.getFielobject(60).ID);
+        assertEquals(20, board.getFielobject(60).getID());
     }
 
     //Board class, testing getFieldObject method when ID is below 40, should return a value +1 from the field ID:
     @Test
     public void returnFieldIDNewValue() {
         Board board = new Board();
-        assertEquals(11, board.getFielobject(10).ID);
+        assertEquals(11, board.getFielobject(10).getID());
     }
 
 
