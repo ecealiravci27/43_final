@@ -17,7 +17,7 @@ public class Dice {
         return temp;
     }
 
-    public int calculateEyeSum() {
+    public int rollDie() {
         int roll1 = rollDice();
         int roll2 = rollDice();
 
@@ -25,7 +25,6 @@ public class Dice {
 
         setDice(eyeSum);
         return eyeSum;
-
     }
 
     public void setDice(int eyeSum){
@@ -35,7 +34,6 @@ public class Dice {
     public int getDiceOutcome() {
         return eyeSum;
     }
-
 
 }
 

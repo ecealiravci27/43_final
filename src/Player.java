@@ -14,7 +14,7 @@ public class Player {
 
     public void movePiece(int addMove) {
         playerPiece.movePiece(addMove);
-        playerPosition = ((getMoves()%40)+1);
+        playerPosition = (getMoves()%40+1);
     }
 
     public int getMoves() {
