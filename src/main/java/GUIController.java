@@ -94,6 +94,10 @@ public class GUIController {
         return gfields;
     }
 
+    public void showDice(int roll, int roll2) {
+
+    }
+
     public static void main(String[] args) {
         SuperField[] board = new Board().setupField();
         //System.out.println(setupBoard(board));

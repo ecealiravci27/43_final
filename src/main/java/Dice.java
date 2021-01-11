@@ -10,32 +10,15 @@ public class Dice {
         this.diceOutcome = 0;
     }
 
-    private int rollDice() {
+    public int rollDice() {
         int maxEye = 6;
         int minEye = 1;
         temp = (int) ((Math.random() * maxEye) + minEye);
         return temp;
     }
 
-    public int calculateEyeSum() {
-        int roll1 = rollDice();
-        int roll2 = rollDice();
-        return roll1 + roll2;
-
-    }
-
-    public void setEyeSum(int dicetotal) {
-        eyeSum = dicetotal;
-    }
-
-    public int getGetEyesum() {
-        return eyeSum;
-    }
-
-
-    /*
-    public void rememberDice(int diceOutcome) {
-        this.diceOutcome = diceOutcome;
+    public void setDice(int eyeSum){
+        diceOutcome = eyeSum ;
     }
 
     public int getRememberDice(){
