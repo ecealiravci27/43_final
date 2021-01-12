@@ -10,21 +10,14 @@ public class Player {
     public Player(int ID) {
         this.playerID = ID;
         this.playerPiece = new Piece();
-        this.playerPosition = (getMoves()%40+1);
+        this.playerPosition = 0;
         this.playerAccount = new Account(30000);
     }
 
     public void movePiece(int addMove) {
         playerPiece.movePiece(addMove);
+        playerPosition = (playerPiece.getMoves()%40+1);
 
-    }
-
-    private int getMoves() {
-        return playerPiece.getMoves();
-    }
-
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
     }
 
     public int getPlayerPosition() {
