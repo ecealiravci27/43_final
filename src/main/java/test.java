@@ -121,7 +121,7 @@ public class test {
                 return super.getFieldDescription();
             }
         };
-        assertEquals("", superField.getFieldDescription());
+        assertEquals("test", superField.getFieldDescription());
     }
 
     //MoveCard class, testing getMovePiece, getMoveToField and getType methods, returning movePiece, moveToField and type respectively
