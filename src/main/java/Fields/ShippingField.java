@@ -12,7 +12,7 @@ public class ShippingField extends PropertyField {
     }
 
     @Override
-    public int getRent(int eyesum, int owned_ShippingFields, int tier) {
+    public int getRent(int eyesum, int owned_ShippingFields) {
         if (owned_ShippingFields == 2){
             rent = rent*2;
         }

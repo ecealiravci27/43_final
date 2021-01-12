@@ -22,32 +22,32 @@ public class test {
     }
 
 
-    //Testing VacantField getRent method below when tier is 0 and rent is 4:
+    //Testing VacantField getRent method below when owned_houses 0 and rent is 4:
     @Test
     public void changeRentByTierZero() {
         VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 4,5,6,7,8,9,1);
-        assertEquals(4, vacantField.getRent(0));
+        assertEquals(4, vacantField.getRent(0,0));
     }
 
-    //when tier is 3 and rent is 8:
+    //when owned_houses is 8 and rent is 8:
     @Test
     public void changeRentByTierThree() {
         VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 8,5,6,7,8,9,1);
-        assertEquals(7, vacantField.getRent(3));
+        assertEquals(9, vacantField.getRent(3,8));
     }
 
     //Testing ShippingField getRent method when owned shipping fields are 2 and rent is 4
     @Test
     public void changeRentOwnedShippingTwo() {
-        ShippingField shippingField = new ShippingField("test", "test", 1, 2,3);
-        assertEquals(6, shippingField.getRent(2));
+        ShippingField shippingField = new ShippingField("test", "test", 1, 2,4);
+        assertEquals(8, shippingField.getRent(2,2));
     }
 
     //Testing ShippingField getRent method when owned shipping fields are 4 and rent is 8
     @Test
     public void changeRentOwnedShippingFour() {
-        ShippingField shippingField = new ShippingField("test", "test", 1, 2,3);
-        assertEquals(12, shippingField.getRent(4));
+        ShippingField shippingField = new ShippingField("test", "test", 1, 2,8);
+        assertEquals(32, shippingField.getRent(3,4));
     }
 
     //Board class, testing getFieldObject method when ID is above 40
@@ -92,8 +92,8 @@ public class test {
     public void returnPrice() {
         PropertyField propertyField = new PropertyField("test", "test", 1,2,3) {
             @Override
-            public int getFieldPrice() {
-                return super.getFieldPrice();
+            public int getRent(int eyesum, int owned_coorporations) {
+                return 0;
             }
         };
         assertEquals(2, propertyField.getFieldPrice());
@@ -104,8 +104,8 @@ public class test {
     public void returnPriceNewValue() {
         PropertyField propertyField = new PropertyField("test", "test", 1,2000,3) {
             @Override
-            public int getFieldPrice() {
-                return super.getFieldPrice();
+            public int getRent(int eyesum, int owned_coorporations) {
+                return 0;
             }
         };
         assertEquals(2000, propertyField.getFieldPrice());
