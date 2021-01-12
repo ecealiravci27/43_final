@@ -1,6 +1,7 @@
-package Model;
+package Model.Controller;
 
 import GUI.GUIController;
+import Model.Dice;
 
 public class Controller {
 

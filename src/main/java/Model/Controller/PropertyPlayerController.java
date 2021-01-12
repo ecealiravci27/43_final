@@ -1,5 +1,7 @@
-package Model;
+package Model.Controller;
 
+import Model.Board;
+import Model.Player;
 import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {

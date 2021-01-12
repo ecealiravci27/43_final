@@ -14,7 +14,7 @@ public abstract class OwnableField extends SuperField{
         return price;
     }
 
-    abstract public int getRent(int eyesum, int owned_coorporations);
+    abstract public int getRent(int eyesum, int owned_entities);
     public int getFieldRent(){
         return rent;
     }

@@ -1,5 +1,6 @@
-package Model;
+package Model.Controller;
 
+import Model.Cards.CardPile;
 import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Cards.SuperCard;
