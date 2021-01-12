@@ -36,6 +36,21 @@ public class Controller {
             }
         }
     }
+
+    public void endGame() {
+
+
+    }
+
+    public void play() {
+
+
+    }
+
+    public void turn() {
+
+
+    }
 }
 
 
