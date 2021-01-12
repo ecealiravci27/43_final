@@ -4,6 +4,7 @@ public class Player {
 
     private int playerPosition;
     private int playerID;
+    private String name;
     private final Piece playerPiece;
     private Account playerAccount;
 
@@ -38,5 +39,15 @@ public class Player {
 
         return playerAccount.getBalance();
 
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public String getName(int ID) {
+
+        return name;
     }
 }
