@@ -13,6 +13,8 @@ public abstract class PropertyField extends SuperField{
     public int getFieldPrice(){
         return price;
     }
+
+    abstract public int getRent(int eyesum, int owned_coorporations, int tier);
     public int getFieldRent(){
         return rent;
     }
