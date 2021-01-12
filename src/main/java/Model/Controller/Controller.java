@@ -1,13 +1,17 @@
 package Model.Controller;
 
 import GUI.GUIController;
+import Model.Board;
 import Model.Dice;
+import Model.Fields.SuperField;
 
 public class Controller {
 
     private Dice dice;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
+    private boolean endGame;
+    SuperField[] board = new Board().getField();
 
    /* public void movePiece() {
 
@@ -17,7 +21,9 @@ public class Controller {
 
     public void startGame() {
 
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2);
+        endGame = false;
+
+        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
         GUIController guiController = new GUIController();
 
         Dice dice = new Dice();
@@ -39,18 +45,21 @@ public class Controller {
 
     public void endGame() {
 
-
+        endGame = true;
     }
 
     public void play() {
 
+        while (!endGame) {
 
+        }
     }
 
     public void turn() {
 
-
     }
+
+
 }
 
 

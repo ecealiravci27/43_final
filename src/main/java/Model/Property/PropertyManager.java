@@ -6,7 +6,15 @@ import Model.Fields.SuperField;
 import Model.Fields.VacantField;
 
 public class PropertyManager {
-    public static int getTotalPropertyFields(SuperField[] board) {
+
+    Property[] properties;
+
+    public PropertyManager(SuperField[] board) {
+
+        this.properties = setupProperty(board);
+    }
+
+    public int getTotalPropertyFields(SuperField[] board) {
         int counter = 0;
 
         for (SuperField f: board)
@@ -16,7 +24,7 @@ public class PropertyManager {
         return counter;
     }
 
-    public static Property[] setupProperty(SuperField[] board) {
+    public Property[] setupProperty(SuperField[] board) {
         Property[] properties = new Property[getTotalPropertyFields(board)];
         SuperField field;
         int curPos = 0;
@@ -37,7 +45,7 @@ public class PropertyManager {
         return properties;
     }
 
-    public static boolean isGroupOwned(int owner, int groupID, Property[] properties) {
+    public boolean isGroupOwned(int owner, int groupID) {
         boolean owned = true;
 
         for (int i = 0; i < properties.length; i++) {

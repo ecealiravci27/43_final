@@ -1,5 +1,5 @@
 package Model.Controller;
-
+import Model.Fields.SuperField;
 import Model.Board;
 import Model.Player;
 import Model.Property.PropertyManager;
@@ -12,11 +12,11 @@ public class PropertyPlayerController {
     private int playerAmount;
     private Player[] playerArray;
 
-    public PropertyPlayerController(int playerAmount) {
+    public PropertyPlayerController(int playerAmount, SuperField[] board) {
 
         this.playerArray = setupPlayer(playerAmount);
         this.board = setupBoard();
-        this.propertyManager = setupCollection();
+        this.propertyManager = new PropertyManager(board);
 
     }
 
@@ -45,7 +45,4 @@ public class PropertyPlayerController {
         return new Board();
     }
 
-    public PropertyManager setupCollection() {
-        return new PropertyManager();
-    }
 }
