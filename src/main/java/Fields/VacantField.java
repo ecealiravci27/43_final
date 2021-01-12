@@ -19,12 +19,12 @@ public class VacantField extends PropertyField {
         }
 
     @Override
-    public int getRent(int eyesum, int owned_coorporations, int tier) {
-        if (tier == 0) {
+    public int getRent(int eyesum, int owned_houses) {
+        if (owned_houses == 0) {
             return rent;
         }
-        if (tier > 0 && tier < 5) {
-            return house_rent[tier-1];
+        if (owned_houses > 0 && owned_houses < 5) {
+            return house_rent[owned_houses-1];
         }
         else {
             return hotel_rent;
