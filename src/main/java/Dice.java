@@ -30,10 +30,8 @@ public class Dice {
     public void setDice(int eyeSum){
         diceOutcome = eyeSum ;
     }
-
     public int getDiceOutcome() {
         return eyeSum;
     }
 
 }
-

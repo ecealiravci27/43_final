@@ -60,24 +60,24 @@ public class PropertyCollection {
         isGroupOwned(1, 2, properties);
     }
 
-//    public void gainOwnership(int owner, int fieldID) {
-//        int i;
-//        for (i = 0; i < properties.length; i++) {
-//            if(properties[i].getID() == fieldID) {
-//                properties[i].setOwner(owner);
-//            }
-//        }
-//    }
-//
-//    public void removeOwnership(int fieldID) {
-//        int owner = 0;
-//        int i;
-//        for (i = 0; i < properties.length; i++) {
-//            if(properties[i].getID() == fieldID) {
-//                properties[i].setOwner(owner);
-//            }
-//        }
-//    }
+    public void gainOwnership(int owner, int fieldID,  Property[] properties) {
+        int i;
+        for (i = 0; i < properties.length; i++) {
+            if(properties[i].getID() == fieldID) {
+                properties[i].setOwner(owner);
+            }
+        }
+    }
+
+    public void removeOwnership(int fieldID,  Property[] properties) {
+        int owner = 0;
+        int i;
+        for (i = 0; i < properties.length; i++) {
+            if(properties[i].getID() == fieldID) {
+                properties[i].setOwner(owner);
+            }
+        }
+    }
 
 
 }
