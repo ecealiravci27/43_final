@@ -1,5 +1,7 @@
 public class PropertyPlayerController {
 
+    private final Board board;
+    private final PropertyCollection propertyCollection;
     private Player player;
     private int playerAmount;
     private Player[] playerArray;
@@ -7,6 +9,8 @@ public class PropertyPlayerController {
     public PropertyPlayerController(int playerAmount) {
 
         this.playerArray = setupPlayer(playerAmount);
+        this.board = setupBoard();
+        this.propertyCollection = setupCollection();
 
     }
 
@@ -30,5 +34,14 @@ public class PropertyPlayerController {
         }
         return playerArray;
     }
+
+    public Board setupBoard() {
+        return new Board();
+    }
+
+    public PropertyCollection setupCollection() {
+        return new PropertyCollection();
+    }
+
 
 }
