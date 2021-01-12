@@ -123,4 +123,62 @@ public class test {
         };
         assertEquals("", superField.getFieldDescription());
     }
+
+    //MoveCard class, testing getMovePiece, getMoveToField and getType methods, returning movePiece, moveToField and type respectively
+    //moveType set to 1, returning 5
+    @Test
+    public void returnPieceMoveTypeOne() {
+        MoveCard moveCard = new MoveCard("test", 1, 5);
+        assertEquals(5, moveCard.getMovePiece());
+    }
+
+    //moveType set to 5, returning 0
+    @Test
+    public void returnPieceMoveTypeFive() {
+        MoveCard moveCard = new MoveCard("test", 5, 5);
+        assertEquals(0, moveCard.getMovePiece());
+    }
+
+    //getMoveToField, amt set to 8, returning 8
+    @Test
+    public void returnPieceMoveToFieldEight() {
+        MoveCard moveCard = new MoveCard("test", 5, 8);
+        assertEquals(8, moveCard.getMoveToField());
+    }
+
+    //amt set to 1, returning 1
+    @Test
+    public void returnPieceMoveToFieldOne() {
+        MoveCard moveCard = new MoveCard("test", 5, 1);
+        assertEquals(1, moveCard.getMoveToField());
+    }
+
+    //getType method, moveType set to 3
+    @Test
+    public void returnTypeThree() {
+        MoveCard moveCard = new MoveCard("test", 3, 5);
+        assertEquals(3, moveCard.getType());
+    }
+
+    //moveType set to 10
+    @Test
+    public void returnTypeTen() {
+        MoveCard moveCard = new MoveCard("test", 10, 5);
+        assertEquals(10, moveCard.getType());
+    }
+
+    //Money card class, testing getChangeMoney method
+    //amt set to 1
+    @Test
+    public void returnChangeMoneyOne() {
+        MoneyCard moneyCard = new MoneyCard("test", 1);
+        assertEquals(1, moneyCard.getChangeMoney());
+    }
+
+    //amt set to 10
+    @Test
+    public void returnChangeMoneyTen() {
+        MoneyCard moneyCard = new MoneyCard("test", 10);
+        assertEquals(10, moneyCard.getChangeMoney());
+    }
 }
