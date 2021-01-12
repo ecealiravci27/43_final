@@ -1,12 +1,9 @@
 package Model;
 
 public class Piece {
-    private String pieceColor;
     private int totalMoves;
-    private String[] Color = new String[]{"Red", "Blue", "Green", "Yellow", "Orange", "Purple"};
 
-    public Piece(int typeIndex){
-        this.pieceColor = Color[typeIndex];
+    public Piece(){
         this.totalMoves = 0;
     }
 
@@ -20,10 +17,6 @@ public class Piece {
 
     public int getMoves() {
         return totalMoves;
-    }
-
-    public String getColor(){
-        return pieceColor;
     }
 
 }
