@@ -10,29 +10,19 @@ public class Dice {
         this.diceOutcome = 0;
     }
 
-    private int rollDice() {
+    public int rollDice() {
         int maxEye = 6;
         int minEye = 1;
         temp = (int) ((Math.random() * maxEye) + minEye);
         return temp;
     }
 
-    public int rollDie() {
-        int roll1 = rollDice();
-        int roll2 = rollDice();
-
-        eyeSum =  roll1 + roll2;
-
-        setDice(eyeSum);
-        return eyeSum;
-    }
-
     public void setDice(int eyeSum){
         diceOutcome = eyeSum ;
     }
 
-    public int getDiceOutcome() {
-        return eyeSum;
+    public int getRememberDice(){
+        return diceOutcome;
     }
 
 }

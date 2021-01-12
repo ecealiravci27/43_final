@@ -34,7 +34,7 @@ public class PropertyCollection {
 
         return properties;
     }
-
+/*
     public void gainOwnership(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
@@ -53,5 +53,5 @@ public class PropertyCollection {
             }
         }
     }
-
+    */
 }
