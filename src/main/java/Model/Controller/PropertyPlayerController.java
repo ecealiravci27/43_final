@@ -48,6 +48,4 @@ public class PropertyPlayerController {
     public PropertyManager setupCollection() {
         return new PropertyManager();
     }
-
-
 }
