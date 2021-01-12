@@ -1,22 +1,41 @@
 public class Property {
-    public boolean availability;
-    public int price;
+    public boolean available;
     public int propertyID;
     public int owner;
 
-    public Property(int cost, int ID){
-        this.availability = true;
-        this.owner = 1000;
-        this.price = cost;
+    public Property(int ID){
+        this.available = isAvailable();
+        this.owner = 0;
         this.propertyID = ID;
     }
 
     public void seizeProperty(int playerNumber){
-        availability = false;
         owner = playerNumber;
     }
+
+    public void setOwner(int ID){
+        owner = ID;
+    }
+
     public int getOwner(){
         return owner;
+    }
+    /*
+    public int getID() {
+        return propertyID;
+    }
+    */
+    public boolean isAvailable(){
+        if (owner == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean getAvailability() {
+        return available;
     }
 
 }

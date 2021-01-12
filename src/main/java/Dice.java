@@ -24,6 +24,6 @@ public class Dice {
     public int getRememberDice(){
         return diceOutcome;
     }
-    */
+
 }
 
