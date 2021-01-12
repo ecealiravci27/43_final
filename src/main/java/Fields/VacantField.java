@@ -1,3 +1,5 @@
+package Fields;
+
 public class VacantField extends PropertyField {
 
     private final int[] house_rent;
@@ -16,12 +18,13 @@ public class VacantField extends PropertyField {
         this.house_price = house_price;
         }
 
-    public int getRent(int tier) {
-        if (tier == 0) {
+    @Override
+    public int getRent(int eyesum, int owned_houses) {
+        if (owned_houses == 0) {
             return rent;
         }
-        if (tier > 0 && tier < 5) {
-            return house_rent[tier-1];
+        if (owned_houses > 0 && owned_houses < 5) {
+            return house_rent[owned_houses-1];
         }
         else {
             return hotel_rent;

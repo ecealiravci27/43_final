@@ -1,3 +1,5 @@
+package Fields;
+
 public abstract class PropertyField extends SuperField{
 
     protected int price;
@@ -10,6 +12,11 @@ public abstract class PropertyField extends SuperField{
     }
     public int getFieldPrice(){
         return price;
+    }
+
+    abstract public int getRent(int eyesum, int owned_coorporations);
+    public int getFieldRent(){
+        return rent;
     }
 }
 

@@ -1,6 +1,7 @@
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.Assert.*;
+import Fields.*;
 
 
 
@@ -21,46 +22,46 @@ public class test {
     }
 
 
-    //Testing VacantField getRent method below when tier is 0 and rent is 4:
+    //Testing VacantField getRent method below when owned_houses 0 and rent is 4:
     @Test
     public void changeRentByTierZero() {
         VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 4,5,6,7,8,9,1);
-        assertEquals(4, vacantField.getRent(0));
+        assertEquals(4, vacantField.getRent(0,0));
     }
 
-    //when tier is 3 and rent is 8:
+    //when owned_houses is 8 and rent is 8:
     @Test
     public void changeRentByTierThree() {
         VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 8,5,6,7,8,9,1);
-        assertEquals(7, vacantField.getRent(3));
+        assertEquals(9, vacantField.getRent(3,8));
     }
 
     //Testing ShippingField getRent method when owned shipping fields are 2 and rent is 4
     @Test
     public void changeRentOwnedShippingTwo() {
-        ShippingField shippingField = new ShippingField("test", "test", 1, 2,3);
-        assertEquals(6, shippingField.getRent(2));
+        ShippingField shippingField = new ShippingField("test", "test", 1, 2,4);
+        assertEquals(8, shippingField.getRent(2,2));
     }
 
     //Testing ShippingField getRent method when owned shipping fields are 4 and rent is 8
     @Test
     public void changeRentOwnedShippingFour() {
-        ShippingField shippingField = new ShippingField("test", "test", 1, 2,3);
-        assertEquals(12, shippingField.getRent(4));
+        ShippingField shippingField = new ShippingField("test", "test", 1, 2,8);
+        assertEquals(32, shippingField.getRent(3,4));
     }
 
     //Board class, testing getFieldObject method when ID is above 40
     @Test
     public void returnFieldID() {
         Board board = new Board();
-        assertEquals(20, board.getFielobject(60).ID);
+        assertEquals(20, board.getFielobject(60).getID());
     }
 
     //Board class, testing getFieldObject method when ID is below 40, should return a value +1 from the field ID:
     @Test
     public void returnFieldIDNewValue() {
         Board board = new Board();
-        assertEquals(11, board.getFielobject(10).ID);
+        assertEquals(11, board.getFielobject(10).getID());
     }
 
 
@@ -91,8 +92,8 @@ public class test {
     public void returnPrice() {
         PropertyField propertyField = new PropertyField("test", "test", 1,2,3) {
             @Override
-            public int getFieldPrice() {
-                return super.getFieldPrice();
+            public int getRent(int eyesum, int owned_coorporations) {
+                return 0;
             }
         };
         assertEquals(2, propertyField.getFieldPrice());
@@ -103,8 +104,8 @@ public class test {
     public void returnPriceNewValue() {
         PropertyField propertyField = new PropertyField("test", "test", 1,2000,3) {
             @Override
-            public int getFieldPrice() {
-                return super.getFieldPrice();
+            public int getRent(int eyesum, int owned_coorporations) {
+                return 0;
             }
         };
         assertEquals(2000, propertyField.getFieldPrice());
@@ -120,6 +121,64 @@ public class test {
                 return super.getFieldDescription();
             }
         };
-        assertEquals("", superField.getFieldDescription());
+        assertEquals("test", superField.getFieldDescription());
+    }
+
+    //MoveCard class, testing getMovePiece, getMoveToField and getType methods, returning movePiece, moveToField and type respectively
+    //moveType set to 1, returning 5
+    @Test
+    public void returnPieceMoveTypeOne() {
+        MoveCard moveCard = new MoveCard("test", 1, 5);
+        assertEquals(5, moveCard.getMovePiece());
+    }
+
+    //moveType set to 5, returning 0
+    @Test
+    public void returnPieceMoveTypeFive() {
+        MoveCard moveCard = new MoveCard("test", 5, 5);
+        assertEquals(0, moveCard.getMovePiece());
+    }
+
+    //getMoveToField, amt set to 8, returning 8
+    @Test
+    public void returnPieceMoveToFieldEight() {
+        MoveCard moveCard = new MoveCard("test", 5, 8);
+        assertEquals(8, moveCard.getMoveToField());
+    }
+
+    //amt set to 1, returning 1
+    @Test
+    public void returnPieceMoveToFieldOne() {
+        MoveCard moveCard = new MoveCard("test", 5, 1);
+        assertEquals(1, moveCard.getMoveToField());
+    }
+
+    //getType method, moveType set to 3
+    @Test
+    public void returnTypeThree() {
+        MoveCard moveCard = new MoveCard("test", 3, 5);
+        assertEquals(3, moveCard.getType());
+    }
+
+    //moveType set to 10
+    @Test
+    public void returnTypeTen() {
+        MoveCard moveCard = new MoveCard("test", 10, 5);
+        assertEquals(10, moveCard.getType());
+    }
+
+    //Money card class, testing getChangeMoney method
+    //amt set to 1
+    @Test
+    public void returnChangeMoneyOne() {
+        MoneyCard moneyCard = new MoneyCard("test", 1);
+        assertEquals(1, moneyCard.getChangeMoney());
+    }
+
+    //amt set to 10
+    @Test
+    public void returnChangeMoneyTen() {
+        MoneyCard moneyCard = new MoneyCard("test", 10);
+        assertEquals(10, moneyCard.getChangeMoney());
     }
 }
