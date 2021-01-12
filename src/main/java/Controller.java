@@ -25,7 +25,7 @@ public class Controller {
 
                 propertyPlayerController.movePiece(roll1 + roll2, j);
                 guiController.showDice(roll1, roll2);
-                System.out.println("Player " + j + " eye sum " + dice.getDiceOutcome());
+                System.out.println("Player " + j + " eye sum " + dice.getRememberDice());
                 propertyPlayerController.getPlayerPosition(j);
                 System.out.println("Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
             }

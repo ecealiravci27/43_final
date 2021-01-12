@@ -20,11 +20,11 @@ public class Property {
     public int getOwner(){
         return owner;
     }
-    /*
+
     public int getID() {
         return propertyID;
     }
-    */
+
     public boolean isAvailable(){
         if (owner == 0) {
             return true;
