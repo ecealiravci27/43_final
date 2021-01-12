@@ -1,8 +1,12 @@
+
+import Model.Cards.MoneyCard;
+import Model.Cards.MoveCard;
+import Model.Board;
+import Model.Piece;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.Assert.*;
-import Fields.*;
 
+import Model.Fields.*;
 
 
 public class test {
@@ -50,14 +54,14 @@ public class test {
         assertEquals(32, shippingField.getRent(3,4));
     }
 
-    //Board class, testing getFieldObject method when ID is above 40
+    //Model.Board class, testing getFieldObject method when ID is above 40
     @Test
     public void returnFieldID() {
         Board board = new Board();
         assertEquals(20, board.getFielobject(60).getID());
     }
 
-    //Board class, testing getFieldObject method when ID is below 40, should return a value +1 from the field ID:
+    //Model.Board class, testing getFieldObject method when ID is below 40, should return a value +1 from the field ID:
     @Test
     public void returnFieldIDNewValue() {
         Board board = new Board();
@@ -72,7 +76,7 @@ public class test {
         assertEquals(0, piece.getMoves());
     }
 
-    //Piece class, testing getColor method, returning color depending on selected typeIndex
+    //Model.Piece class, testing getColor method, returning color depending on selected typeIndex
     //When typeIndex = 5, it should return purple from Color-array
     @Test
     public void returnPieceColorPurple() {
@@ -90,25 +94,25 @@ public class test {
     //PropertyField class, testing getFieldPrice method, returning price
     @Test
     public void returnPrice() {
-        PropertyField propertyField = new PropertyField("test", "test", 1,2,3) {
+        OwnableField ownableField = new OwnableField("test", "test", 1,2,3) {
             @Override
             public int getRent(int eyesum, int owned_coorporations) {
                 return 0;
             }
         };
-        assertEquals(2, propertyField.getFieldPrice());
+        assertEquals(2, ownableField.getFieldPrice());
     }
 
     //testing the same method with another value set
     @Test
     public void returnPriceNewValue() {
-        PropertyField propertyField = new PropertyField("test", "test", 1,2000,3) {
+        OwnableField ownableField = new OwnableField("test", "test", 1,2000,3) {
             @Override
             public int getRent(int eyesum, int owned_coorporations) {
                 return 0;
             }
         };
-        assertEquals(2000, propertyField.getFieldPrice());
+        assertEquals(2000, ownableField.getFieldPrice());
     }
 
 
@@ -124,7 +128,7 @@ public class test {
         assertEquals("test", superField.getFieldDescription());
     }
 
-    //MoveCard class, testing getMovePiece, getMoveToField and getType methods, returning movePiece, moveToField and type respectively
+    //Model.Cards.MoveCard class, testing getMovePiece, getMoveToField and getType methods, returning movePiece, moveToField and type respectively
     //moveType set to 1, returning 5
     @Test
     public void returnPieceMoveTypeOne() {

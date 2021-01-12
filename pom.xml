@@ -25,5 +25,11 @@
             <artifactId>matadorgui</artifactId>
             <version>3.1.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
