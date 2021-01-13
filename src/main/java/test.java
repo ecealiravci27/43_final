@@ -171,4 +171,10 @@ public class test {
         MoneyCard moneyCard = new MoneyCard("test", 10);
         assertEquals(10, moneyCard.getChangeMoney());
     }
+
+    @Test
+    public void returNnumberOfOwnedTwo() {
+
+    }
+
 }
