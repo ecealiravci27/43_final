@@ -9,7 +9,13 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class GUIController {
-    public static GUI_Field[] setupBoard(SuperField[] board) {
+    private final GUI GUI;
+
+    public GUIController(SuperField[] board) {
+        this.GUI = new GUI(setupBoard(board));
+    }
+
+    public GUI_Field[] setupBoard(SuperField[] board) {
         GUI_Field[] gfields = new GUI_Field[board.length];
         SuperField field;
         HashMap <String, FieldColor> colors = new HashMap<>();
@@ -103,6 +109,26 @@ public class GUIController {
 
 //    public static void main(String[] args) {
 //        SuperField[] board = new Board().setupField();
+//        //System.out.println(setupBoard(board));
+//        GUI gui = new GUI(setupBoard(board));
+//        //GUI gui = new GUI();
+//    }
+    public int totalplayers(int min, int max) {
+        String[] options = new String[max - min + 1];
+
+        for (int i = min; i <= max; i++) {
+            options[i-min] = String.valueOf(i);
+        }
+
+        String chosenElement = GUI.getUserSelection(
+                "Choose an element",
+                options
+        );
+        return Integer.parseInt(chosenElement);
+    }
+
+//    public static void main(String[] args) {
+//        SuperField[] board = new Board().getField();
 //        //System.out.println(setupBoard(board));
 //        GUI gui = new GUI(setupBoard(board));
 //        //GUI gui = new GUI();
