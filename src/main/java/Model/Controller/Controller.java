@@ -63,6 +63,14 @@ public class Controller {
     private void turn() {
 
     }
+    private void movePlayer(int ID){
+        int dice_1 = dice.rollDice();
+        int dice_2 = dice.rollDice();
+        int eyesum = dice_1 + dice_2;
+        int pos_1 = propertyPlayerController.getPlayerPosition(ID);
+        propertyPlayerController.movePiece(eyesum, ID);
+        int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+    }
 }
 
 
