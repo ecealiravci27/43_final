@@ -25,9 +25,14 @@ public class Player {
         return playerPosition;
     }
 
-    public void changeBalance(int change) {
+    public void addBalance(int change) {
 
-        playerAccount.changeBalance(change);
+        playerAccount.addBalance(change);
+    }
+
+    public void reduceBalance(int change) {
+
+        playerAccount.reduceBalance(change);
     }
 
     public void setBalance(int change) {

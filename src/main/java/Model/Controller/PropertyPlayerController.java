@@ -1,4 +1,5 @@
 package Model.Controller;
+import Model.Fields.OwnableField;
 import Model.Fields.SuperField;
 import Model.Board;
 import Model.Player;
@@ -45,4 +46,30 @@ public class PropertyPlayerController {
         return new Board();
     }
 
+    public void doPropertyField() {
+
+
+    }
+
+
+
+
+    public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
+
+        //propertyField.getRent(eyeSum, )
+    }
+
+
+
+
+
+    public void purchaseProperty(int playerID, OwnableField propertyField) {
+
+        playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
+
+        propertyManager.gainOwnership(playerID,propertyField.getID());
+    }
+
 }
+
+

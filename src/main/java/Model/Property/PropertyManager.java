@@ -34,10 +34,13 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseProperty(field.getID(), ((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseProperty(field.getID(), Property.VACANT_TYPE,((VacantField) field).getTypeIndex());
                 curPos++;
-            } else if((field instanceof Model.Fields.ShippingField) || (field instanceof Model.Fields.CoorporationField)) {
-                properties[curPos] = new Property(field.getID());
+            } else if((field instanceof Model.Fields.CoorporationField)) {
+                properties[curPos] = new Property(field.getID(), Property.COORP_TYPE);
+                curPos++;
+            } else if((field instanceof Model.Fields.ShippingField)) {
+                properties[curPos] = new Property(field.getID(), Property.SHIPPING_TYPE);
                 curPos++;
             }
         }
@@ -61,6 +64,30 @@ public class PropertyManager {
         return owned;
     }
 
+    public int numberOfOwned(int owner, int fieldID) {
+
+        int type = 0;
+        int entities = 0;
+
+        for (int i = 0; i < properties.length ; i++) {
+
+            if (properties[i].getID() == fieldID) {
+                type = properties[i].getType();
+                break;
+            }
+        }
+
+        for (int j = 0; j < properties.length; j++) {
+
+            if (owner == properties[j].getOwner() && type == properties[j].getType()) {
+                entities++;
+            }
+        }
+
+        return entities;
+        }
+
+
 //    public static void main(String[] args) {
 //        SuperField[] board = new Board().setupField();
 //        //System.out.println(setupBoard(board));
@@ -69,7 +96,7 @@ public class PropertyManager {
 //        isGroupOwned(1, 2, properties);
 //    }
 
-    public void gainOwnership(int owner, int fieldID,  Property[] properties) {
+    public void gainOwnership(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
             if(properties[i].getID() == fieldID) {
@@ -88,4 +115,18 @@ public class PropertyManager {
         }
     }
 
+//Temporary main method for testing
+
+    public static void main(String[] args) {
+
+        Board board = new Board();
+
+        PropertyManager propertyManager = new PropertyManager(board.getField());
+
+        propertyManager.numberOfOwned(0,6);
+
+
+    }
 }
+
+

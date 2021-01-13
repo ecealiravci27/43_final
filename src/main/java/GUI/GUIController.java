@@ -107,6 +107,12 @@ public class GUIController {
 
     }
 
+//    public static void main(String[] args) {
+//        SuperField[] board = new Board().setupField();
+//        //System.out.println(setupBoard(board));
+//        GUI gui = new GUI(setupBoard(board));
+//        //GUI gui = new GUI();
+//    }
     public int totalplayers(int min, int max) {
         String[] options = new String[max - min + 1];
 
