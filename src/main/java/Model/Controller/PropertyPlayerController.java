@@ -63,8 +63,6 @@ public class PropertyPlayerController {
     }
 
 
-
-
     public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
 
         int rent;
