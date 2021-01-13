@@ -56,7 +56,7 @@ public class PropertyPlayerController {
 
     public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
 
-        //propertyField.getRent(eyeSum, )
+        //propertyField.getRent()
     }
 
 
