@@ -34,10 +34,13 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseProperty(field.getID(), ((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseProperty(field.getID(), Property.VACANT_TYPE,((VacantField) field).getTypeIndex());
                 curPos++;
-            } else if((field instanceof Model.Fields.ShippingField) || (field instanceof Model.Fields.CoorporationField)) {
-                properties[curPos] = new Property(field.getID());
+            } else if((field instanceof Model.Fields.CoorporationField)) {
+                properties[curPos] = new Property(field.getID(), Property.COORP_TYPE);
+                curPos++;
+            } else if((field instanceof Model.Fields.ShippingField)) {
+                properties[curPos] = new Property(field.getID(), Property.SHIPPING_TYPE);
                 curPos++;
             }
         }
@@ -69,7 +72,7 @@ public class PropertyManager {
 //        isGroupOwned(1, 2, properties);
 //    }
 
-    public void gainOwnership(int owner, int fieldID,  Property[] properties) {
+    public void gainOwnership(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
             if(properties[i].getID() == fieldID) {
@@ -87,5 +90,4 @@ public class PropertyManager {
             }
         }
     }
-
 }

@@ -12,6 +12,8 @@ public class Controller {
     private GUIController guiController;
     private boolean endGame;
     SuperField[] board = new Board().getField();
+    private int totalPlayers;
+    private int playerTurn;
 
    /* public void movePiece() {
 
@@ -43,23 +45,21 @@ public class Controller {
         }
     }
 
-    public void endGame() {
+    private void endGame() {
 
         endGame = true;
     }
 
-    public void play() {
+    private void play() {
 
         while (!endGame) {
 
         }
     }
 
-    public void turn() {
+    private void turn() {
 
     }
-
-
 }
 
 

@@ -4,8 +4,8 @@ public class HouseProperty extends Property{
     private int numberOfHouses;
     private int group;
 
-    public HouseProperty(int ID, int group) {
-        super(ID);
+    public HouseProperty(int ID, int type, int group) {
+        super(ID, type);
         this.numberOfHouses = 0;
         this.group = group;
     }
