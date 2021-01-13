@@ -11,6 +11,9 @@ public class Controller {
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
     private boolean endGame;
+    private int totalPlayers = 0;
+    private final int minPlayers = 2;
+    private final int maxPlayers = 6;
     SuperField[] board = new Board().getField();
 
    /* public void movePiece() {
@@ -24,8 +27,9 @@ public class Controller {
         endGame = false;
 
         PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
-        GUIController guiController = new GUIController();
-
+        GUIController guiController = new GUIController(board);
+        totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
+        System.out.println("totalplayers: " + totalPlayers);
         Dice dice = new Dice();
 
         for (int i = 0; i < 5; i++) {
