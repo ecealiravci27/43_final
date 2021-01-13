@@ -81,11 +81,18 @@ public class PropertyPlayerController {
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
 
-//    public boolean isAffordable(int playerID, int change) {
-//
-//
-//    }
 
+    public boolean isAffordable(int playerID, int change) {
+
+        boolean canAfford = true;
+
+        if (getPlayer(playerID).getBalance() < change) {
+
+            canAfford = false;
+        }
+
+        return canAfford;
+    }
 }
 
 
