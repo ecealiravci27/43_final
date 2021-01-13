@@ -3,6 +3,7 @@ import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Board;
 import Model.Piece;
+import Model.Property.PropertyManager;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -172,9 +173,12 @@ public class test {
         assertEquals(10, moneyCard.getChangeMoney());
     }
 
+    //PropertyManager class, testing numberOfOwned method
     @Test
-    public void returNnumberOfOwnedTwo() {
-
+    public void returnEntities() {
+        SuperField[] board = new Board().getField();
+        PropertyManager propertyManager = new PropertyManager(board);
+        assertEquals(2, propertyManager.numberOfOwned(0,13));
     }
 
 }
