@@ -56,7 +56,13 @@ public class PropertyPlayerController {
 
     public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
 
-        //propertyField.getRent()
+        int rent;
+
+        rent = propertyField.getRent(eyeSum,propertyManager.numberOfOwned(owner,propertyField.getID()));
+
+        playerArray[playerID].reduceBalance(rent);
+
+        playerArray[owner].addBalance(rent);
     }
 
 
