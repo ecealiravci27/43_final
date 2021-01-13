@@ -1,6 +1,6 @@
 package Model.Property;
 
-public class Property {
+public class Ownable {
     public boolean available;
     public int propertyID;
     public int owner;
@@ -9,7 +9,7 @@ public class Property {
     public static final int VACANT_TYPE = 2;
     private int typeInt;
 
-    public Property(int ID, int typeInt){
+    public Ownable(int ID, int typeInt){
         this.available = isAvailable();
         this.owner = 0;
         this.propertyID = ID;
