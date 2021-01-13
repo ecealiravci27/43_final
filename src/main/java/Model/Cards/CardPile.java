@@ -1,13 +1,5 @@
 package Model.Cards;
 
-import Model.Cards.MoneyCard;
-import Model.Cards.MoveCard;
-import Model.Cards.SuperCard;
-
-import java.util.Random;
-
-
-
 public class CardPile {
     SuperCard[] cards;
     int counter;
@@ -18,15 +10,13 @@ public class CardPile {
     }
 
     public SuperCard[] setupCardPile() {
-        SuperCard[] cards = {
-                new MoneyCard("i am money", 1000),
-                new MoveCard("i am movetopiece", 1, 3),
-                new MoveCard("i am movetofield", 2, 2),
-                new MoneyCard("I am money 2", 2000),
-                new MoveCard("i am movetopiece 5", 1, 5),
-                new MoveCard("i am movetofield 5", 2, 8),
-        };
-
+        cards = new SuperCard[6];
+        cards[0]  = new MoneyCard("i am money", 1000);
+        cards[1]  = new MoveCard("i am movetopiece", 1, 3);
+        cards[2]  = new MoveCard("i am movetofield", 2, 2);
+        cards[3]  = new MoneyCard("I am money 2", 2000);
+        cards[4]  = new MoveCard("i am movetopiece 5", 1, 5);
+        cards[5]  = new MoveCard("i am movetofield 5", 2, 8);
         shuffleDeck();
         return cards;
 
@@ -35,7 +25,6 @@ public class CardPile {
         counter = (counter%cards.length);
         counter++;
         return cards[counter-1];
-
     }
 
     public void swap(int a, int b){
@@ -46,9 +35,7 @@ public class CardPile {
     }
 
     public void shuffleDeck(){
-
         int a,b;
-
         for (int i = 0; i < 1000; i++) {
             a = (int)(Math.random()* cards.length);
             b = (int)(Math.random()* cards.length);
@@ -58,8 +45,7 @@ public class CardPile {
 
     public static void main(String[] args) {
         CardPile cardPile = new CardPile();
-        cardPile.swap(0,1);
-        cardPile.shuffleDeck();
+        cardPile.drawCard();
     }
 }
 
