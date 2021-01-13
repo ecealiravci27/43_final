@@ -1,13 +1,19 @@
 package Model.Controller;
 
 import GUI.GUIController;
+import Model.Board;
 import Model.Dice;
+import Model.Fields.SuperField;
 
 public class Controller {
 
     private Dice dice;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
+    private boolean endGame;
+    SuperField[] board = new Board().getField();
+    private int totalPlayers;
+    private int playerTurn;
 
    /* public void movePiece() {
 
@@ -15,9 +21,11 @@ public class Controller {
     }*/
 
 
-    public static void main(String[] args) {
+    public void startGame() {
 
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2);
+        endGame = false;
+
+        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
         GUIController guiController = new GUIController();
 
         Dice dice = new Dice();
@@ -35,6 +43,22 @@ public class Controller {
                 System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
             }
         }
+    }
+
+    private void endGame() {
+
+        endGame = true;
+    }
+
+    private void play() {
+
+        while (!endGame) {
+
+        }
+    }
+
+    private void turn() {
+
     }
 }
 

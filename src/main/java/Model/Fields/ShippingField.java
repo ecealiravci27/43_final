@@ -13,15 +13,9 @@ public class ShippingField extends OwnableField {
 
     @Override
     public int getRent(int eyesum, int owned_ShippingFields) {
-        if (owned_ShippingFields == 2){
-            rent = rent*2;
-        }
-        if (owned_ShippingFields == 3){
-            rent = rent*3;
-        }
-        if (owned_ShippingFields == 4){
-            rent = rent*4;
-        }
+
+        rent = (int) (rent*Math.pow(2,(owned_ShippingFields-1)));
+
         return rent;
     }
 

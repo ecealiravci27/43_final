@@ -6,7 +6,15 @@ import Model.Fields.SuperField;
 import Model.Fields.VacantField;
 
 public class PropertyManager {
-    public static int getTotalPropertyFields(SuperField[] board) {
+
+    Property[] properties;
+
+    public PropertyManager(SuperField[] board) {
+
+        this.properties = setupProperty(board);
+    }
+
+    public int getTotalPropertyFields(SuperField[] board) {
         int counter = 0;
 
         for (SuperField f: board)
@@ -16,7 +24,7 @@ public class PropertyManager {
         return counter;
     }
 
-    public static Property[] setupProperty(SuperField[] board) {
+    public Property[] setupProperty(SuperField[] board) {
         Property[] properties = new Property[getTotalPropertyFields(board)];
         SuperField field;
         int curPos = 0;
@@ -26,10 +34,13 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseProperty(field.getID(), ((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseProperty(field.getID(), Property.VACANT_TYPE,((VacantField) field).getTypeIndex());
                 curPos++;
-            } else if((field instanceof Model.Fields.ShippingField) || (field instanceof Model.Fields.CoorporationField)) {
-                properties[curPos] = new Property(field.getID());
+            } else if((field instanceof Model.Fields.CoorporationField)) {
+                properties[curPos] = new Property(field.getID(), Property.COORP_TYPE);
+                curPos++;
+            } else if((field instanceof Model.Fields.ShippingField)) {
+                properties[curPos] = new Property(field.getID(), Property.SHIPPING_TYPE);
                 curPos++;
             }
         }
@@ -37,7 +48,7 @@ public class PropertyManager {
         return properties;
     }
 
-    public static boolean isGroupOwned(int owner, int groupID, Property[] properties) {
+    public boolean isGroupOwned(int owner, int groupID) {
         boolean owned = true;
 
         for (int i = 0; i < properties.length; i++) {
@@ -61,7 +72,7 @@ public class PropertyManager {
 //        isGroupOwned(1, 2, properties);
 //    }
 
-    public void gainOwnership(int owner, int fieldID,  Property[] properties) {
+    public void gainOwnership(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
             if(properties[i].getID() == fieldID) {
@@ -79,5 +90,4 @@ public class PropertyManager {
             }
         }
     }
-
 }

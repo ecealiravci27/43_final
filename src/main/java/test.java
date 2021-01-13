@@ -72,24 +72,10 @@ public class test {
     //when typeIndex = 2
     @Test
     public void returnTotalMoves() {
-        Piece piece = new Piece(2);
+        Piece piece = new Piece();
         assertEquals(0, piece.getMoves());
     }
 
-    //Model.Piece class, testing getColor method, returning color depending on selected typeIndex
-    //When typeIndex = 5, it should return purple from Color-array
-    @Test
-    public void returnPieceColorPurple() {
-        Piece piece = new Piece(5);
-        assertEquals("Purple", piece.getColor());
-    }
-
-    //When typeIndex = 1, it should return blue from Color-array
-    @Test
-    public void returnPieceColorBlue() {
-        Piece piece = new Piece(1);
-        assertEquals("Blue", piece.getColor());
-    }
 
     //PropertyField class, testing getFieldPrice method, returning price
     @Test

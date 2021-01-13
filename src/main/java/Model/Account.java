@@ -16,8 +16,17 @@ public class Account {
     }
 
     //method changes balance variable by a given value (change). balance can not go under 0.
-    public void changeBalance(int change){
+    public void addBalance(int change){
         balance = balance + change;
+
+        if (balance < 0){
+            balance = 0;
+        }
+    }
+
+    public void reduceBalance(int change) {
+
+        balance = balance - change;
 
         if (balance < 0){
             balance = 0;

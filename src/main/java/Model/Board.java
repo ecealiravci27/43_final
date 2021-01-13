@@ -12,6 +12,11 @@ public class Board {
         this.fields = setupField();
     }
 
+    public SuperField[] getField() {
+
+        return fields;
+    }
+
     public SuperField getFielobject(int id) {
 
         while (id > 40) {
@@ -20,7 +25,7 @@ public class Board {
 
         return fields[id];
     }
-    public SuperField[] setupField(){
+    private SuperField[] setupField(){
         fields = new SuperField[40];
         fields[0] = new SpecialField("START", "", 1, 0, "start");
         fields[1] = new VacantField("Rødovrevej", "", 2, 1200, 0, 50, 250,750, 2250, 4000, 6000, 1000);
@@ -65,5 +70,4 @@ public class Board {
 
         return fields;
     }
-
 }
