@@ -15,6 +15,8 @@ public class Controller {
     private final int minPlayers = 2;
     private final int maxPlayers = 6;
     SuperField[] board = new Board().getField();
+    private int totalPlayers;
+    private int playerTurn;
 
    /* public void movePiece() {
 
@@ -47,23 +49,21 @@ public class Controller {
         }
     }
 
-    public void endGame() {
+    private void endGame() {
 
         endGame = true;
     }
 
-    public void play() {
+    private void play() {
 
         while (!endGame) {
 
         }
     }
 
-    public void turn() {
+    private void turn() {
 
     }
-
-
 }
 
 
