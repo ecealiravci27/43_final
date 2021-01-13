@@ -48,10 +48,11 @@ public class PropertyPlayerController {
 
     public void doPropertyField() {
 
-
     }
 
-
+    public int getOwnership(int ID){
+        return propertyManager.getOwnable(ID).getOwner();
+    }
 
 
     public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
