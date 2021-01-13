@@ -115,10 +115,7 @@ public class PropertyManager {
         }
     }
 
-    /**
-     * Temporary main method for test
-     * @param args
-     */
+//Temporary main method for testing
 
     public static void main(String[] args) {
 
