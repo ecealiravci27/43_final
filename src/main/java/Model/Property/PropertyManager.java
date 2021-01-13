@@ -83,7 +83,6 @@ public class PropertyManager {
                 entities++;
             }
         }
-
         return entities;
         }
 
@@ -95,6 +94,13 @@ public class PropertyManager {
 //        //System.out.println(properties);
 //        isGroupOwned(1, 2, properties);
 //    }
+
+    public Ownable getOwnable(int ID){
+        return properties[ID];
+    }
+
+
+
 
     public void gainOwnership(int owner, int fieldID) {
         int i;

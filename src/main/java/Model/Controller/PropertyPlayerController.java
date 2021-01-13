@@ -33,7 +33,6 @@ public class PropertyPlayerController {
         return getPlayer(playerID).getPlayerPosition();
     }
 
-
     public Player[] setupPlayer(int playerAmount) {
 
         playerArray = new Player[playerAmount];
@@ -46,16 +45,18 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
-
     public Board setupBoard() {
         return new Board();
     }
 
-
     public void doPropertyField() {
+
 
     }
 
+    public int getOwnership(int ID){
+        return propertyManager.getOwnable(ID).getOwner();
+    }
 
     private Player getPlayer(int playerID) {
 
