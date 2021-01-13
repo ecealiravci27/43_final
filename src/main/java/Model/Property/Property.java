@@ -36,6 +36,11 @@ public class Property {
         return owner == 0;
     }
 
+    public int getType() {
+
+        return typeInt;
+    }
+
     public boolean getAvailability() {
         return available;
     }

@@ -64,6 +64,30 @@ public class PropertyManager {
         return owned;
     }
 
+    public int numberOfOwned(int owner, int fieldID) {
+
+        int type = 0;
+        int entities = 0;
+
+        for (int i = 0; i < properties.length ; i++) {
+
+            if (properties[i].getID() == fieldID) {
+                type = properties[i].getType();
+                break;
+            }
+        }
+
+        for (int j = 0; j < properties.length; j++) {
+
+            if (owner == properties[j].getOwner() && type == properties[j].getType()) {
+                entities++;
+            }
+        }
+
+        return entities;
+        }
+
+
 //    public static void main(String[] args) {
 //        SuperField[] board = new Board().setupField();
 //        //System.out.println(setupBoard(board));
@@ -90,4 +114,22 @@ public class PropertyManager {
             }
         }
     }
+
+    /**
+     * Temporary main method for test
+     * @param args
+     */
+
+    public static void main(String[] args) {
+
+        Board board = new Board();
+
+        PropertyManager propertyManager = new PropertyManager(board.getField());
+
+        propertyManager.numberOfOwned(0,6);
+
+
+    }
 }
+
+
