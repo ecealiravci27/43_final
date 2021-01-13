@@ -21,14 +21,18 @@ public class PropertyPlayerController {
 
     }
 
+
     public void movePiece(int eyeSum, int playerID) {
 
         getPlayer(playerID).movePiece(eyeSum);
     }
 
-    public int getPlayerPosition(int ID) {
-        return playerArray[ID-1].getPlayerPosition();
+
+    public int getPlayerPosition(int playerID) {
+
+        return getPlayer(playerID).getPlayerPosition();
     }
+
 
     public Player[] setupPlayer(int playerAmount) {
 
@@ -42,14 +46,16 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
+
     public Board setupBoard() {
         return new Board();
     }
 
+
     public void doPropertyField() {
 
-
     }
+
 
     private Player getPlayer(int playerID) {
 
@@ -71,15 +77,13 @@ public class PropertyPlayerController {
     }
 
 
-
-
-
     public void purchaseProperty(int playerID, OwnableField propertyField) {
 
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
 
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
+
 
 
     public boolean isAffordable(int playerID, int change) {
