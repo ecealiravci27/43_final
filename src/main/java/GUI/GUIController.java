@@ -127,10 +127,11 @@ public class GUIController {
         return Integer.parseInt(chosenElement);
     }
 
-//    public static void main(String[] args) {
-//        SuperField[] board = new Board().getField();
-//        //System.out.println(setupBoard(board));
-//        GUI gui = new GUI(setupBoard(board));
-//        //GUI gui = new GUI();
-//    }
+    public boolean wantToBuy(String propertyname) {
+        String chosenButton = GUI.getUserButtonPressed(
+                "Do you want to buy: " + propertyname,
+                "Yes", "No"
+        );
+        return chosenButton == "Yes";
+    }
 }
