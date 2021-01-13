@@ -32,7 +32,7 @@ public class Controller {
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
         System.out.println("totalplayers: " + totalPlayers);
         Dice dice = new Dice();
-
+        guiController.wantToBuy("test");
         for (int i = 0; i < 5; i++) {
 
             for (int j = 1; j < 3; j++) {
