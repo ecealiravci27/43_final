@@ -7,7 +7,7 @@ import Model.Fields.VacantField;
 
 public class PropertyManager {
 
-    Property[] properties;
+    Ownable[] properties;
 
     public PropertyManager(SuperField[] board) {
 
@@ -24,8 +24,8 @@ public class PropertyManager {
         return counter;
     }
 
-    public Property[] setupProperty(SuperField[] board) {
-        Property[] properties = new Property[getTotalPropertyFields(board)];
+    public Ownable[] setupProperty(SuperField[] board) {
+        Ownable[] properties = new Ownable[getTotalPropertyFields(board)];
         SuperField field;
         int curPos = 0;
 
@@ -34,13 +34,13 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseProperty(field.getID(), Property.VACANT_TYPE,((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE,((VacantField) field).getTypeIndex());
                 curPos++;
             } else if((field instanceof Model.Fields.CoorporationField)) {
-                properties[curPos] = new Property(field.getID(), Property.COORP_TYPE);
+                properties[curPos] = new Ownable(field.getID(), Ownable.COORP_TYPE);
                 curPos++;
             } else if((field instanceof Model.Fields.ShippingField)) {
-                properties[curPos] = new Property(field.getID(), Property.SHIPPING_TYPE);
+                properties[curPos] = new Ownable(field.getID(), Ownable.SHIPPING_TYPE);
                 curPos++;
             }
         }
@@ -52,8 +52,8 @@ public class PropertyManager {
         boolean owned = true;
 
         for (int i = 0; i < properties.length; i++) {
-            if(properties[i] instanceof HouseProperty) {
-                if(properties[i].getOwner() != owner && ((HouseProperty) properties[i]).getGroup() == groupID) {
+            if(properties[i] instanceof HouseOwnable) {
+                if(properties[i].getOwner() != owner && ((HouseOwnable) properties[i]).getGroup() == groupID) {
                     owned = false;
                     break;
                 }
@@ -105,7 +105,7 @@ public class PropertyManager {
         }
     }
 
-    public void removeOwnership(int fieldID,  Property[] properties) {
+    public void removeOwnership(int fieldID,  Ownable[] properties) {
         int owner = 0;
         int i;
         for (i = 0; i < properties.length; i++) {
