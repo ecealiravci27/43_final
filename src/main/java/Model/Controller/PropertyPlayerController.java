@@ -80,7 +80,12 @@ public class PropertyPlayerController {
 
     private Player getPlayer(int playerID) {
 
-        return playerArray[playerID-1];
+        return playerArray[playerID];
+    }
+
+    public Player[] getPlayerArray() {
+
+        return playerArray;
     }
 
 
