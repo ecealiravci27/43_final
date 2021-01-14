@@ -142,8 +142,6 @@ public class PropertyManager {
         PropertyManager propertyManager = new PropertyManager(board.getField());
 
         propertyManager.numberOfOwned(0,6);
-
-
     }
 }
 
