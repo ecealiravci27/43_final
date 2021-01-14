@@ -52,10 +52,10 @@ public class PropertyPlayerController {
     }
 
 
-    public boolean doPropertyField(OwnableField field, int eyeSum) {
-
-
-    }
+//    public boolean doPropertyField(OwnableField field, int eyeSum) {
+//
+//
+//    }
 
 
     private Player getPlayer(int playerID) {
