@@ -21,14 +21,18 @@ public class PropertyPlayerController {
 
     }
 
-    public void movePiece(int eyeSum, int ID) {
 
-        playerArray[ID-1].movePiece(eyeSum);
+    public void movePiece(int eyeSum, int playerID) {
+
+        getPlayer(playerID).movePiece(eyeSum);
     }
 
-    public int getPlayerPosition(int ID) {
-        return playerArray[ID-1].getPlayerPosition();
+
+    public int getPlayerPosition(int playerID) {
+
+        return getPlayer(playerID).getPlayerPosition();
     }
+
 
     public Player[] setupPlayer(int playerAmount) {
 
@@ -42,25 +46,33 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
+
     public Board setupBoard() {
         return new Board();
     }
 
-    public void doPropertyField() {
 
+    public void doPropertyField() {
 
     }
 
 
+    private Player getPlayer(int playerID) {
+
+        return playerArray[playerID-1];
+    }
 
 
     public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
 
-        //propertyField.getRent(eyeSum, )
+        int rent;
+
+        rent = propertyField.getRent(eyeSum,propertyManager.numberOfOwned(owner,propertyField.getID()));
+
+        playerArray[playerID].reduceBalance(rent);
+
+        playerArray[owner].addBalance(rent);
     }
-
-
-
 
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {
@@ -70,6 +82,19 @@ public class PropertyPlayerController {
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
 
+
+
+    public boolean isAffordable(int playerID, int change) {
+
+        boolean canAfford = true;
+
+        if (getPlayer(playerID).getBalance() < change) {
+
+            canAfford = false;
+        }
+
+        return canAfford;
+    }
 }
 
 
