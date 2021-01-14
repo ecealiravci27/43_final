@@ -27,25 +27,27 @@ public class Controller {
 
         endGame = false;
 
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
-        GUIController guiController = new GUIController(board);
+        guiController = new GUIController(board);
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
+        propertyPlayerController = new PropertyPlayerController(totalPlayers, board);
+        guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
         System.out.println("totalplayers: " + totalPlayers);
-        Dice dice = new Dice();
+        dice = new Dice();
         guiController.wantToBuy("test");
-        for (int i = 0; i < 5; i++) {
-
-            for (int j = 1; j < 3; j++) {
-                int roll1 = dice.rollDice();
-                int roll2 = dice.rollDice();
-
-                propertyPlayerController.movePiece(roll1 + roll2, j);
-                guiController.showDice(roll1, roll2);
-                System.out.println("Model.Player " + j + " eye sum " + dice.getRememberDice());
-                propertyPlayerController.getPlayerPosition(j);
-                System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
-            }
-        }
+//        for (int i = 0; i < 5; i++) {
+//
+//            for (int j = 1; j < 3; j++) {
+//                int roll1 = dice.rollDice();
+//                int roll2 = dice.rollDice();
+//
+//                propertyPlayerController.movePiece(roll1 + roll2, j);
+//                guiController.showDice(roll1, roll2);
+//                System.out.println("Model.Player " + j + " eye sum " + dice.getRememberDice());
+//                propertyPlayerController.getPlayerPosition(j);
+//                System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
+//            }
+//        }
+        play();
     }
 
     private void endGame() {
@@ -56,20 +58,29 @@ public class Controller {
     private void play() {
 
         while (!endGame) {
-
+            for (int i = 0; i < totalPlayers; i++) {
+                turn(i);
+            }
         }
     }
 
-    private void turn() {
-
+    private void turn(int ID) {
+        System.out.println("id = " + ID);
+        movePlayer(ID);
+        guiController.wantToBuy("roll");
     }
-    private void movePlayer(int ID){
+
+    private void movePlayer(int ID){ ;
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
+        System.out.println(dice_1);
+        System.out.println(dice_2);
         int eyesum = dice_1 + dice_2;
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+
+        guiController.changePlayerGUIPos(ID, pos_2, pos_1);
     }
 }
 
