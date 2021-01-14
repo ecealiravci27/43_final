@@ -26,6 +26,14 @@ public class PropertyPlayerController {
         playerArray[ID-1].movePiece(eyeSum);
     }
 
+    public void changeAccount(int money, int ID){
+        playerArray[ID-1].addBalance(money);
+    }
+
+    public void setPiece(int position, int ID){
+        playerArray[ID-1].setPiece(position);
+    }
+
     public int getPlayerPosition(int ID) {
         return playerArray[ID-1].getPlayerPosition();
     }

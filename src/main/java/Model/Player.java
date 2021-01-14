@@ -21,6 +21,12 @@ public class Player {
 
     }
 
+    public void setPiece(int position){
+        playerPiece.setTotalMoves(position);
+        playerPosition = (playerPiece.getMoves()%40+1);
+    }
+
+
     public int getPlayerPosition() {
         return playerPosition;
     }
