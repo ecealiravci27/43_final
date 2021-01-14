@@ -121,9 +121,15 @@ public class PropertyPlayerController {
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
 
+    private void purchaseHouse(int fieldID, int playerID) {
+
+        ((HouseProperty) propertyManager.getPropertyObject(fieldID)).addHouse();
+
+    }
+
 
     //Method for checking if a player can afford something
-    public boolean isAffordable(int playerID, int change) {
+    private boolean isAffordable(int playerID, int change) {
 
         boolean canAfford = true;
 
