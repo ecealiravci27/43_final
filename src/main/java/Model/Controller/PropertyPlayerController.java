@@ -69,9 +69,25 @@ public class PropertyPlayerController {
             canBuy = isAffordable(playerID,field.getFieldPrice());
         }
         //When the owner of the property is another player
-        else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 0 )
+        else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 10 ) {
 
-        {
+            int change;
+
+            if (field instanceof VacantField) {
+                //Player can't afford to pay rent, something happens
+                change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
+
+                }
+            else {
+
+                change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
+            }
+
+            if (change > playerArray[playerID].getBalance()) {
+
+                //Player can't afford to pay rent, something happens
+            }
+
             payRent(field,propertyObject.getOwner(),playerID,eyeSum);
         }
         return canBuy;
@@ -150,6 +166,18 @@ public class PropertyPlayerController {
             canAfford = false;
         }
         return canAfford;
+    }
+
+    public void sellHouse(int playerID, VacantField field) {
+
+        ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).removeHouse();
+
+        playerArray[playerID].addBalance(field.getHouse_price()/2);
+    }
+
+    public static void main (String[] args) {
+
+
     }
 }
 

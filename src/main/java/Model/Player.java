@@ -43,7 +43,6 @@ public class Player {
 
         playerAccount.setBalance(change);
     }
-
     public int getBalance() {
 
         return playerAccount.getBalance();
