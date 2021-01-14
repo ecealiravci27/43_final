@@ -61,34 +61,33 @@ public class PropertyPlayerController {
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //When the owner of the property is the current player
-        if (playerID == propertyObject.getOwner()) {
-        }
-        //When the owner of the property is the bank
-        else if (bank == propertyObject.getOwner()) {
+        if (playerID != propertyObject.getOwner()) {
+            if (bank == propertyObject.getOwner()) {
 
-            canBuy = isAffordable(playerID,field.getFieldPrice());
-        }
-        //When the owner of the property is another player
-        else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 10 ) {
+                canBuy = isAffordable(playerID,field.getFieldPrice());
+            }
+            //When the owner of the property is another player
+            else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 10 ) {
 
-            int change;
+                int change = 0;
 
-            if (field instanceof VacantField) {
-                //Player can't afford to pay rent, something happens
-                change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
+                if (field instanceof VacantField) {
+                    change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
 
+                    } else if (field instanceof ShippingField || field instanceof CoorporationField) {
+                    change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
                 }
-            else {
 
-                change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
+                //Player can afford to pay rent
+                if (change <= playerArray[playerID].getBalance()) {
+                    if (field instanceof ShippingField || field instanceof CoorporationField) {
+                        payRent(field,propertyObject.getOwner(),playerID,eyeSum);
+                    }
+                } else {
+
+                    //Player can't afford rent, something happens
+                }
             }
-
-            if (change > playerArray[playerID].getBalance()) {
-
-                //Player can't afford to pay rent, something happens
-            }
-
-            payRent(field,propertyObject.getOwner(),playerID,eyeSum);
         }
         return canBuy;
     }
