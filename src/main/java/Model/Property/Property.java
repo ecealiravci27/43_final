@@ -1,9 +1,9 @@
 package Model.Property;
 
 public class Property {
-    public boolean available;
-    public int propertyID;
-    public int owner;
+    private boolean available;
+    private int propertyID;
+    private int owner;
     public static final int SHIPPING_TYPE = 0;
     public static final int COORP_TYPE = 1;
     public static final int VACANT_TYPE = 2;
