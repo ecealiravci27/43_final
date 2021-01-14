@@ -27,11 +27,11 @@ public class PropertyPlayerController {
     }
 
     public void changeAccount(int money, int ID){
-        playerArray[ID-1].addBalance(money);
+        playerArray[ID].addBalance(money);
     }
 
     public void setPiece(int position, int ID){
-        playerArray[ID-1].setPiece(position);
+        playerArray[ID].setPiece(position);
     }
 
     public int getPlayerPosition(int playerID) {
@@ -44,7 +44,7 @@ public class PropertyPlayerController {
         playerArray = new Player[playerAmount];
 
         for (int i = 0; i < playerAmount; i++) {
-            playerArray[i] = new Player(i+1);
+            playerArray[i] = new Player(i);
         }
         return playerArray;
     }
@@ -57,14 +57,15 @@ public class PropertyPlayerController {
 
 
     public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
+        int bank = 10;
         boolean canBuy = false;
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //When the owner of the property is the current player
-        if (playerID == ((Ownable) propertyObject).getOwner()) {
+        if (playerID == propertyObject.getOwner()) {
         }
         //When the owner of the property is the bank
-        else if (0 == propertyObject.getOwner()) {
+        else if (bank == propertyObject.getOwner()) {
 
             canBuy = isAffordable(playerID,field.getFieldPrice());
         }
@@ -122,7 +123,7 @@ public class PropertyPlayerController {
 
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
 
-        propertyManager.gainOwnership(playerID,propertyField.getID());
+        propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
 
 

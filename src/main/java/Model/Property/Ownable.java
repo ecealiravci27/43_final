@@ -11,7 +11,7 @@ package Model.Property;
 
         public Ownable(int ID, int typeInt) {
             this.available = isAvailable();
-            this.owner = 0;
+            this.owner = 10;
             this.propertyID = ID;
             this.typeInt = typeInt;
         }

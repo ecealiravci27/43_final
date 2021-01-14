@@ -114,7 +114,7 @@ public class PropertyManager {
 
 
 
-    public void gainOwnership(int owner, int fieldID) {
+    public void setOwnerShip(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
             if(properties[i].getID() == fieldID) {
