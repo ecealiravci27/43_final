@@ -55,7 +55,6 @@ public class PropertyPlayerController {
     }
 
 
-
     public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
         int bank = 10;
         boolean canBuy = false;
@@ -76,7 +75,6 @@ public class PropertyPlayerController {
             payRent(field,propertyObject.getOwner(),playerID,eyeSum);
         }
         return canBuy;
-
     }
 
     public int getOwnership(int ID){
@@ -95,9 +93,7 @@ public class PropertyPlayerController {
 
 
     public void payRent(OwnableField field, int owner, int playerID, int eyeSum) {
-
         int rent;
-
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //Rent for a Vacant field
@@ -118,14 +114,12 @@ public class PropertyPlayerController {
         playerArray[owner].addBalance(rent);
     }
 
-
     public void purchaseProperty(int playerID, OwnableField propertyField) {
 
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
 
         propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
-
 
     //Method for checking if a player can afford something
     public boolean isAffordable(int playerID, int change) {

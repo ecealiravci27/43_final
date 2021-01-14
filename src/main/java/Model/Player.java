@@ -17,15 +17,13 @@ public class Player {
 
     public void movePiece(int addMove) {
         playerPiece.movePiece(addMove);
-        playerPosition = (playerPiece.getMoves()%40+1);
-
+        playerPosition = (playerPiece.getMoves()%40);
     }
 
     public void setPiece(int position){
         playerPiece.setTotalMoves(position);
-        playerPosition = (playerPiece.getMoves()%40+1);
+        playerPosition = (playerPiece.getMoves()%40);
     }
-
 
     public int getPlayerPosition() {
         return playerPosition;

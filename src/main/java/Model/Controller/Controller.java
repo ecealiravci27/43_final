@@ -70,14 +70,15 @@ public class Controller {
 
         while (!endGame) {
             for (int i = 0; i < totalPlayers; i++) {
-                turn(i);
+                doTurn(i);
             }
         }
     }
 
-    private void turn(int ID) {
-        System.out.println("id = " + ID);
+    private void doTurn(int ID) {
+
         movePlayer(ID);
+
         guiController.wantToBuy("roll");
     }
 
@@ -90,7 +91,6 @@ public class Controller {
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
-
         guiController.changePlayerGUIPos(ID, pos_2, pos_1);
     }
 

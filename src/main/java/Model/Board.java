@@ -13,7 +13,6 @@ public class Board {
     }
 
     public SuperField[] getField() {
-
         return fields;
     }
 
@@ -22,7 +21,6 @@ public class Board {
 //        while (id > 40) {
 //            id = id - 41;
 //        }
-
         return fields[id];
     }
     private SuperField[] setupField(){
