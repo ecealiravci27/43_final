@@ -2,12 +2,18 @@ package Model.Controller;
 
 import GUI.GUIController;
 import Model.Board;
+import Model.Cards.CardPile;
+import Model.Cards.MoneyCard;
+import Model.Cards.MoveCard;
+import Model.Cards.SuperCard;
 import Model.Dice;
 import Model.Fields.SuperField;
 
 public class Controller {
 
     private Dice dice;
+    private CardPile cardPile;
+    private int playerAmount;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
     private boolean endGame;
@@ -17,16 +23,18 @@ public class Controller {
     SuperField[] board = new Board().getField();
     private int playerTurn;
 
-   /* public void movePiece() {
+    public Controller(){
+        this.cardPile = new CardPile();
+        this.propertyPlayerController = new PropertyPlayerController(playerAmount, board);
+    }
 
+   /* public void movePiece() {
         propertyPlayerController.movePiece(dice.fetchEyeSum(), );
     }*/
 
 
     public void startGame() {
-
         endGame = false;
-
         PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
         GUIController guiController = new GUIController(board);
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
@@ -70,6 +78,21 @@ public class Controller {
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+    }
+
+    private void doCard(int playerID){
+        SuperCard card = cardPile.drawCard();
+        if(card instanceof MoveCard){
+            if ((((MoveCard) card).getType()) == 1){
+            propertyPlayerController.movePiece(((MoveCard) card).getMovePiece(), playerID);
+        }
+            if ((((MoveCard) card).getType()) == 2) {
+                propertyPlayerController.setPiece(((MoveCard) card).getMovePiece(), playerID);
+            }
+        }
+        if(card instanceof MoneyCard){
+            propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
+        }
     }
 }
 
