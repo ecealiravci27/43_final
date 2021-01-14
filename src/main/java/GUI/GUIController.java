@@ -2,6 +2,7 @@ package GUI;
 
 import Model.Board;
 import Model.Fields.*;
+import Model.Player;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -10,6 +11,7 @@ import java.util.HashMap;
 
 public class GUIController {
     private final GUI GUI;
+    private GUI_Player[] gPlayers;
 
     public GUIController(SuperField[] board) {
         this.GUI = new GUI(setupBoard(board));
@@ -125,6 +127,22 @@ public class GUIController {
                 options
         );
         return Integer.parseInt(chosenElement);
+    }
+
+    public GUI_Player[] GUIPlayers(Player[] players) {
+        gPlayers = new GUI_Player[players.length];
+        for (int i = 0; i < players.length; i++) {
+            gPlayers[i] = new GUI_Player(players[i].getName(i), players[i].getBalance());
+        }
+
+        return gPlayers;
+    }
+
+    public void changePlayerGUIPos(int playerID, int newpos, int oldpos) {
+        GUI.getFields()[oldpos].setCar(gPlayers[playerID], false);
+        GUI.getFields()[newpos].setCar(gPlayers[playerID], true);
+
+        System.out.printf("Changed guipos from: " + oldpos + " to newpos: " +newpos);
     }
 
     public boolean wantToBuy(String propertyname) {
