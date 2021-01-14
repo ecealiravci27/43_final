@@ -1,8 +1,9 @@
 package Model.Controller;
-import Model.Fields.OwnableField;
-import Model.Fields.SuperField;
+import Model.Fields.*;
 import Model.Board;
 import Model.Player;
+import Model.Property.HouseProperty;
+import Model.Property.Property;
 import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
@@ -54,22 +55,36 @@ public class PropertyPlayerController {
 
     public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
 
-        int propertyOwner = propertyManager.getPropertyObject(field.getID()).getOwner();
+        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+
+        int rent;
 
         //When the owner of the property is the current player
-        if (playerID == propertyOwner) {
+        if (playerID == propertyObject.getOwner()) {
 
         }
         //When the owner of the property is the bank
-        else if (0 == propertyOwner) {
+        else if (0 == propertyObject.getOwner()) {
 
         }
         //When the owner of the property is another player
-        else {
+        else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 0 )
+
+        {
+            //Scenario in which field is a VacantField
+            if (field instanceof VacantField) {
+
+                int houses = ((HouseProperty) propertyObject).getNumberOfHouses();
+
+                rent = field.getRent(eyeSum,houses);
+            }
+
+            //Scenario in which field a CorperationField or a ShippingField
+            else if (field instanceof CoorporationField || field instanceof ShippingField) {
 
 
+            }
         }
-
     }
 
 
