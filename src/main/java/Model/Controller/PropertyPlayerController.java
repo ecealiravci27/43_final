@@ -121,7 +121,18 @@ public class PropertyPlayerController {
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
 
-    private void purchaseHouse(int fieldID, int playerID) {
+    public boolean canPurchaseHouse(int playerID, int fieldID) {
+
+        boolean canBuild;
+
+        if ()
+
+        propertyManager.getPropertyObject(fieldID).getOwner();
+    }
+
+    private boolean purchaseHouse(int fieldID, int playerID) {
+
+
 
         ((HouseProperty) propertyManager.getPropertyObject(fieldID)).addHouse();
 
