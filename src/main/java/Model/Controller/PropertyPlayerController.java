@@ -2,8 +2,8 @@ package Model.Controller;
 import Model.Fields.*;
 import Model.Board;
 import Model.Player;
-import Model.Property.HouseProperty;
-import Model.Property.Property;
+import Model.Property.HouseOwnable;
+import Model.Property.Ownable;
 import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
@@ -13,24 +13,28 @@ public class PropertyPlayerController {
     private Player player;
     private int playerAmount;
     private Player[] playerArray;
+    private int playerID;
 
     public PropertyPlayerController(int playerAmount, SuperField[] board) {
 
         this.playerArray = setupPlayer(playerAmount);
         this.board = setupBoard();
         this.propertyManager = new PropertyManager(board);
-
     }
 
-
     public void movePiece(int eyeSum, int playerID) {
-
         getPlayer(playerID).movePiece(eyeSum);
     }
 
+    public void changeAccount(int money, int ID){
+        playerArray[ID].addBalance(money);
+    }
+
+    public void setPiece(int position, int ID){
+        playerArray[ID].setPiece(position);
+    }
 
     public int getPlayerPosition(int playerID) {
-
         return getPlayer(playerID).getPlayerPosition();
     }
 
@@ -40,9 +44,7 @@ public class PropertyPlayerController {
         playerArray = new Player[playerAmount];
 
         for (int i = 0; i < playerAmount; i++) {
-
             playerArray[i] = new Player(i);
-
         }
         return playerArray;
     }
@@ -53,18 +55,17 @@ public class PropertyPlayerController {
     }
 
 
+
     public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
-
+        int bank = 10;
         boolean canBuy = false;
-
-        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //When the owner of the property is the current player
         if (playerID == propertyObject.getOwner()) {
-
         }
         //When the owner of the property is the bank
-        else if (0 == propertyObject.getOwner()) {
+        else if (bank == propertyObject.getOwner()) {
 
             canBuy = isAffordable(playerID,field.getFieldPrice());
         }
@@ -75,8 +76,12 @@ public class PropertyPlayerController {
             payRent(field,propertyObject.getOwner(),playerID,eyeSum);
         }
         return canBuy;
+
     }
 
+    public int getOwnership(int ID){
+        return propertyManager.getOwnable(ID).getOwner();
+    }
 
     private Player getPlayer(int playerID) {
 
@@ -93,12 +98,12 @@ public class PropertyPlayerController {
 
         int rent;
 
-        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //Rent for a Vacant field
         if (field instanceof VacantField) {
 
-            int numberOfHouses = ((HouseProperty) propertyObject).getNumberOfHouses();
+            int numberOfHouses = ((HouseOwnable) propertyObject).getNumberOfHouses();
 
             rent = field.getRent(eyeSum,numberOfHouses);
 
@@ -118,50 +123,16 @@ public class PropertyPlayerController {
 
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
 
-        propertyManager.gainOwnership(playerID,propertyField.getID());
-    }
-
-    public boolean canPurchaseHouse(int playerID, VacantField field) {
-
-        boolean canBuild =  true;
-
-        //Checks if player is the owner of the property
-        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
-
-            canBuild = false;
-        }
-
-        //Checks if the player owns all of the fields of that indexType
-        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
-
-            canBuild = false;
-        }
-
-        if (!isAffordable(playerID,field.getHouse_price())) {
-
-            canBuild = false;
-        }
-        return canBuild;
-    }
-
-
-    private void purchaseHouse(int fieldID, int playerID) {
-
-        ((HouseProperty) propertyManager.getPropertyObject(fieldID)).addHouse();
-
+        propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
 
 
     //Method for checking if a player can afford something
-    private boolean isAffordable(int playerID, int change) {
-
+    public boolean isAffordable(int playerID, int change) {
         boolean canAfford = true;
-
         if (getPlayer(playerID).getBalance() < change) {
-
             canAfford = false;
         }
-
         return canAfford;
     }
 }

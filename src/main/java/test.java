@@ -4,7 +4,7 @@ import Model.Cards.MoveCard;
 import GUI.GUIController;
 import Model.Board;
 import Model.Piece;
-import Model.Property.Property;
+import Model.Property.Ownable;
 import Model.Property.PropertyManager;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -187,7 +187,6 @@ public class test {
     public void returnProperty() {
         SuperField[] board = new Board().getField();
         PropertyManager propertyManager = new PropertyManager(board);
-        Model.Property.Property[] properties = new Property[28];
         assertEquals(1,propertyManager.getPropertyObject(4));
     }
 
