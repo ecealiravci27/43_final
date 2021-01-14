@@ -121,18 +121,31 @@ public class PropertyPlayerController {
         propertyManager.gainOwnership(playerID,propertyField.getID());
     }
 
-    public boolean canPurchaseHouse(int playerID, int fieldID) {
+    public boolean canPurchaseHouse(int playerID, VacantField field) {
 
-        boolean canBuild;
+        boolean canBuild =  true;
 
-        if ()
+        //Checks if player is the owner of the property
+        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
 
-        propertyManager.getPropertyObject(fieldID).getOwner();
+            canBuild = false;
+        }
+
+        //Checks if the player owns all of the fields of that indexType
+        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
+
+            canBuild = false;
+        }
+
+        if (!isAffordable(playerID,field.getHouse_price())) {
+
+            canBuild = false;
+        }
+        return canBuild;
     }
 
-    private boolean purchaseHouse(int fieldID, int playerID) {
 
-
+    private void purchaseHouse(int fieldID, int playerID) {
 
         ((HouseProperty) propertyManager.getPropertyObject(fieldID)).addHouse();
 
