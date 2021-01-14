@@ -2,8 +2,8 @@ package Model.Controller;
 import Model.Fields.*;
 import Model.Board;
 import Model.Player;
-import Model.Property.HouseProperty;
-import Model.Property.Property;
+import Model.Property.HouseOwnable;
+import Model.Property.Ownable;
 import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
@@ -13,18 +13,16 @@ public class PropertyPlayerController {
     private Player player;
     private int playerAmount;
     private Player[] playerArray;
+    private int playerID;
 
     public PropertyPlayerController(int playerAmount, SuperField[] board) {
 
         this.playerArray = setupPlayer(playerAmount);
         this.board = setupBoard();
         this.propertyManager = new PropertyManager(board);
-
     }
 
-
     public void movePiece(int eyeSum, int playerID) {
-
         getPlayer(playerID).movePiece(eyeSum);
     }
 
@@ -36,11 +34,7 @@ public class PropertyPlayerController {
         playerArray[ID-1].setPiece(position);
     }
 
-    public int getPlayerPosition(int ID) {
-        return playerArray[ID-1].getPlayerPosition();
-
     public int getPlayerPosition(int playerID) {
-
         return getPlayer(playerID).getPlayerPosition();
     }
 
@@ -50,9 +44,7 @@ public class PropertyPlayerController {
         playerArray = new Player[playerAmount];
 
         for (int i = 0; i < playerAmount; i++) {
-
             playerArray[i] = new Player(i+1);
-
         }
         return playerArray;
     }
@@ -63,16 +55,13 @@ public class PropertyPlayerController {
     }
 
 
+
     public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
-
         boolean canBuy = false;
-    public void doPropertyField() {
-
-        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //When the owner of the property is the current player
-        if (playerID == propertyObject.getOwner()) {
-
+        if (playerID == ((Ownable) propertyObject).getOwner()) {
         }
         //When the owner of the property is the bank
         else if (0 == propertyObject.getOwner()) {
@@ -108,12 +97,12 @@ public class PropertyPlayerController {
 
         int rent;
 
-        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
 
         //Rent for a Vacant field
         if (field instanceof VacantField) {
 
-            int numberOfHouses = ((HouseProperty) propertyObject).getNumberOfHouses();
+            int numberOfHouses = ((HouseOwnable) propertyObject).getNumberOfHouses();
 
             rent = field.getRent(eyeSum,numberOfHouses);
 
@@ -139,14 +128,10 @@ public class PropertyPlayerController {
 
     //Method for checking if a player can afford something
     public boolean isAffordable(int playerID, int change) {
-
         boolean canAfford = true;
-
         if (getPlayer(playerID).getBalance() < change) {
-
             canAfford = false;
         }
-
         return canAfford;
     }
 }

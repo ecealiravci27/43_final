@@ -14,7 +14,7 @@ public class PropertyManager {
         this.properties = setupProperty(board);
     }
 
-    public Property getPropertyObject(int fieldID) {
+    public Ownable getPropertyObject(int fieldID) {
 
         int i;
 
@@ -78,7 +78,6 @@ public class PropertyManager {
     }
 
     public int numberOfOwned(int owner, int fieldID) {
-
         int type = 0;
         int entities = 0;
 
