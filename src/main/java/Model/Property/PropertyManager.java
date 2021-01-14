@@ -96,9 +96,6 @@ public class PropertyManager {
                 entities++;
             }
         }
-
-
-
         return entities;
         }
 
