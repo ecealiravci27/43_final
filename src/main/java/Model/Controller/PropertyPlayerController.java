@@ -76,7 +76,6 @@ public class PropertyPlayerController {
             payRent(field,propertyObject.getOwner(),playerID,eyeSum);
         }
         return canBuy;
-
     }
 
     public int getOwnership(int ID){
@@ -93,6 +92,28 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
+    public boolean canPurchaseHouse(int playerID, VacantField field) {
+
+        boolean canBuild =  true;
+
+        //Checks if player is the owner of the property
+        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
+
+            canBuild = false;
+        }
+
+        //Checks if the player owns all of the fields of that indexType
+        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
+
+            canBuild = false;
+        }
+
+        if (!isAffordable(playerID,field.getHouse_price())) {
+
+            canBuild = false;
+        }
+        return canBuild;
+    }
 
     public void payRent(OwnableField field, int owner, int playerID, int eyeSum) {
 
@@ -125,7 +146,6 @@ public class PropertyPlayerController {
 
         propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
-
 
     //Method for checking if a player can afford something
     public boolean isAffordable(int playerID, int change) {
