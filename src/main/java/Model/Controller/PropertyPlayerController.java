@@ -1,8 +1,9 @@
 package Model.Controller;
-import Model.Fields.OwnableField;
-import Model.Fields.SuperField;
+import Model.Fields.*;
 import Model.Board;
 import Model.Player;
+import Model.Property.HouseProperty;
+import Model.Property.Property;
 import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
@@ -40,7 +41,7 @@ public class PropertyPlayerController {
 
         for (int i = 0; i < playerAmount; i++) {
 
-            playerArray[i] = new Player(i+1);
+            playerArray[i] = new Player(i);
 
         }
         return playerArray;
@@ -52,8 +53,28 @@ public class PropertyPlayerController {
     }
 
 
-    public void doPropertyField() {
+    public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
 
+        boolean canBuy = false;
+
+        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+
+        //When the owner of the property is the current player
+        if (playerID == propertyObject.getOwner()) {
+
+        }
+        //When the owner of the property is the bank
+        else if (0 == propertyObject.getOwner()) {
+
+            canBuy = isAffordable(playerID,field.getFieldPrice());
+        }
+        //When the owner of the property is another player
+        else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 0 )
+
+        {
+            payRent(field,propertyObject.getOwner(),playerID,eyeSum);
+        }
+        return canBuy;
     }
 
 
@@ -63,11 +84,24 @@ public class PropertyPlayerController {
     }
 
 
-    public void payRent(OwnableField propertyField, int owner, int playerID, int eyeSum) {
+    public void payRent(OwnableField field, int owner, int playerID, int eyeSum) {
 
         int rent;
 
-        rent = propertyField.getRent(eyeSum,propertyManager.numberOfOwned(owner,propertyField.getID()));
+        Property propertyObject = propertyManager.getPropertyObject(field.getID());
+
+        //Rent for a Vacant field
+        if (field instanceof VacantField) {
+
+            int numberOfHouses = ((HouseProperty) propertyObject).getNumberOfHouses();
+
+            rent = field.getRent(eyeSum,numberOfHouses);
+
+            //Rent for a Shipping or Corperation field
+        } else {
+
+            rent = field.getRent(eyeSum,propertyManager.numberOfOwned(owner,field.getID()));
+        }
 
         playerArray[playerID].reduceBalance(rent);
 
@@ -83,7 +117,7 @@ public class PropertyPlayerController {
     }
 
 
-
+    //Method for checking if a player can afford something
     public boolean isAffordable(int playerID, int change) {
 
         boolean canAfford = true;

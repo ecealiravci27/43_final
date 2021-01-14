@@ -14,6 +14,19 @@ public class PropertyManager {
         this.properties = setupProperty(board);
     }
 
+    public Property getPropertyObject(int fieldID) {
+
+        int i;
+
+        for (i = 0; i < properties.length; i++) {
+
+            if (properties[i].getID() == fieldID) {
+                break;
+            }
+        }
+        return properties[i];
+    }
+
     public int getTotalPropertyFields(SuperField[] board) {
         int counter = 0;
 
@@ -83,6 +96,8 @@ public class PropertyManager {
                 entities++;
             }
         }
+
+
 
         return entities;
         }
