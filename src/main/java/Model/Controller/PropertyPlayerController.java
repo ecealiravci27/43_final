@@ -52,9 +52,24 @@ public class PropertyPlayerController {
     }
 
 
-    public boolean doPropertyField(OwnableField field, int eyeSum) {
+    public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
 
-        propertyManager.getPropertyObject(field.getID()).getOwner()
+        int propertyOwner = propertyManager.getPropertyObject(field.getID()).getOwner();
+
+        //When the owner of the property is the current player
+        if (playerID == propertyOwner) {
+
+        }
+        //When the owner of the property is the bank
+        else if (0 == propertyOwner) {
+
+        }
+        //When the owner of the property is another player
+        else {
+
+
+        }
+
     }
 
 

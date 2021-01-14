@@ -183,12 +183,12 @@ public class test {
         assertEquals(2, propertyManager.numberOfOwned(0,13));
     }
 
-//    @Test
-//    public void returnProperty() {
-//        SuperField[] board = new Board().getField();
-//        PropertyManager propertyManager = new PropertyManager(board);
-//        Model.Property.Property[] properties = new Property[28];
-//        assertEquals(properties[1],propertyManager.getPropertyObject(4));
-//    }
+    @Test
+    public void returnProperty() {
+        SuperField[] board = new Board().getField();
+        PropertyManager propertyManager = new PropertyManager(board);
+        Model.Property.Property[] properties = new Property[28];
+        assertEquals(1,propertyManager.getPropertyObject(4));
+    }
 
 }
