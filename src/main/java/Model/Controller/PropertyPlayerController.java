@@ -52,7 +52,8 @@ public class PropertyPlayerController {
     }
 
 
-    public void doPropertyField() {
+    public boolean doPropertyField(OwnableField field, int eyeSum) {
+
 
     }
 

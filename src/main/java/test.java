@@ -181,4 +181,12 @@ public class test {
         assertEquals(2, propertyManager.numberOfOwned(0,13));
     }
 
+    @Test
+    public void returnProperty() {
+        SuperField[] board = new Board().getField();
+        PropertyManager propertyManager = new PropertyManager(board);
+        Property properties;
+        assertEquals(properties[1],propertyManager.getPropertyObject(4));
+    }
+
 }
