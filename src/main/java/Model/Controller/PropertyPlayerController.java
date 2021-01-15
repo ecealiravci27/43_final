@@ -82,7 +82,7 @@ public class PropertyPlayerController {
                         payPlayerRent(field, propertyObject.getOwner(), playerID, eyeSum);
                     } else {
                         //Player can't afford rent, they go bankrupt
-                        bancruptPlayer(playerID);
+                        bankruptPlayer(playerID);
                     }
                 }
             }
@@ -100,7 +100,7 @@ public class PropertyPlayerController {
     private Player getPlayer(int playerID) {
         return playerArray[playerID];
     }
-    public void bancruptPlayer(int playerID){
+    public void bankruptPlayer(int playerID){
         getPlayer(playerID).bancrupt();
     }
 
@@ -114,20 +114,15 @@ public class PropertyPlayerController {
     }
 
     public boolean canPurchaseHouse(int playerID, VacantField field) {
-
         boolean canBuild =  true;
-
         //Checks if player is the owner of the property
         if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
             canBuild = false;
         }
-
         //Checks if the player owns all of the fields of that indexType
         if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
-
             canBuild = false;
         }
-
         if (!isAffordable(playerID,field.getHouse_price())) {
             canBuild = false;
         }
@@ -158,9 +153,7 @@ public class PropertyPlayerController {
     }
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {
-
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
-
         propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
 

@@ -67,21 +67,25 @@ public class Controller {
     private void endGame() {
         endGame = true;
     }
-
     private void play() {
-
         while (!endGame) {
-            for (int i = 0; i < totalPlayers; i++) {
-                doTurn(i);
+            //number of rounds
+            int i;
+            for (i = 0; i < 1000; i++) {
+                for (i = 0; i < totalPlayers; i++) {
+                    doTurn(i);
+                }
             }
         }
     }
 
     private void doTurn(int playerID) {
-            SuperField landedField = board[propertyPlayerController.getPlayerPosition(playerID)];
+        if (!propertyPlayerController.isBankrupt(playerID)) {
             movePlayer(playerID);
+            SuperField landedField = board[propertyPlayerController.getPlayerPosition(playerID)];
             doField(landedField, playerID);
         }
+    }
 
     private void movePlayer(int ID){ ;
         int dice_1 = dice.rollDice();
@@ -106,6 +110,13 @@ public class Controller {
         }
         if (landedField instanceof ChanceField){
             doCard(playerID);
+        }
+    }
+
+    private void buyHouse(){
+        if (guiController.wantToBuy("")){
+            if (propertyPlayerController.canPurchaseHouse()){
+            }
         }
     }
 
