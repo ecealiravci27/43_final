@@ -18,15 +18,12 @@ public class PropertyPlayerController {
     public PropertyPlayerController(int playerAmount, Board board) {
 
         this.playerArray = setupPlayer(playerAmount);
-        this.field = setupBoard(board);
-        this.propertyManager =setupPropertyManager(field);
+        this.field = setupSuperFieldArray(board);
+        this.propertyManager = new PropertyManager(field);
     }
 
     public void movePiece(int eyeSum, int playerID) {
         getPlayer(playerID).movePiece(eyeSum);
-    }
-    public PropertyManager setupPropertyManager(SuperField[] board){
-        return new PropertyManager(board);
     }
 
     public void changeAccount(int money, int ID){
@@ -57,7 +54,7 @@ public class PropertyPlayerController {
     }
 
 
-    public SuperField[] setupBoard(Board board) {
+    public SuperField[] setupSuperFieldArray(Board board) {
         return board.getField();
     }
 
@@ -182,9 +179,8 @@ public class PropertyPlayerController {
     }
 
     public static void main (String[] args) {
-        Board board = new Board();
-        PropertyPlayerController controller = new PropertyPlayerController(3,board);
-        controller.doPropertyField((OwnableField) board.getFielobject(13), 2, 6);
+
+
     }
 }
 

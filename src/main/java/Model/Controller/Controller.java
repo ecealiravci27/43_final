@@ -71,7 +71,7 @@ public class Controller {
         }
     }
 
-    private void movePlayer(int ID){ ;
+    private void movePlayer(int ID) {
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
         System.out.println(dice_1);
@@ -96,7 +96,7 @@ public class Controller {
                 propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice());
             }
         }
-        if (landedField instanceof ChanceField){
+        if (landedField instanceof ChanceField) {
             doCard(playerID);
         }
     }
