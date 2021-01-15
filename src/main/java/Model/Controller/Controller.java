@@ -10,7 +10,6 @@ import Model.Dice;
 import Model.Fields.*;
 
 public class Controller {
-
     private Dice dice;
     private CardPile cardPile;
     private int playerAmount;
@@ -26,10 +25,12 @@ public class Controller {
         this.cardPile = new CardPile();
         this.board = new Board();
         this.field = board.getField();
-        this.propertyPlayerController = setupPropertyPlayerCrontroller(board);
         this.guiController = new GUIController(field);
+        this.propertyPlayerController = setupPropertyPlayerCrontroller(board);
         this.dice = new Dice();
     }
+
+
 
     public void startGame() {
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
@@ -147,5 +148,3 @@ public class Controller {
         return new PropertyPlayerController(totalPlayers, board);
     }
 }
-
-
