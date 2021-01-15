@@ -59,7 +59,7 @@ public class PropertyPlayerController {
     }
 
 
-    public void doPropertyField(OwnableField field, int playerID, int eyeSum) {
+    public void doPropertyField(OwnableField field, int playerID, int eyeSum, boolean wanToBuy) {
         //denne metode antager at man vil købe feltet
         int bank = 10;
         boolean canBuy = isAffordable(playerID,field.getFieldPrice());
@@ -70,9 +70,13 @@ public class PropertyPlayerController {
         //When the owner of the property is not the current player
         if (playerID != owner) {
             //when the bank is the owner
-            if (bank == owner) {
+            if (bank == owner && wanToBuy) {
+                if (getPlayerMoney(playerID) >= rent)
                 propertyManager.setOwnerShip(playerID,fieldID);
                 getPlayer(playerID).reduceBalance(rent);
+                if (getPlayerMoney(playerID) <= rent){
+                    System.out.println("not enough money!");
+                }
             }
             //When the owner of the property is another player
             else {

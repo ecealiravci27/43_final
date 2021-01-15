@@ -89,19 +89,16 @@ public class Controller {
         if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
             propertyPlayerController.changeAccount(4000, playerID);
         }
-
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField){
-            if( guiController.wantToBuy(landedField.getFieldName())) {
-                propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice());
+            boolean wantToBuy =  guiController.wantToBuy(landedField.getFieldName());
+            propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice(), wantToBuy);
             }
-        }
         if (landedField instanceof ChanceField) {
             doCard(playerID);
         }
     }
-
     private boolean passStart(int playerID){
         boolean passedStart = false;
         if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
