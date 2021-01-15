@@ -1,11 +1,9 @@
 
 import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
-import GUI.GUIController;
 import Model.Board;
 import Model.Controller.PropertyPlayerController;
 import Model.Piece;
-import Model.Property.Ownable;
 import Model.Property.PropertyManager;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -208,6 +206,6 @@ public class test {
         Board trueBoard = new Board();
         PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2,board);
 
-        assertFalse(propertyPlayerController.canPurchaseHouse(1, ((VacantField) trueBoard.getFielobject(1))));
+        assertFalse(propertyPlayerController.canBuyHouse(1, ((VacantField) trueBoard.getFielobject(1))));
     }
 }
