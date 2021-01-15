@@ -115,7 +115,7 @@ public class PropertyPlayerController {
         boolean canBuild =  true;
 
         //Checks if player is the owner of the property
-        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
+        if (playerID != propertyManager.getPropertyObject(field.getID()).getOwner()) {
 
             canBuild = false;
         }
