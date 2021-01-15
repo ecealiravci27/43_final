@@ -82,7 +82,7 @@ public class PropertyPlayerController {
                         payPlayerRent(field, propertyObject.getOwner(), playerID, eyeSum);
                     } else {
                         //Player can't afford rent, they go bankrupt
-                        bankruptPLayer(playerID);
+                        bankruptPlayer(playerID);
                     }
                 }
             }
@@ -100,7 +100,7 @@ public class PropertyPlayerController {
     private Player getPlayer(int playerID) {
         return playerArray[playerID];
     }
-    public void bankruptPLayer(int playerID){
+    public void bankruptPlayer(int playerID){
         getPlayer(playerID).bancrupt();
     }
 
@@ -113,7 +113,7 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
-    public boolean canBuyHouse(int playerID, VacantField field) {
+    public boolean canPurchaseHouse(int playerID, VacantField field) {
 
         boolean canBuild =  true;
 
@@ -157,11 +157,11 @@ public class PropertyPlayerController {
         playerArray[playerID].addBalance(-(rent));
     }
 
-    public void purchaseProperty(int playerID, OwnableField field) {
+    public void purchaseProperty(int playerID, OwnableField propertyField) {
 
-        playerArray[playerID].reduceBalance(field.getFieldPrice());
+        playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
 
-        propertyManager.setOwnerShip(playerID,field.getID());
+        propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
 
     //Method for checking if a player can afford something
@@ -171,11 +171,6 @@ public class PropertyPlayerController {
             canAfford = false;
         }
         return canAfford;
-    }
-
-    public void buyHouse(int playerID, VacantField field) {
-        ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).addHouse();
-        playerArray[playerID].reduceBalance(field.getHouse_price());
     }
 
     public void sellHouse(int playerID, VacantField field) {
