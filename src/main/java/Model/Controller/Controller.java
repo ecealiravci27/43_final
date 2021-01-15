@@ -7,7 +7,10 @@ import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Cards.SuperCard;
 import Model.Dice;
+import Model.Fields.ChanceField;
+import Model.Fields.OwnableField;
 import Model.Fields.SuperField;
+import Model.Fields.VacantField;
 
 public class Controller {
 
@@ -62,7 +65,6 @@ public class Controller {
     }
 
     private void endGame() {
-
         endGame = true;
     }
 
@@ -75,12 +77,11 @@ public class Controller {
         }
     }
 
-    private void doTurn(int ID) {
-
-        movePlayer(ID);
-
-        guiController.wantToBuy("roll");
-    }
+    private void doTurn(int playerID) {
+            SuperField landedField = board[propertyPlayerController.getPlayerPosition(playerID)];
+            movePlayer(playerID);
+            doField(landedField, playerID);
+        }
 
     private void movePlayer(int ID){ ;
         int dice_1 = dice.rollDice();
@@ -88,10 +89,24 @@ public class Controller {
         System.out.println(dice_1);
         System.out.println(dice_2);
         int eyesum = dice_1 + dice_2;
+        dice.setDice(eyesum);
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
         guiController.changePlayerGUIPos(ID, pos_2, pos_1);
+    }
+
+    private void doField(SuperField landedField, int playerID){
+        int fieldID = landedField.getID();
+        int EyeSum = dice.getRememberDice();
+        if (landedField instanceof OwnableField){
+            if( guiController.wantToBuy("roll")){
+                propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice());
+            }
+        }
+        if (landedField instanceof ChanceField){
+            doCard(playerID);
+        }
     }
 
     private void doCard(int playerID){
