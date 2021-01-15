@@ -59,50 +59,53 @@ public class PropertyPlayerController {
     }
 
 
-    public boolean doPropertyField(OwnableField field, int playerID, int eyeSum) {
+    public void doPropertyField(OwnableField field, int playerID, int eyeSum) {
+        //denne metode antager at man vil købe feltet
         int bank = 10;
-        boolean canBuy = false;
+        boolean canBuy = isAffordable(playerID,field.getFieldPrice());
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
-
-        //When the owner of the property is the current player
-        if (playerID != propertyObject.getOwner()) {
-            if (bank == propertyObject.getOwner()) {
-
-                canBuy = isAffordable(playerID,field.getFieldPrice());
+        int owner = propertyObject.getOwner();
+        int fieldID = field.getID();
+        int rent = getRent(field, playerID, eyeSum);
+        //When the owner of the property is not the current player
+        if (playerID != owner) {
+            //when the bank is the owner
+            if (bank == owner) {
+                propertyManager.setOwnerShip(playerID,fieldID);
+                getPlayer(playerID).addBalance(rent);
             }
             //When the owner of the property is another player
-            else if (propertyObject.getOwner() != playerID && propertyObject.getOwner() != 10 ) {
-
-                int change = 0;
-
-                if (field instanceof VacantField) {
-                    change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
-
-                    } else if (field instanceof ShippingField || field instanceof CoorporationField) {
-                    change = field.getRent(eyeSum,propertyManager.numberOfOwned(propertyManager.getPropertyObject(field.getID()).getOwner(),field.getID()));
-                }
-
+            else {
                 //Player can afford to pay rent
-                if (change <= playerArray[playerID].getBalance()) {
+                if (rent <= playerArray[playerID].getBalance()) {
                     if (field instanceof ShippingField || field instanceof CoorporationField) {
-                        payRent(field,propertyObject.getOwner(),playerID,eyeSum);
+                        payPlayerRent(field, propertyObject.getOwner(), playerID, eyeSum);
+                    } else {
+                        //Player can't afford rent, they go bankrupt
+                        bancruptPlayer(playerID);
                     }
-                } else {
-
-                    //Player can't afford rent, something happens
                 }
             }
         }
-        return canBuy;
     }
 
     public int getOwnership(int ID){
         return propertyManager.getOwnable(ID).getOwner();
     }
 
-    private Player getPlayer(int playerID) {
+    public boolean isBankrupt(int playerID){
+        return getPlayer(playerID).getBankrupt();
+    }
 
+    private Player getPlayer(int playerID) {
         return playerArray[playerID];
+    }
+    public void bancruptPlayer(int playerID){
+        getPlayer(playerID).bancrupt();
+    }
+
+    public int getPlayerMoney (int ID){
+        return playerArray[ID].getBalance();
     }
 
     public Player[] getPlayerArray() {
@@ -115,8 +118,7 @@ public class PropertyPlayerController {
         boolean canBuild =  true;
 
         //Checks if player is the owner of the property
-        if (playerID != propertyManager.getPropertyObject(field.getID()).getOwner()) {
-
+        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
             canBuild = false;
         }
 
@@ -127,32 +129,32 @@ public class PropertyPlayerController {
         }
 
         if (!isAffordable(playerID,field.getHouse_price())) {
-
             canBuild = false;
         }
         return canBuild;
     }
 
-    public void payRent(OwnableField field, int owner, int playerID, int eyeSum) {
-        int rent;
+    public int getRent(OwnableField field, int playerID, int eyeSum){
+        int rent = 0;
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
-
         //Rent for a Vacant field
         if (field instanceof VacantField) {
-
             int numberOfHouses = ((HouseOwnable) propertyObject).getNumberOfHouses();
-
             rent = field.getRent(eyeSum,numberOfHouses);
-
-            //Rent for a Shipping or Corperation field
-        } else {
-
-            rent = field.getRent(eyeSum,propertyManager.numberOfOwned(owner,field.getID()));
         }
+        //Rent for a Shipping or Corperation field
+        else if ((field instanceof CoorporationField)){
+            rent = field.getRent(eyeSum,propertyManager.numberOfOwned(playerID,field.getID()));
+        }
+        return rent;
+    }
 
-        playerArray[playerID].reduceBalance(rent);
-
-        playerArray[owner].addBalance(rent);
+    public void payPlayerRent(OwnableField field, int owner, int playerID, int eyeSum) {
+        int rent;
+        rent = getRent(field, playerID, eyeSum);
+        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
+        playerArray[playerID].addBalance(rent);
+        playerArray[playerID].addBalance(-(rent));
     }
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {
@@ -172,9 +174,7 @@ public class PropertyPlayerController {
     }
 
     public void sellHouse(int playerID, VacantField field) {
-
         ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).removeHouse();
-
         playerArray[playerID].addBalance(field.getHouse_price()/2);
     }
 
