@@ -72,7 +72,7 @@ public class PropertyPlayerController {
             //when the bank is the owner
             if (bank == owner) {
                 propertyManager.setOwnerShip(playerID,fieldID);
-                getPlayer(playerID).addBalance(rent);
+                getPlayer(playerID).reduceBalance(rent);
             }
             //When the owner of the property is another player
             else {

@@ -40,6 +40,7 @@ public class Controller {
     }
 
     private void play() {
+        endGame = false;
         while (!endGame) {
             //number of rounds
             int i;
@@ -92,7 +93,7 @@ public class Controller {
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField){
-            if( guiController.wantToBuy("roll")){
+            if( guiController.wantToBuy(landedField.getFieldName())) {
                 propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice());
             }
         }
