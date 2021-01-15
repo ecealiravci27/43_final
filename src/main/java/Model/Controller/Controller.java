@@ -21,52 +21,25 @@ public class Controller {
     private GUIController guiController;
     private boolean endGame;
     private int totalPlayers = 0;
-    private final int minPlayers = 2;
-    private final int maxPlayers = 6;
     SuperField[] board = new Board().getField();
     private int playerTurn;
 
     public Controller(){
         this.cardPile = new CardPile();
-        this.propertyPlayerController = new PropertyPlayerController(playerAmount, board);
+        this.propertyPlayerController = setupPropertyPlayerCrontroller();
+        this.guiController = new GUIController(board);
+        this.dice = new Dice();
     }
 
-   /* public void movePiece() {
-        propertyPlayerController.movePiece(dice.fetchEyeSum(), );
-    }*/
-
-
     public void startGame() {
-        endGame = false;
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
-        GUIController guiController = new GUIController(board);
-
-        guiController = new GUIController(board);
-        totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
-        propertyPlayerController = new PropertyPlayerController(totalPlayers, board);
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
-        System.out.println("totalplayers: " + totalPlayers);
-        dice = new Dice();
-        guiController.wantToBuy("test");
-//        for (int i = 0; i < 5; i++) {
-//
-//            for (int j = 1; j < 3; j++) {
-//                int roll1 = dice.rollDice();
-//                int roll2 = dice.rollDice();
-//
-//                propertyPlayerController.movePiece(roll1 + roll2, j);
-//                guiController.showDice(roll1, roll2);
-//                System.out.println("Model.Player " + j + " eye sum " + dice.getRememberDice());
-//                propertyPlayerController.getPlayerPosition(j);
-//                System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
-//            }
-//        }
         play();
     }
 
     private void endGame() {
         endGame = true;
     }
+
     private void play() {
         while (!endGame) {
             //number of rounds
@@ -122,14 +95,6 @@ public class Controller {
             doCard(playerID);
         }
     }
-
-    private void buyHouse(){
-        if (guiController.wantToBuy("")){
-            if (propertyPlayerController.canPurchaseHouse()){
-            }
-        }
-    }
-
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
         if(card instanceof MoveCard){
@@ -143,6 +108,14 @@ public class Controller {
         if(card instanceof MoneyCard){
             propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
         }
+    }
+
+    private PropertyPlayerController setupPropertyPlayerCrontroller (){
+        int maxPlayers = 6;
+        int minPlayers = 2;
+        totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
+        PropertyPlayerController pController = new PropertyPlayerController(totalPlayers, board);
+        return pController;
     }
 }
 
