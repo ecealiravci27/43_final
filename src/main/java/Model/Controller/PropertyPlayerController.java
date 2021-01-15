@@ -93,9 +93,9 @@ public class PropertyPlayerController {
         return propertyManager.getOwnable(ID).getOwner();
     }
 
-    public boolean isBankrupt(int playerID){
-        return getPlayer(playerID).getBankrupt();
-    }
+//    public boolean isBankrupt(int playerID){
+//        return getPlayer(playerID).getBankrupt();
+//    }
 
     private Player getPlayer(int playerID) {
         return playerArray[playerID];
