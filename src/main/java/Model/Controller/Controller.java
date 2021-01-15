@@ -28,7 +28,6 @@ public class Controller {
 
     public Controller(){
         this.cardPile = new CardPile();
-        this.propertyPlayerController = new PropertyPlayerController(playerAmount, board);
     }
 
    /* public void movePiece() {
@@ -38,29 +37,14 @@ public class Controller {
 
     public void startGame() {
         endGame = false;
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2, board);
-        GUIController guiController = new GUIController(board);
-
         guiController = new GUIController(board);
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
         propertyPlayerController = new PropertyPlayerController(totalPlayers, board);
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
         System.out.println("totalplayers: " + totalPlayers);
         dice = new Dice();
-        guiController.wantToBuy("test");
-//        for (int i = 0; i < 5; i++) {
-//
-//            for (int j = 1; j < 3; j++) {
-//                int roll1 = dice.rollDice();
-//                int roll2 = dice.rollDice();
-//
-//                propertyPlayerController.movePiece(roll1 + roll2, j);
-//                guiController.showDice(roll1, roll2);
-//                System.out.println("Model.Player " + j + " eye sum " + dice.getRememberDice());
-//                propertyPlayerController.getPlayerPosition(j);
-//                System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
-//            }
-//        }
+        //guiController.wantToBuy("test");
+
         play();
     }
 
