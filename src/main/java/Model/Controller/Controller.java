@@ -21,13 +21,16 @@ public class Controller {
     private GUIController guiController;
     private boolean endGame;
     private int totalPlayers = 0;
-    SuperField[] board = new Board().getField();
+    Board board;
+    SuperField[] field;
     private int playerTurn;
 
     public Controller(){
         this.cardPile = new CardPile();
-        this.propertyPlayerController = setupPropertyPlayerCrontroller();
-        this.guiController = new GUIController(board);
+        this.board = new Board();
+        this.field = board.getField();
+        this.propertyPlayerController = setupPropertyPlayerCrontroller(board);
+        this.guiController = new GUIController(field);
         this.dice = new Dice();
     }
 
@@ -63,7 +66,7 @@ public class Controller {
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             movePlayer(playerID);
-            SuperField landedField = board[propertyPlayerController.getPlayerPosition(playerID)];
+            SuperField landedField = field[propertyPlayerController.getPlayerPosition(playerID)];
             doField(landedField, playerID, playerTurn);
         }
     }
@@ -98,13 +101,6 @@ public class Controller {
         }
     }
 
-    private void buyHouse(){
-        if (guiController.wantToBuy("")){
-            if (propertyPlayerController.canPurchaseHouse()){
-            }
-        }
-    }
-
     private boolean passStart(int playerID){
         boolean passedStart = false;
         if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
@@ -128,7 +124,7 @@ public class Controller {
         }
     }
 
-    private PropertyPlayerController setupPropertyPlayerCrontroller (){
+    private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
         int maxPlayers = 6;
         int minPlayers = 2;
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);

@@ -8,22 +8,25 @@ import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
 
-    private final Board board;
+    private SuperField[] field;
     private final PropertyManager propertyManager;
     private Player player;
     private int playerAmount;
     private Player[] playerArray;
     private int playerID;
 
-    public PropertyPlayerController(int playerAmount, SuperField[] board) {
+    public PropertyPlayerController(int playerAmount, Board board) {
 
         this.playerArray = setupPlayer(playerAmount);
-        this.board = setupBoard();
-        this.propertyManager = new PropertyManager(board);
+        this.field = setupBoard(board);
+        this.propertyManager =setupPropertyManager(field);
     }
 
     public void movePiece(int eyeSum, int playerID) {
         getPlayer(playerID).movePiece(eyeSum);
+    }
+    public PropertyManager setupPropertyManager(SuperField[] board){
+        return new PropertyManager(board);
     }
 
     public void changeAccount(int money, int ID){
@@ -54,8 +57,8 @@ public class PropertyPlayerController {
     }
 
 
-    public Board setupBoard() {
-        return new Board();
+    public SuperField[] setupBoard(Board board) {
+        return board.getField();
     }
 
 
@@ -179,8 +182,9 @@ public class PropertyPlayerController {
     }
 
     public static void main (String[] args) {
-
-
+        Board board = new Board();
+        PropertyPlayerController controller = new PropertyPlayerController(3,board);
+        controller.doPropertyField((OwnableField) board.getFielobject(13), 2, 6);
     }
 }
 

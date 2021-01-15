@@ -200,12 +200,12 @@ public class test {
 //
 //    }
 
-    @Test
-    public void returnBoolean() {
-        SuperField[] board = new Board().getField();
-        Board trueBoard = new Board();
-        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2,board);
+   // @Test
+  //  public void returnBoolean() {
+    //    SuperField[] board = new Board().getField();
+      //  Board trueBoard = new Board();
+        //PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2,board);
 
-        assertFalse(propertyPlayerController.canBuyHouse(1, ((VacantField) trueBoard.getFielobject(1))));
+        //assertFalse(propertyPlayerController.canBuyHouse(1, ((VacantField) trueBoard.getFielobject(1))));
     }
-}
+
