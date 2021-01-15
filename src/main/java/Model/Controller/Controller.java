@@ -95,7 +95,7 @@ public class Controller {
             doCard(playerID);
         }
         if (landedField instanceof SpecialField){
-
+            doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
     }
 
