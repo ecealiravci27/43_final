@@ -82,7 +82,7 @@ public class PropertyPlayerController {
                         payPlayerRent(field, propertyObject.getOwner(), playerID, eyeSum);
                     } else {
                         //Player can't afford rent, they go bankrupt
-                        bancruptPlayer(playerID);
+                        bankruptPLayer(playerID);
                     }
                 }
             }
@@ -94,13 +94,13 @@ public class PropertyPlayerController {
     }
 
     public boolean isBankrupt(int playerID){
-        return getPlayer(playerID).getBankrupt();
+        return getPlayer(playerID).isBankrupt();
     }
 
     private Player getPlayer(int playerID) {
         return playerArray[playerID];
     }
-    public void bancruptPlayer(int playerID){
+    public void bankruptPLayer(int playerID){
         getPlayer(playerID).bancrupt();
     }
 
