@@ -150,6 +150,6 @@ public class GUIController {
                 "Do you want to buy: " + propertyname,
                 "Yes", "No"
         );
-        return chosenButton == "Yes";
+        return chosenButton.equals("Yes");
     }
 }

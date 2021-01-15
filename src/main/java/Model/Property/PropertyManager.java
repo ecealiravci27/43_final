@@ -10,7 +10,6 @@ public class PropertyManager {
     Ownable[] properties;
 
     public PropertyManager(SuperField[] board) {
-
         this.properties = setupProperty(board);
     }
 

@@ -30,6 +30,10 @@ public class PropertyPlayerController {
         playerArray[ID].addBalance(money);
     }
 
+    public int getOwnedEntities(int playerID, int fieldID){
+        return propertyManager.numberOfOwned(playerID, fieldID);
+    }
+
     public void setPiece(int position, int ID){
         playerArray[ID].setPiece(position);
     }
@@ -111,18 +115,18 @@ public class PropertyPlayerController {
         boolean canBuild =  true;
 
         //Checks if player is the owner of the property
-        if (playerID != propertyManager.getPropertyObject(field.getID()).getOwner()) {
+        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
 
             canBuild = false;
         }
 
         //Checks if the player owns all of the fields of that indexType
-        else if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
+        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
 
             canBuild = false;
         }
 
-        else if (!isAffordable(playerID,field.getHouse_price())) {
+        if (!isAffordable(playerID,field.getHouse_price())) {
 
             canBuild = false;
         }
