@@ -36,10 +36,6 @@ public class Controller {
         play();
     }
 
-    private void endGame() {
-        endGame = true;
-    }
-
     private void play() {
         while (!endGame) {
             //number of rounds
