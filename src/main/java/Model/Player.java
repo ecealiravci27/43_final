@@ -8,6 +8,7 @@ public class Player {
     private final Piece playerPiece;
     private Account playerAccount;
     private boolean bancrupt;
+    private boolean jailed;
 
     public Player(int ID) {
         this.playerID = ID;
@@ -15,6 +16,7 @@ public class Player {
         this.playerPosition = 0;
         this.playerAccount = new Account(30000);
         this.bancrupt = false;
+        this.jailed = false;
     }
 
     public void movePiece(int addMove) {
@@ -22,7 +24,7 @@ public class Player {
         playerPosition = (playerPiece.getMoves()%40);
     }
 
-    public void bancrupt(){
+    public void bankrupt(){
         bancrupt = true;
     }
 
@@ -67,5 +69,13 @@ public class Player {
     public String getName(int ID) {
 
         return name;
+    }
+
+    public void jail(){
+        jailed = true;
+    }
+
+    public boolean isJailed(){
+        return jailed;
     }
 }

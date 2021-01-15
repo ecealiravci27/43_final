@@ -42,6 +42,30 @@ public class PropertyPlayerController {
         return getPlayer(playerID).getPlayerPosition();
     }
 
+    public void doSpecialField(SpecialField landedField, int playerID, int fieldID){
+        String type = landedField.getType();
+
+        //parking and visit fields do nothing
+
+        //tax
+        if(type.equals("tax")){
+            int tax = landedField.getTaxes();
+            if(isAffordable(playerID, tax)){
+                playerArray[playerID].reduceBalance(tax);
+            }
+            else{
+                playerArray[playerID].reduceBalance(tax);
+                playerArray[playerID].bankrupt();
+            }
+        }
+
+        //goJail
+        if(type.equals("prison")){
+            playerArray[playerID].setPiece(10);
+            playerArray[playerID].jail();
+        }
+    }
+
 
     public Player[] setupPlayer(int playerAmount) {
 
@@ -52,7 +76,6 @@ public class PropertyPlayerController {
         }
         return playerArray;
     }
-
 
     public SuperField[] setupSuperFieldArray(Board board) {
         return board.getField();
@@ -76,7 +99,7 @@ public class PropertyPlayerController {
         return playerArray[playerID];
     }
     public void bankruptPlayer(int playerID){
-        getPlayer(playerID).bancrupt();
+        getPlayer(playerID).bankrupt();
     }
 
     public int getPlayerMoney (int ID){
@@ -84,30 +107,30 @@ public class PropertyPlayerController {
     }
 
     public Player[] getPlayerArray() {
-
         return playerArray;
     }
+//
+//    public boolean canPurchaseHouse(int playerID, VacantField field) {
+//        boolean canBuild =  true;
+//
+//        //Checks if player is the owner of the property
+//        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
+//            canBuild = false;
+//        }
+//
+//        //Checks if the player owns all of the fields of that indexType
+//        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
+//
+//        }
+//            canBuild = false;
+//        }
+//
+//        if (!isAffordable(playerID,field.getHouse_price())) {
+//            canBuild = false;
+//        }
+//        return canBuild;
+//    }
 
-    public boolean canPurchaseHouse(int playerID, VacantField field) {
-
-        boolean canBuild =  true;
-
-        //Checks if player is the owner of the property
-        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
-            canBuild = false;
-        }
-
-        //Checks if the player owns all of the fields of that indexType
-        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
-
-            canBuild = false;
-        }
-
-        if (!isAffordable(playerID,field.getHouse_price())) {
-            canBuild = false;
-        }
-        return canBuild;
-    }
 
     public int getRent(OwnableField field, int playerID, int eyeSum){
         int rent = 0;
@@ -123,13 +146,18 @@ public class PropertyPlayerController {
         }
         return rent;
     }
-
     public void payPlayerRent(OwnableField field, int owner, int playerID, int eyeSum) {
         int rent;
         rent = getRent(field, playerID, eyeSum);
         Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
-        playerArray[playerID].addBalance(rent);
-        playerArray[playerID].addBalance(-(rent));
+        if (playerArray[playerID].getBalance() < rent) {
+            playerArray[owner].addBalance(playerArray[playerID].getBalance());
+            playerArray[playerID].reduceBalance(rent);
+            playerArray[playerID].bankrupt();
+        } else {
+            playerArray[owner].addBalance(rent);
+            playerArray[playerID].reduceBalance(rent);
+        }
     }
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {
@@ -150,11 +178,4 @@ public class PropertyPlayerController {
         ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).removeHouse();
         playerArray[playerID].addBalance(field.getHouse_price()/2);
     }
-
-    public static void main (String[] args) {
-
-
-    }
 }
-
-

@@ -100,14 +100,8 @@ public class Controller {
     }
 
     private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
-
-
-
-
-
-
+        propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
     }
-
 
     private boolean passStart(int playerID){
         boolean passedStart = false;
