@@ -94,7 +94,7 @@ public class PropertyPlayerController {
     }
 
     public boolean isBankrupt(int playerID){
-        return getPlayer(playerID).getBankrupt();
+        return getPlayer(playerID).isBankrupt();
     }
 
     private Player getPlayer(int playerID) {
