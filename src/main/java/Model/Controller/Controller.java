@@ -7,10 +7,7 @@ import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Cards.SuperCard;
 import Model.Dice;
-import Model.Fields.ChanceField;
-import Model.Fields.OwnableField;
-import Model.Fields.SuperField;
-import Model.Fields.VacantField;
+import Model.Fields.*;
 
 public class Controller {
 
@@ -91,20 +88,47 @@ public class Controller {
         }
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
-        if (landedField instanceof OwnableField){
-            boolean wantToBuy =  guiController.wantToBuy(landedField.getFieldName());
-            propertyPlayerController.doPropertyField((OwnableField) landedField, playerID, dice.getRememberDice(), wantToBuy);
-            }
+        if (landedField instanceof OwnableField) {
+            doPropertyField((OwnableField) landedField,playerID,fieldID);
+        }
         if (landedField instanceof ChanceField) {
             doCard(playerID);
         }
+        if (landedField instanceof SpecialField){
+
+        }
     }
+
+    private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
+
+
+
+
+
+
+    }
+
+
     private boolean passStart(int playerID){
         boolean passedStart = false;
         if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
             passedStart = true;
         }
         return true;
+    }
+
+    private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
+        if (!propertyPlayerController.isOwned(landedField.getID())) {
+            if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
+                if (guiController.wantToBuy(landedField.getFieldName())) {
+                    propertyPlayerController.purchaseProperty(playerID,landedField);
+                }
+            }
+        }
+        else if (!(propertyPlayerController.getOwnership(landedField.getID()) == playerID)) {
+            int owner = propertyPlayerController.getOwnership(fieldID);
+            propertyPlayerController.payPlayerRent((OwnableField) landedField,owner, playerID, dice.getRememberDice());
+        }
     }
 
     private void doCard(int playerID){
@@ -126,8 +150,7 @@ public class Controller {
         int maxPlayers = 6;
         int minPlayers = 2;
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
-        PropertyPlayerController pController = new PropertyPlayerController(totalPlayers, board);
-        return pController;
+        return new PropertyPlayerController(totalPlayers, board);
     }
 }
 

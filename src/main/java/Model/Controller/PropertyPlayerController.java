@@ -58,39 +58,10 @@ public class PropertyPlayerController {
         return board.getField();
     }
 
-
-    public void doPropertyField(OwnableField field, int playerID, int eyeSum, boolean wanToBuy) {
-        //denne metode antager at man vil købe feltet
+    public boolean isOwned(int fieldID){
         int bank = 10;
-        boolean canBuy = isAffordable(playerID,field.getFieldPrice());
-        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
-        int owner = propertyObject.getOwner();
-        int fieldID = field.getID();
-        int rent = getRent(field, playerID, eyeSum);
-        //When the owner of the property is not the current player
-        if (playerID != owner) {
-            //when the bank is the owner
-            if (bank == owner && wanToBuy) {
-                if (getPlayerMoney(playerID) >= rent)
-                propertyManager.setOwnerShip(playerID,fieldID);
-                getPlayer(playerID).reduceBalance(rent);
-                if (getPlayerMoney(playerID) <= rent){
-                    System.out.println("not enough money!");
-                }
-            }
-            //When the owner of the property is another player
-            else {
-                //Player can afford to pay rent
-                if (rent <= playerArray[playerID].getBalance()) {
-                    if (field instanceof ShippingField || field instanceof CoorporationField) {
-                        payPlayerRent(field, propertyObject.getOwner(), playerID, eyeSum);
-                    } else {
-                        //Player can't afford rent, they go bankrupt
-                        bankruptPlayer(playerID);
-                    }
-                }
-            }
-        }
+        int owner = getOwnership(fieldID);
+        return owner != bank;
     }
 
     public int getOwnership(int ID){
@@ -162,9 +133,7 @@ public class PropertyPlayerController {
     }
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {
-
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
-
         propertyManager.setOwnerShip(playerID,propertyField.getID());
     }
 
