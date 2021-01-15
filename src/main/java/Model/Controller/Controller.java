@@ -75,6 +75,16 @@ public class Controller {
                 for (i = 0; i < totalPlayers; i++) {
                     doTurn(i);
                 }
+                for (int j = 0; j< totalPlayers ; j++) {
+                    int counter = 0;
+                    if(propertyPlayerController.isBankrupt(j)){
+                        counter++;
+                    }
+                    if (counter == (totalPlayers - 1)) {
+                        endGame = true;
+                        break;
+                    }
+                }
             }
         }
     }
