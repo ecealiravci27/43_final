@@ -40,9 +40,11 @@ public class Controller {
         while (!endGame) {
             //number of rounds
             int i;
+            int turn = 0;
             for (i = 0; i < 1000; i++) {
                 for (i = 0; i < totalPlayers; i++) {
-                    doTurn(i);
+                    doTurn(i, turn);
+                    turn++;
                 }
                 for (int j = 0; j< totalPlayers ; j++) {
                     int counter = 0;
@@ -58,11 +60,11 @@ public class Controller {
         }
     }
 
-    private void doTurn(int playerID) {
+    private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             movePlayer(playerID);
             SuperField landedField = board[propertyPlayerController.getPlayerPosition(playerID)];
-            doField(landedField, playerID);
+            doField(landedField, playerID, playerTurn);
         }
     }
 
@@ -79,7 +81,11 @@ public class Controller {
         guiController.changePlayerGUIPos(ID, pos_2, pos_1);
     }
 
-    private void doField(SuperField landedField, int playerID){
+    private void doField(SuperField landedField, int playerID, int turn){
+        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
+            propertyPlayerController.changeAccount(4000, playerID);
+        }
+
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField){
@@ -99,6 +105,13 @@ public class Controller {
         }
     }
 
+    private boolean passStart(int playerID){
+        boolean passedStart = false;
+        if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
+            passedStart = true;
+        }
+        return true;
+    }
 
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
