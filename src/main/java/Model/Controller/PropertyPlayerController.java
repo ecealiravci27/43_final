@@ -118,7 +118,7 @@ public class PropertyPlayerController {
         boolean canBuild =  true;
 
         //Checks if player is the owner of the property
-        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
+        if (playerID != propertyManager.getPropertyObject(field.getID()).getOwner()) {
             canBuild = false;
         }
 
@@ -177,6 +177,8 @@ public class PropertyPlayerController {
         ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).removeHouse();
         playerArray[playerID].addBalance(field.getHouse_price()/2);
     }
+
+
 
     public static void main (String[] args) {
 
