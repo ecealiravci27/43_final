@@ -95,6 +95,15 @@ public class Controller {
             doCard(playerID);
         }
     }
+
+    private void buyHouse(){
+        if (guiController.wantToBuy("")){
+            if (propertyPlayerController.canPurchaseHouse()){
+            }
+        }
+    }
+
+
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
         if(card instanceof MoveCard){
