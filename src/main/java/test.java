@@ -9,6 +9,7 @@ import Model.Property.Ownable;
 import Model.Property.PropertyManager;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import Model.Fields.*;
 
@@ -201,4 +202,12 @@ public class test {
 //
 //    }
 
+    @Test
+    public void returnBoolean() {
+        SuperField[] board = new Board().getField();
+        Board trueBoard = new Board();
+        PropertyPlayerController propertyPlayerController = new PropertyPlayerController(2,board);
+
+        assertFalse(propertyPlayerController.canPurchaseHouse(1, ((VacantField) trueBoard.getFielobject(1))));
+    }
 }

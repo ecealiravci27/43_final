@@ -111,18 +111,18 @@ public class PropertyPlayerController {
         boolean canBuild =  true;
 
         //Checks if player is the owner of the property
-        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
+        if (playerID != propertyManager.getPropertyObject(field.getID()).getOwner()) {
 
             canBuild = false;
         }
 
         //Checks if the player owns all of the fields of that indexType
-        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
+        else if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
 
             canBuild = false;
         }
 
-        if (!isAffordable(playerID,field.getHouse_price())) {
+        else if (!isAffordable(playerID,field.getHouse_price())) {
 
             canBuild = false;
         }
