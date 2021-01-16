@@ -84,12 +84,17 @@ public class Player {
         return name;
     }
 
-    public void jail(){
-
+    public void jail() {
         if (!freeCard) {
             this.jailed = true;
         }
-        freeCard = false;
+        if (freeCard){
+            freeCard = false;
+        }
+    }
+
+    public void getFreeCard(){
+        freeCard = true;
     }
 
     public boolean isJailed(){

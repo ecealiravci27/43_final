@@ -155,6 +155,9 @@ public class Controller {
         if(card instanceof MoneyCard){
             propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
         }
+        if(card instanceof FreeCard) {
+            propertyPlayerController.setFree(playerID);
+        }
     }
 
     private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
