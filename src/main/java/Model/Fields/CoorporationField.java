@@ -13,12 +13,13 @@ public class CoorporationField extends OwnableField {
 
     @Override
     public int getRent(int eyesum, int owned_coorporations) {
+        int tempRent = 0;
         if (owned_coorporations == 1) {
-            rent = eyesum * multiplier_for_one;
+            tempRent = eyesum * multiplier_for_one;
         }
         if (owned_coorporations == 2){
-            rent = (2*rent)* getMultiplier_for_two;
+            tempRent = (2*rent)* getMultiplier_for_two;
         }
-        return rent;
+        return tempRent;
     }
 }
