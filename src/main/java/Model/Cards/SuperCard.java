@@ -4,6 +4,10 @@ public abstract class SuperCard {
     protected String cardDescription;
 
     public SuperCard(String desc) {
-        this.cardDescription = "";
+        this.cardDescription = desc;
+    }
+
+    public String getCardDescription() {
+        return cardDescription;
     }
 }

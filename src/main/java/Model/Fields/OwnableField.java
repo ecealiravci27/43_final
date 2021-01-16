@@ -4,11 +4,13 @@ public abstract class OwnableField extends SuperField{
 
     protected int price;
     protected int rent;
+    protected  int defaultRent;
 
     public OwnableField(String name, String description, int ID, int price, int rent) {
         super(name, description, ID);
         this.price = price;
         this.rent = rent;
+        this.defaultRent = rent;
     }
     public int getFieldPrice(){
         return price;
@@ -17,6 +19,9 @@ public abstract class OwnableField extends SuperField{
     abstract public int getRent(int eyesum, int owned_entities);
     public int getFieldRent(){
         return rent;
+    }
+    public int getDefaultRent() {
+        return defaultRent;
     }
 }
 

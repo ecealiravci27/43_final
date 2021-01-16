@@ -76,35 +76,47 @@ public class GUIController {
                 System.out.println(((SpecialField) field).getType());
                 FieldColor color = colors.get(((SpecialField) field).getType());
                 if(((SpecialField) field).getType().equals("start")) {
-                    gfields[i] = new GUI_Start(field.getFieldName(), "subtext", field.getFieldDescription(), color.FG, color.BG);
+                    gfields[i] = new GUI_Start(field.getFieldName(), "", field.getFieldDescription(), color.FG, color.BG);
                 } else if(((SpecialField) field).getType().equals("tax")) {
                     gfields[i] = new GUI_Tax(field.getFieldName(), field.getFieldDescription(), field.getFieldDescription(), color.FG, color.BG);
                 } else if(((SpecialField) field).getType().equals("visitprison") || ((SpecialField) field).getType().equals("prison")) {
                     gfields[i] = new GUI_Jail("default", field.getFieldName(), field.getFieldName(), field.getFieldDescription(), color.FG, color.BG);
                 } else if(((SpecialField) field).getType().equals("parking")) {
-                    gfields[i] = new GUI_Refuge("default", field.getFieldName(), "subtext", field.getFieldDescription(), color.FG, color.BG);
+                    gfields[i] = new GUI_Refuge("default", field.getFieldName(), field.getFieldDescription(), "Her kan der parkeres frit", color.FG, color.BG);
                 }
 
             } else if(field instanceof Model.Fields.VacantField) {
                 int rent = ((VacantField) field).getFieldRent();
                 int price = ((VacantField) field).getFieldPrice();
+                int housePrice = ((VacantField) field).getHouse_price();
+                //int houseRent = ((VacantField) field).get
+                String desc = "Rent: " + rent + "\nHouse Price: " + housePrice + "\nHouse Rent: 10";
+
                 FieldColor color = colors.get("vacant." + ((VacantField) field).getTypeIndex());
                 System.out.println(((VacantField) field).getColor());
-                gfields[i] = new GUI_Street(field.getFieldName(), "Pris: " + price , field.getFieldDescription(), String.valueOf(rent), color.FG, color.BG);
+                gfields[i] = new GUI_Street(field.getFieldName(), "Pris: " + price , desc , String.valueOf(rent), color.FG, color.BG);
                 //new GUI_Street(,)
             } else if(field instanceof Model.Fields.ChanceField) {
                 FieldColor color = colors.get("chance");
                 gfields[i] = new GUI_Chance(field.getFieldName(), field.getFieldDescription(), field.getFieldDescription(), color.FG, color.BG);
             } else if(field instanceof Model.Fields.ShippingField) {
                 FieldColor color = colors.get("shipping");
-                int rent = ((ShippingField) field).getFieldRent();
+                int rent = ((ShippingField) field).getRent(0, 1);
+                System.out.println("RENTTTTTTTTTTTTTTT = " + rent);
                 int price = ((ShippingField) field).getFieldPrice();
-                gfields[i] = new GUI_Shipping("default", field.getFieldName(), "Pris: " + price, field.getFieldDescription(), String.valueOf(rent), color.FG, color.BG);
+                String desc = "";
+                for (int a = 0; a < 4; a++) {
+                    desc = desc + "\n" + (a+1) + "x" + field.getFieldName() + " Rent:"  + ((ShippingField) field).getRent(0, (a+1));;
+                }
+
+                gfields[i] = new GUI_Shipping("default", field.getFieldName(), "Pris: " + price, desc, String.valueOf(rent), color.FG, color.BG);
             } else if(field instanceof Model.Fields.CoorporationField) {
                 FieldColor color = colors.get("brew");
                 int rent = ((CoorporationField) field).getFieldRent();
                 int price = ((CoorporationField) field).getFieldPrice();
-                gfields[i] = new GUI_Brewery("default", field.getFieldName(), "Pris: " + price, field.getFieldDescription(), String.valueOf(rent), color.FG, color.BG);
+                String desc = "Renten er afhænging af øjekast og om hvorvidt du ejer Tuborg og Carlsberg";
+
+                gfields[i] = new GUI_Brewery("default", field.getFieldName(), "Pris: " + price, desc, String.valueOf(rent), color.FG, color.BG);
             }
         }
 
@@ -232,6 +244,13 @@ public class GUIController {
         );
     }
 
+    public void readCard(String desc) {
+        GUI.getUserButtonPressed(
+                desc,
+                "Ok"
+        );
+    }
+
     public void setPropertyBorder(int playerID, int fieldID) {
         GUI_Field field = GUI.getFields()[fieldID];
         if (field instanceof GUI_Shipping) {
@@ -245,5 +264,9 @@ public class GUIController {
 
     public void updateBalance(int playerID, int balance) {
         gPlayers[playerID].setBalance(balance);
+    }
+
+    public void updateOwnableDescription(String name) {
+        GUI.getFields()[1].setDescription(name);
     }
 }

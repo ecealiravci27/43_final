@@ -45,7 +45,7 @@ public class Board {
         fields[17] = new ChanceField("?", "Prøv Lykken", 17, true);
         fields[18] = new VacantField("Hellerupvej", "", 18, 3600, 4, 300, 1400,4000,11000, 15000, 19000, 2000);
         fields[19] = new VacantField("Strandvejen", "", 19, 4000, 4, 350, 1600, 4400, 12000, 16000, 20000, 2000);
-        fields[20] = new SpecialField("parkering", "",20,0, "parking");
+        fields[20] = new SpecialField("parkering", "Fri Parkering",20,0, "parking");
         fields[21] = new VacantField("Trianglen", "", 21, 4400, 5, 350, 1800, 5000, 14000, 17500, 21000, 3000);
         fields[22] = new ChanceField("?", "Prøv Lykken", 22, true);
         fields[23] = new VacantField("Østerbrogade", "", 23, 4400, 5, 350, 1800, 5000, 14000, 17500, 21000, 3000);
@@ -55,7 +55,7 @@ public class Board {
         fields[27] = new VacantField("Kgs. Nytorv", "", 27, 5200, 6, 450, 2200, 6600, 16000, 19500,23000,3000);
         fields[28] = new CoorporationField("Carlsberg", "", 28, 3000,  100);
         fields[29] = new VacantField("Østergade", "", 29, 5600, 6, 500, 2400, 7200, 17000, 20500, 24000, 3000);
-        fields[30] = new SpecialField("Gå i fængsel", "De fængsles\nSlå to ens for at komme ud", 30, 0, "prison");
+        fields[30] = new SpecialField("Gå i fængsel", "Du sendes i fængsel og mister en tur", 30, 0, "prison");
         fields[31] = new VacantField("Amagertorv", "", 31, 6000, 2, 550, 2600, 7800, 18000, 22000, 25000, 4000);
         fields[32] = new VacantField("Vimmelskaffet", "", 32, 6000, 2, 550, 2600, 7800, 18000, 22000,25000, 4000);
         fields[33] = new ChanceField("?", "Prøv Lykken", 33, true);
