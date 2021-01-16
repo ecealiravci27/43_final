@@ -134,7 +134,7 @@ public class PropertyPlayerController {
 
     public int getRent(OwnableField field, int playerID, int eyeSum){
         int rent = 0;
-        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getOwnable(field.getID());
         //Rent for a Vacant field
         if (field instanceof VacantField) {
             int numberOfHouses = ((HouseOwnable) propertyObject).getNumberOfHouses();
@@ -149,7 +149,7 @@ public class PropertyPlayerController {
     public void payPlayerRent(OwnableField field, int owner, int playerID, int eyeSum) {
         int rent;
         rent = getRent(field, playerID, eyeSum);
-        Ownable propertyObject = propertyManager.getPropertyObject(field.getID());
+        Ownable propertyObject = propertyManager.getOwnable(field.getID());
         if (playerArray[playerID].getBalance() < rent) {
             playerArray[owner].addBalance(playerArray[playerID].getBalance());
             playerArray[playerID].reduceBalance(rent);
@@ -175,7 +175,7 @@ public class PropertyPlayerController {
     }
 
     public void sellHouse(int playerID, VacantField field) {
-        ((HouseOwnable) propertyManager.getPropertyObject(field.getID())).removeHouse();
+        ((HouseOwnable) propertyManager.getOwnable(field.getID())).removeHouse();
         playerArray[playerID].addBalance(field.getHouse_price()/2);
     }
 }
