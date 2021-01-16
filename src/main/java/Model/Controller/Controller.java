@@ -119,6 +119,8 @@ public class Controller {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
                 if (guiController.wantToBuy(landedField.getFieldName())) {
                     propertyPlayerController.purchaseProperty(playerID,landedField);
+                    guiController.setPropertyBorder(playerID, fieldID);
+                    guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
                 }
             }
         }
