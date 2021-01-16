@@ -224,11 +224,10 @@ public class GUIController {
         return chosenButton.equals("Yes");
     }
 
-    public boolean wantToRoll(String name) {
+    public void wantToRoll(String name) {
         String chosenButton = GUI.getUserButtonPressed(
                  name + "'s turn",
                 "Roll"
         );
-        return chosenButton.equals("Roll");
     }
 }
