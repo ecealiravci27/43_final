@@ -7,7 +7,7 @@ package Model.Property;
         public static final int SHIPPING_TYPE = 0;
         public static final int COORP_TYPE = 1;
         public static final int VACANT_TYPE = 2;
-        private int typeInt;
+        private final int typeInt;
 
         public Ownable(int ID, int typeInt) {
             this.available = isAvailable();

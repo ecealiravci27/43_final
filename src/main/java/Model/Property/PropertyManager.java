@@ -125,6 +125,33 @@ public class PropertyManager {
         }
     }
 
+
+    public int[] getOwnedHouseOwnables(int playerID) {
+
+        int counter = 0;
+        int index = 0;
+
+        for (int i = 0; i < properties.length; i++) {
+
+            if (properties[i] instanceof HouseOwnable && playerID == properties[i].getOwner()) {
+
+                counter++;
+            }
+        }
+
+        int[] ownAblesID = new int[counter];
+
+        for (int j = 0; j < properties.length; j++) {
+
+            if (playerID == properties[j].getOwner())
+
+            ownAblesID[index] = properties[j].getID();
+
+            index++;
+        }
+
+        return ownAblesID;
+    }
 //Temporary main method for testing
 
     public static void main(String[] args) {

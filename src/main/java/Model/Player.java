@@ -10,6 +10,7 @@ public class Player {
     private boolean bancrupt;
     private boolean jailed;
     private int oldPlayerPosition;
+    private boolean freeCard;
 
     public Player(int ID) {
         this.playerID = ID;
@@ -18,6 +19,7 @@ public class Player {
         this.playerAccount = new Account(30000);
         this.bancrupt = false;
         this.jailed = false;
+        this.freeCard = false;
     }
 
     public void movePiece(int addMove) {
@@ -83,7 +85,11 @@ public class Player {
     }
 
     public void jail(){
-        this.jailed = true;
+
+        if (!freeCard) {
+            this.jailed = true;
+        }
+        freeCard = false;
     }
 
     public boolean isJailed(){
