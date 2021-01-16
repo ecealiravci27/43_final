@@ -77,6 +77,7 @@ public class Controller {
         System.out.println(dice_2);
         int eyesum = dice_1 + dice_2;
         dice.setDice(eyesum);
+        guiController.showDice(dice_1, dice_2);
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);

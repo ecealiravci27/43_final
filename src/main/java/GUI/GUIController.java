@@ -112,7 +112,7 @@ public class GUIController {
     }
 
     public void showDice(int roll, int roll2) {
-
+        GUI.setDice(roll, roll2);
     }
 
 //    public static void main(String[] args) {
