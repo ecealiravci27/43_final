@@ -225,7 +225,7 @@ public class GUIController {
     }
 
     public void wantToRoll(String name) {
-        String chosenButton = GUI.getUserButtonPressed(
+        GUI.getUserButtonPressed(
                  name + "'s turn",
                 "Roll"
         );
