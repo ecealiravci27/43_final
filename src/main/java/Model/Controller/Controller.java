@@ -2,10 +2,7 @@ package Model.Controller;
 
 import GUI.GUIController;
 import Model.Board;
-import Model.Cards.CardPile;
-import Model.Cards.MoneyCard;
-import Model.Cards.MoveCard;
-import Model.Cards.SuperCard;
+import Model.Cards.*;
 import Model.Dice;
 import Model.Fields.*;
 
@@ -157,6 +154,9 @@ public class Controller {
         }
         if(card instanceof MoneyCard){
             propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
+        }
+        if(card instanceof FreeCard) {
+            propertyPlayerController.setFree(playerID);
         }
     }
 

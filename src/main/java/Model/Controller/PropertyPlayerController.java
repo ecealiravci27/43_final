@@ -182,4 +182,8 @@ public class PropertyPlayerController {
         ((HouseOwnable) propertyManager.getOwnable(field.getID())).removeHouse();
         playerArray[playerID].addBalance(field.getHouse_price()/2);
     }
+
+    public void setFree(int playerID) {
+        playerArray[playerID].setFree();
+    }
 }
