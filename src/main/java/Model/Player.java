@@ -83,7 +83,7 @@ public class Player {
     }
 
     public void jail(){
-        jailed = true;
+        this.jailed = true;
     }
 
     public boolean isJailed(){

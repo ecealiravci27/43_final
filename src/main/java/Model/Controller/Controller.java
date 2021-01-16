@@ -79,12 +79,12 @@ public class Controller {
                     guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
                 }
             }
-            else{
+            if (propertyPlayerController.getPlayerArray()[playerID].isJailed()){
                 //message to jailed player
                 //guiController.
                 System.out.println("Du er fængslet. vent en tur!");
+                propertyPlayerController.getPlayerArray()[playerID].setFree();
             }
-            propertyPlayerController.getPlayerArray()[playerID].setFree();
         }
     }
 
