@@ -65,8 +65,24 @@ public class Controller {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             guiController.wantToRoll("test" + playerID);
             movePlayer(playerID);
-            SuperField landedField = field[propertyPlayerController.getPlayerPosition(playerID)];
+            int pos1 = propertyPlayerController.getPlayerPosition(playerID);
+            SuperField landedField = field[pos1];
             doField(landedField, playerID, playerTurn);
+
+            // In some cases the player pos gets changed by doField
+            int pos2 = propertyPlayerController.getPlayerPosition(playerID);
+            guiController.changePlayerGUIPos(playerID, pos2, pos1);
+
+            // update every players balance
+            for(int i = 0; i < totalPlayers; i++) {
+                guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
+            }
+        }
+    }
+
+    private void passStart(int oldpos, int newpos, int playerID){
+        if(newpos <= 12 && oldpos > field.length - 12){
+            propertyPlayerController.changeAccount(4000, playerID);
         }
     }
 
@@ -82,12 +98,13 @@ public class Controller {
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
         guiController.changePlayerGUIPos(ID, pos_2, pos_1);
+        passStart(pos_1, pos_2, ID);
     }
 
     private void doField(SuperField landedField, int playerID, int turn){
-        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
-            propertyPlayerController.changeAccount(4000, playerID);
-        }
+//        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
+//            propertyPlayerController.changeAccount(4000, playerID);
+//        }
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField) {
@@ -105,20 +122,12 @@ public class Controller {
         propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
     }
 
-    private boolean passStart(int playerID){
-        boolean passedStart = false;
-        if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
-            passedStart = true;
-        }
-        return passedStart;
-    }
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
         if (!propertyPlayerController.isOwned(landedField.getID())) {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
                 if (guiController.wantToBuy(landedField.getFieldName())) {
                     propertyPlayerController.purchaseProperty(playerID,landedField);
                     guiController.setPropertyBorder(playerID, fieldID);
-                    guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
                 }
             }
         }
