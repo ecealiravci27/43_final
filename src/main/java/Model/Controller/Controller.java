@@ -63,20 +63,28 @@ public class Controller {
 
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
-            guiController.wantToRoll("test" + playerID);
-            movePlayer(playerID);
-            int pos1 = propertyPlayerController.getPlayerPosition(playerID);
-            SuperField landedField = field[pos1];
-            doField(landedField, playerID, playerTurn);
+            if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
+                guiController.wantToRoll("test" + playerID);
+                movePlayer(playerID);
+                int pos1 = propertyPlayerController.getPlayerPosition(playerID);
+                SuperField landedField = field[pos1];
+                doField(landedField, playerID, playerTurn);
 
-            // In some cases the player pos gets changed by doField
-            int pos2 = propertyPlayerController.getPlayerPosition(playerID);
-            guiController.changePlayerGUIPos(playerID, pos2, pos1);
+                // In some cases the player pos gets changed by doField
+                int pos2 = propertyPlayerController.getPlayerPosition(playerID);
+                guiController.changePlayerGUIPos(playerID, pos2, pos1);
 
-            // update every players balance
-            for(int i = 0; i < totalPlayers; i++) {
-                guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
+                // update every players balance
+                for (int i = 0; i < totalPlayers; i++) {
+                    guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
+                }
             }
+            else{
+                //message to jailed player
+                //guiController.
+                System.out.println("Du er fængslet. vent en tur!");
+            }
+            propertyPlayerController.getPlayerArray()[playerID].setFree();
         }
     }
 

@@ -26,6 +26,10 @@ public class Player {
         playerPosition = (playerPiece.getMoves()%40);
     }
 
+    public  void setFree (){
+        jailed = false;
+    }
+
     public void bankrupt(){
         bancrupt = true;
     }
