@@ -13,7 +13,7 @@ public class PropertyManager {
         this.properties = setupProperty(board);
     }
 
-    public Ownable getPropertyObject(int fieldID) {
+    public Ownable getOwnable(int fieldID) {
 
         int i;
 
@@ -105,13 +105,6 @@ public class PropertyManager {
 //        //System.out.println(properties);
 //        isGroupOwned(1, 2, properties);
 //    }
-
-    public Ownable getOwnable(int ID){
-        return properties[ID];
-    }
-
-
-
 
     public void setOwnerShip(int owner, int fieldID) {
         int i;

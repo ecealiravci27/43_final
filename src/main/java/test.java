@@ -2,7 +2,6 @@
 import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Board;
-import Model.Controller.PropertyPlayerController;
 import Model.Piece;
 import Model.Property.PropertyManager;
 import org.junit.Test;
@@ -53,8 +52,8 @@ public class test {
     //Testing ShippingField getRent method when owned shipping fields are 4 and rent is 8
     @Test
     public void changeRentOwnedShippingFour() {
-        ShippingField shippingField = new ShippingField("test", "test", 1, 2,8);
-        assertEquals(32, shippingField.getRent(3,4));
+        ShippingField shippingField = new ShippingField("test", "test", 1, 2,400);
+        assertEquals(3200, shippingField.getRent(3,4));
     }
 
     //Model.Board class, testing getFieldObject method when ID is above 40
@@ -68,7 +67,7 @@ public class test {
     @Test
     public void returnFieldIDNewValue() {
         Board board = new Board();
-        assertEquals(11, board.getFielobject(10).getID());
+        assertEquals(10, board.getFielobject(10).getID());
     }
 
 
@@ -180,14 +179,14 @@ public class test {
     public void returnEntities() {
         SuperField[] board = new Board().getField();
         PropertyManager propertyManager = new PropertyManager(board);
-        assertEquals(2, propertyManager.numberOfOwned(0,13));
+        assertEquals(2, propertyManager.numberOfOwned(10,12));
     }
 
     @Test
     public void returnProperty() {
         SuperField[] board = new Board().getField();
         PropertyManager propertyManager = new PropertyManager(board);
-        assertEquals(1,propertyManager.getPropertyObject(4));
+        assertEquals(1,propertyManager.getOwnable(3));
     }
 
 //    @Test

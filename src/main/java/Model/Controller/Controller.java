@@ -41,11 +41,10 @@ public class Controller {
         endGame = false;
         while (!endGame) {
             //number of rounds
-            int i;
             int turn = 0;
-            for (i = 0; i < 1000; i++) {
-                for (i = 0; i < totalPlayers; i++) {
-                    doTurn(i, turn);
+            for (int i = 0; i < 1000; i++) {
+                for (int k = 0; k < totalPlayers; k++) {
+                    doTurn(k, turn);
                     turn++;
                 }
                 for (int j = 0; j< totalPlayers ; j++) {
@@ -111,9 +110,8 @@ public class Controller {
         if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
             passedStart = true;
         }
-        return true;
+        return passedStart;
     }
-
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
         if (!propertyPlayerController.isOwned(landedField.getID())) {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
