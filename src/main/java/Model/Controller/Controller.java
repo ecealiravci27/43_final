@@ -63,6 +63,7 @@ public class Controller {
 
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
+            guiController.wantToRoll("test" + playerID);
             movePlayer(playerID);
             SuperField landedField = field[propertyPlayerController.getPlayerPosition(playerID)];
             doField(landedField, playerID, playerTurn);
@@ -76,6 +77,7 @@ public class Controller {
         System.out.println(dice_2);
         int eyesum = dice_1 + dice_2;
         dice.setDice(eyesum);
+        guiController.showDice(dice_1, dice_2);
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
@@ -115,6 +117,8 @@ public class Controller {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
                 if (guiController.wantToBuy(landedField.getFieldName())) {
                     propertyPlayerController.purchaseProperty(playerID,landedField);
+                    guiController.setPropertyBorder(playerID, fieldID);
+                    guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
                 }
             }
         }

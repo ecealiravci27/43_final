@@ -15,7 +15,8 @@ public class GUIController {
     String[] options;
 
     public GUIController(SuperField[] board) {
-        this.GUI = new GUI(setupBoard(board));
+        Color bg = new Color(141, 138, 138);
+        this.GUI = new GUI(setupBoard(board), bg);
         this.playerColors = setupPlayerColors();
         options = playerColors.keySet().toArray(new String[0]);
     }
@@ -112,7 +113,7 @@ public class GUIController {
     }
 
     public void showDice(int roll, int roll2) {
-
+        GUI.setDice(roll, roll2);
     }
 
 //    public static void main(String[] args) {
@@ -222,5 +223,27 @@ public class GUIController {
                 "Yes", "No"
         );
         return chosenButton.equals("Yes");
+    }
+
+    public void wantToRoll(String name) {
+        GUI.getUserButtonPressed(
+                 name + "'s turn",
+                "Roll"
+        );
+    }
+
+    public void setPropertyBorder(int playerID, int fieldID) {
+        GUI_Field field = GUI.getFields()[fieldID];
+        if (field instanceof GUI_Shipping) {
+            ((GUI_Shipping) field).setBorder(gPlayers[playerID].getPrimaryColor());
+        } else if (field instanceof GUI_Street) {
+            ((GUI_Street) field).setBorder(gPlayers[playerID].getPrimaryColor());
+        } else if (field instanceof GUI_Brewery) {
+            ((GUI_Brewery) field).setBorder(gPlayers[playerID].getPrimaryColor());
+        }
+    }
+
+    public void updateBalance(int playerID, int balance) {
+        gPlayers[playerID].setBalance(balance);
     }
 }
