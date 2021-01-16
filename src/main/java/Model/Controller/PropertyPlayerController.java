@@ -42,6 +42,10 @@ public class PropertyPlayerController {
         return getPlayer(playerID).getPlayerPosition();
     }
 
+    public int getOldPlayerPosition(int playerID) {
+        return getPlayer(playerID).getOldPlayerPosition();
+    }
+
     public void doSpecialField(SpecialField landedField, int playerID, int fieldID){
         String type = landedField.getType();
 

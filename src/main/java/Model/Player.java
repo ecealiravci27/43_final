@@ -9,6 +9,7 @@ public class Player {
     private Account playerAccount;
     private boolean bancrupt;
     private boolean jailed;
+    private int oldPlayerPosition;
 
     public Player(int ID) {
         this.playerID = ID;
@@ -35,6 +36,10 @@ public class Player {
 
     public int getPlayerPosition() {
         return playerPosition;
+    }
+
+    public int getOldPlayerPosition() {
+        return oldPlayerPosition;
     }
 
     public void addBalance(int change) {
