@@ -113,7 +113,7 @@ public class PropertyPlayerController {
     public Player[] getPlayerArray() {
         return playerArray;
     }
-//
+
 //    public boolean canPurchaseHouse(int playerID, VacantField field) {
 //        boolean canBuild =  true;
 //
