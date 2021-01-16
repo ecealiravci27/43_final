@@ -64,6 +64,7 @@ public class Controller {
 
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
+            guiController.wantToRoll("test" + playerID);
             movePlayer(playerID);
             SuperField landedField = field[propertyPlayerController.getPlayerPosition(playerID)];
             doField(landedField, playerID, playerTurn);
