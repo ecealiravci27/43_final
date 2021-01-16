@@ -5,21 +5,25 @@ import Model.Fields.*;
 import Model.Player;
 import gui_fields.*;
 import gui_main.GUI;
-
 import java.awt.*;
 import java.util.HashMap;
 
 public class GUIController {
     private final GUI GUI;
     private GUI_Player[] gPlayers;
+    private HashMap<String, Color> playerColors;
+    String[] options;
 
     public GUIController(SuperField[] board) {
         this.GUI = new GUI(setupBoard(board));
+        this.playerColors = setupPlayerColors();
+        options = playerColors.keySet().toArray(new String[0]);
     }
 
     public GUI_Field[] setupBoard(SuperField[] board) {
         GUI_Field[] gfields = new GUI_Field[board.length];
         SuperField field;
+
         HashMap <String, FieldColor> colors = new HashMap<>();
 
         Color cRed = new Color(229, 62,62);
@@ -102,6 +106,8 @@ public class GUIController {
                 gfields[i] = new GUI_Brewery("default", field.getFieldName(), "Pris: " + price, field.getFieldDescription(), String.valueOf(rent), color.FG, color.BG);
             }
         }
+
+        setupPlayerColors();
         return gfields;
     }
 
@@ -123,16 +129,46 @@ public class GUIController {
         }
 
         String chosenElement = GUI.getUserSelection(
-                "Choose an element",
+                "Vælg antal spillere",
                 options
         );
         return Integer.parseInt(chosenElement);
     }
 
+    public GUI_Car setupCar(Color color) {
+        return new GUI_Car(color, color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
+    }
+
+    public String[] popElement(String element, String[] array) {
+        int counter = 0;
+        boolean found = false;
+
+        // if element doesn't exist
+        for (String string: array) {
+            if(string == element) {
+                found = true;
+            }
+        }
+
+        if (!found) return array;
+
+        String[] newArray = new String[array.length - 1];
+        for (String string: array) {
+            if(string != element) {
+                newArray[counter] = string;
+                counter++;
+            }
+        }
+        return newArray;
+    }
+
     public GUI_Player[] GUIPlayers(Player[] players) {
         gPlayers = new GUI_Player[players.length];
         for (int i = 0; i < players.length; i++) {
-            gPlayers[i] = new GUI_Player(players[i].getName(i), players[i].getBalance());
+            Color color = choosePlayerColor();
+            gPlayers[i] = new GUI_Player("test" + i, players[i].getBalance(), setupCar(color));
+            GUI.addPlayer(gPlayers[i]);
+            GUI.getFields()[0].setCar(gPlayers[i], true);
         }
 
         return gPlayers;
@@ -145,11 +181,46 @@ public class GUIController {
         System.out.printf("Changed guipos from: " + oldpos + " to newpos: " +newpos);
     }
 
+    public HashMap<String, Color> setupPlayerColors() {
+        HashMap <String, Color> colors = new HashMap<>();
+
+        colors.put("rød", Color.red);
+        colors.put("gul", Color.yellow);
+        colors.put("grøn", Color.green);
+        colors.put("blå", Color.blue);
+        colors.put("orange", Color.orange);
+        colors.put("lilla", new Color(128, 0, 128));
+
+        return colors;
+//        playerColors = new String[6];
+//        int i = 0;
+//        playerColors[i++] = "rød";
+//        playerColors[i++] = "gul";
+//        playerColors[i++] = "grøn";
+//        playerColors[i++] = "blå";
+//        playerColors[i++] = "orange";
+//        playerColors[i++] = "lilla";
+    }
+
+    public Color choosePlayerColor() {
+        String chosenElement = GUI.getUserSelection(
+                "Choose color",
+                options
+        );
+        options = popElement(chosenElement, options);
+        return playerColors.get(chosenElement);
+    }
+
+//    public void setPlayerColor(String color, int ID) {
+//        return playerColors.get(color);
+//        gPlayers[ID].getCar().setPrimaryColor(playerColors.get(color));
+//    }
+
     public boolean wantToBuy(String propertyname) {
         String chosenButton = GUI.getUserButtonPressed(
                 "Do you want to buy: " + propertyname,
                 "Yes", "No"
         );
-        return chosenButton == "Yes";
+        return chosenButton.equals("Yes");
     }
 }

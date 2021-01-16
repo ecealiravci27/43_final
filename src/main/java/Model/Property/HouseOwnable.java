@@ -1,10 +1,10 @@
 package Model.Property;
 
-public class HouseProperty extends Property{
+public class HouseOwnable extends Ownable {
     private int numberOfHouses;
     private int group;
 
-    public HouseProperty(int ID, int type, int group) {
+    public HouseOwnable(int ID, int type, int group) {
         super(ID, type);
         this.numberOfHouses = 0;
         this.group = group;
@@ -20,6 +20,10 @@ public class HouseProperty extends Property{
 
     public void addHouse() {
         numberOfHouses++;
+    }
+
+    public void removeHouse() {
+        numberOfHouses--;
     }
 
     public int getGroup() {

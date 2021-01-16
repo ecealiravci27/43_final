@@ -7,14 +7,13 @@ import Model.Fields.VacantField;
 
 public class PropertyManager {
 
-    Property[] properties;
+    Ownable[] properties;
 
     public PropertyManager(SuperField[] board) {
-
         this.properties = setupProperty(board);
     }
 
-    public Property getPropertyObject(int fieldID) {
+    public Ownable getPropertyObject(int fieldID) {
 
         int i;
 
@@ -37,8 +36,8 @@ public class PropertyManager {
         return counter;
     }
 
-    public Property[] setupProperty(SuperField[] board) {
-        Property[] properties = new Property[getTotalPropertyFields(board)];
+    public Ownable[] setupProperty(SuperField[] board) {
+        Ownable[] properties = new Ownable[getTotalPropertyFields(board)];
         SuperField field;
         int curPos = 0;
 
@@ -47,13 +46,13 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseProperty(field.getID(), Property.VACANT_TYPE,((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE,((VacantField) field).getTypeIndex());
                 curPos++;
             } else if((field instanceof Model.Fields.CoorporationField)) {
-                properties[curPos] = new Property(field.getID(), Property.COORP_TYPE);
+                properties[curPos] = new Ownable(field.getID(), Ownable.COORP_TYPE);
                 curPos++;
             } else if((field instanceof Model.Fields.ShippingField)) {
-                properties[curPos] = new Property(field.getID(), Property.SHIPPING_TYPE);
+                properties[curPos] = new Ownable(field.getID(), Ownable.SHIPPING_TYPE);
                 curPos++;
             }
         }
@@ -65,8 +64,8 @@ public class PropertyManager {
         boolean owned = true;
 
         for (int i = 0; i < properties.length; i++) {
-            if(properties[i] instanceof HouseProperty) {
-                if(properties[i].getOwner() != owner && ((HouseProperty) properties[i]).getGroup() == groupID) {
+            if(properties[i] instanceof HouseOwnable) {
+                if(properties[i].getOwner() != owner && ((HouseOwnable) properties[i]).getGroup() == groupID) {
                     owned = false;
                     break;
                 }
@@ -78,7 +77,6 @@ public class PropertyManager {
     }
 
     public int numberOfOwned(int owner, int fieldID) {
-
         int type = 0;
         int entities = 0;
 
@@ -96,9 +94,6 @@ public class PropertyManager {
                 entities++;
             }
         }
-
-
-
         return entities;
         }
 
@@ -111,7 +106,14 @@ public class PropertyManager {
 //        isGroupOwned(1, 2, properties);
 //    }
 
-    public void gainOwnership(int owner, int fieldID) {
+    public Ownable getOwnable(int ID){
+        return properties[ID];
+    }
+
+
+
+
+    public void setOwnerShip(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
             if(properties[i].getID() == fieldID) {
@@ -120,7 +122,7 @@ public class PropertyManager {
         }
     }
 
-    public void removeOwnership(int fieldID,  Property[] properties) {
+    public void removeOwnership(int fieldID,  Ownable[] properties) {
         int owner = 0;
         int i;
         for (i = 0; i < properties.length; i++) {
@@ -139,8 +141,6 @@ public class PropertyManager {
         PropertyManager propertyManager = new PropertyManager(board.getField());
 
         propertyManager.numberOfOwned(0,6);
-
-
     }
 }
 

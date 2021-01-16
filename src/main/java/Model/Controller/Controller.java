@@ -2,86 +2,149 @@ package Model.Controller;
 
 import GUI.GUIController;
 import Model.Board;
+import Model.Cards.CardPile;
+import Model.Cards.MoneyCard;
+import Model.Cards.MoveCard;
+import Model.Cards.SuperCard;
 import Model.Dice;
-import Model.Fields.SuperField;
+import Model.Fields.*;
 
 public class Controller {
-
     private Dice dice;
+    private CardPile cardPile;
+    private int playerAmount;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
     private boolean endGame;
     private int totalPlayers = 0;
-    private final int minPlayers = 2;
-    private final int maxPlayers = 6;
-    SuperField[] board = new Board().getField();
+    Board board;
+    SuperField[] field;
     private int playerTurn;
 
-   /* public void movePiece() {
+    public Controller(){
+        this.cardPile = new CardPile();
+        this.board = new Board();
+        this.field = board.getField();
+        this.guiController = new GUIController(field);
+        this.propertyPlayerController = setupPropertyPlayerCrontroller(board);
+        this.dice = new Dice();
+    }
 
-        propertyPlayerController.movePiece(dice.fetchEyeSum(), );
-    }*/
 
 
     public void startGame() {
-
-        endGame = false;
-
-        guiController = new GUIController(board);
-        totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
-        propertyPlayerController = new PropertyPlayerController(totalPlayers, board);
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
-        System.out.println("totalplayers: " + totalPlayers);
-        dice = new Dice();
-        guiController.wantToBuy("test");
-//        for (int i = 0; i < 5; i++) {
-//
-//            for (int j = 1; j < 3; j++) {
-//                int roll1 = dice.rollDice();
-//                int roll2 = dice.rollDice();
-//
-//                propertyPlayerController.movePiece(roll1 + roll2, j);
-//                guiController.showDice(roll1, roll2);
-//                System.out.println("Model.Player " + j + " eye sum " + dice.getRememberDice());
-//                propertyPlayerController.getPlayerPosition(j);
-//                System.out.println("Model.Player " + j + " position : " + propertyPlayerController.getPlayerPosition(j));
-//            }
-//        }
         play();
     }
 
-    private void endGame() {
-
-        endGame = true;
-    }
-
     private void play() {
-
+        endGame = false;
         while (!endGame) {
-            for (int i = 0; i < totalPlayers; i++) {
-                turn(i);
+            //number of rounds
+            int i;
+            int turn = 0;
+            for (i = 0; i < 1000; i++) {
+                for (i = 0; i < totalPlayers; i++) {
+                    doTurn(i, turn);
+                    turn++;
+                }
+                for (int j = 0; j< totalPlayers ; j++) {
+                    int counter = 0;
+                    if(propertyPlayerController.isBankrupt(j)){
+                        counter++;
+                    }
+                    if (counter == (totalPlayers - 1)) {
+                        endGame = true;
+                        break;
+                    }
+                }
             }
         }
     }
 
-    private void turn(int ID) {
-        System.out.println("id = " + ID);
-        movePlayer(ID);
-        guiController.wantToBuy("roll");
+    private void doTurn(int playerID, int playerTurn) {
+        if (!propertyPlayerController.isBankrupt(playerID)) {
+            movePlayer(playerID);
+            SuperField landedField = field[propertyPlayerController.getPlayerPosition(playerID)];
+            doField(landedField, playerID, playerTurn);
+        }
     }
 
-    private void movePlayer(int ID){ ;
+    private void movePlayer(int ID) {
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
         System.out.println(dice_1);
         System.out.println(dice_2);
         int eyesum = dice_1 + dice_2;
+        dice.setDice(eyesum);
         int pos_1 = propertyPlayerController.getPlayerPosition(ID);
         propertyPlayerController.movePiece(eyesum, ID);
         int pos_2 = propertyPlayerController.getPlayerPosition(ID);
-
         guiController.changePlayerGUIPos(ID, pos_2, pos_1);
     }
+
+    private void doField(SuperField landedField, int playerID, int turn){
+        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
+            propertyPlayerController.changeAccount(4000, playerID);
+        }
+        int fieldID = landedField.getID();
+        int EyeSum = dice.getRememberDice();
+        if (landedField instanceof OwnableField) {
+            doPropertyField((OwnableField) landedField,playerID,fieldID);
+        }
+        if (landedField instanceof ChanceField) {
+            doCard(playerID);
+        }
+        if (landedField instanceof SpecialField){
+            doSpecialField((SpecialField) landedField,playerID,fieldID);
+        }
+    }
+
+    private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
+        propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
+    }
+
+    private boolean passStart(int playerID){
+        boolean passedStart = false;
+        if(propertyPlayerController.getPlayerPosition(playerID) <= 12){
+            passedStart = true;
+        }
+        return true;
+    }
+
+    private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
+        if (!propertyPlayerController.isOwned(landedField.getID())) {
+            if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
+                if (guiController.wantToBuy(landedField.getFieldName())) {
+                    propertyPlayerController.purchaseProperty(playerID,landedField);
+                }
+            }
+        }
+        else if (!(propertyPlayerController.getOwnership(landedField.getID()) == playerID)) {
+            int owner = propertyPlayerController.getOwnership(fieldID);
+            propertyPlayerController.payPlayerRent((OwnableField) landedField,owner, playerID, dice.getRememberDice());
+        }
+    }
+
+    private void doCard(int playerID){
+        SuperCard card = cardPile.drawCard();
+        if(card instanceof MoveCard){
+            if ((((MoveCard) card).getType()) == 1){
+            propertyPlayerController.movePiece(((MoveCard) card).getMovePiece(), playerID);
+        }
+            if ((((MoveCard) card).getType()) == 2) {
+                propertyPlayerController.setPiece(((MoveCard) card).getMovePiece(), playerID);
+            }
+        }
+        if(card instanceof MoneyCard){
+            propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
+        }
+    }
+
+    private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
+        int maxPlayers = 6;
+        int minPlayers = 2;
+        totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
+        return new PropertyPlayerController(totalPlayers, board);
+    }
 }
-
-
