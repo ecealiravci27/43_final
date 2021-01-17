@@ -152,15 +152,56 @@ public class PropertyManager {
 
         return ownAblesID;
     }
+
+
+    //Incomplete methods for buying houses, probably won't have time to complete
+//    public HouseOwnable[] getGroupOwnables(int groupIndex) {
+//
+//        int counter = 0;
+//
+//        for (int i = 0; i < properties.length; i++) {
+//
+//            if (((HouseOwnable) properties[i]).getGroup() == groupIndex) {
+//
+//                counter++;
+//            }
+//        }
+//
+//        HouseOwnable[] houseOwnables = new HouseOwnable[counter];
+//
+//        for (int j = 0; j < properties.length; j++) {
+//
+//            if (((HouseOwnable) properties[j]).getGroup() == groupIndex) {
+//
+//                houseOwnables[j] = ((HouseOwnable) properties[j]);
+//            }
+//        }
+//        return houseOwnables;
+//    }
+//
+//
+//    public boolean yesCanBuildOn(int playerID, HouseOwnable[] houseOwnablesArray) {
+//
+//        HouseOwnable[] houseOwnables = new HouseOwnable[houseOwnablesArray.length];
+//
+//        for (int i = 0; i < houseOwnablesArray.length; i++) {
+//
+//            if (houseOwnablesArray[i].getNumberOfHouses() <= houseOwnablesArray[i++].getNumberOfHouses()+1)
+//        }
+//    }
+
+    
+    
+    
+    
+    
+    
+    
+    
 //Temporary main method for testing
 
     public static void main(String[] args) {
 
-        Board board = new Board();
-
-        PropertyManager propertyManager = new PropertyManager(board.getField());
-
-        propertyManager.numberOfOwned(0,6);
     }
 }
 
