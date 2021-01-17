@@ -11,10 +11,10 @@ public class CardPile {
 
     public SuperCard[] setupCardPile() {
         cards = new SuperCard[7];
-        cards[0]  = new MoneyCard("i am money", 1000);
+        cards[0]  = new MoneyCard(" De har vundet i klasselotteriet. Modtag 1000 kr.", 1000);
         cards[1]  = new MoveCard("i am movetopiece", 1, 3);
         cards[2]  = new MoveCard("i am movetofield", 2, 2);
-        cards[3]  = new MoneyCard("I am money 2", 2000);
+        cards[3]  = new MoneyCard("Kommunen har eftergivet et kvartals skat. Hæv i banken 2000 kr.", 2000);
         cards[4]  = new MoveCard("i am movetopiece 5", 1, 5);
         cards[5]  = new MoveCard("i am movetofield 5", 2, 8);
         cards[6] = new FreeCard("you can get out of prison");
