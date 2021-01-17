@@ -16,7 +16,7 @@ public class CardPile {
         cards[2]  = new MoveCard("Du rykker til Rødovrevej.", 2, 2);
         cards[3]  = new MoneyCard("Kommunen har eftergivet et kvartals skat! Hæv i banken 2000 kr.", 2000);
         cards[4]  = new MoveCard("Du rykker 5 felter frem.", 1, 5);
-        cards[5]  = new MoveCard("Du rykker til Rådhuspladsen.", 2, 40);
+        cards[5]  = new MoveCard("Du rykker til Rådhuspladsen.", 2, 39);
         cards[6] = new FreeCard("Løsladelseskort: Du kan komme ud af fængslet!");
         shuffleDeck();
         return cards;
