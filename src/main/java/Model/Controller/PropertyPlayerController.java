@@ -137,6 +137,8 @@ public class PropertyPlayerController {
 
         int[] ownablesID = new int[propertyManager.getOwnedHouseOwnables(playerID).length];
 
+        VacantField[] canBuyHousesOn;
+
         if (!(ownablesID.length == 0)) {
 
             for (int i = 0; i < ownablesID.length; i++) {
@@ -155,7 +157,7 @@ public class PropertyPlayerController {
                 }
             }
 
-            VacantField[] canBuyHousesOn = new VacantField[counter];
+            canBuyHousesOn = new VacantField[counter];
 
             for (int i = 0; i < ownablesID.length; i++) {
 
@@ -173,6 +175,9 @@ public class PropertyPlayerController {
                     }
                 }
             }
+        } else {
+
+            canBuyHousesOn = new VacantField[0];
         }
 
         return canBuyHousesOn;
