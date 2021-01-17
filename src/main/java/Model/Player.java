@@ -98,8 +98,15 @@ public class Player {
         }
     }
 
-    public void getFreeCard(){
+    public void gainFreeCard(){
         freeCard = true;
+    }
+
+    public void spendFreeCard(){
+        freeCard = false;
+    }
+    public boolean hasFreeCard(){
+        return freeCard;
     }
 
     public boolean isJailed(){

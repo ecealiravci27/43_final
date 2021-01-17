@@ -55,29 +55,44 @@ public class Controller {
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
-                guiController.wantToRoll("test" + playerID);
-                movePlayer(playerID);
-                int pos1 = propertyPlayerController.getPlayerPosition(playerID);
-                SuperField landedField = field[pos1];
-                doField(landedField, playerID, playerTurn);
-
-                // In some cases the player pos gets changed by doField
-                int pos2 = propertyPlayerController.getPlayerPosition(playerID);
-                guiController.changePlayerGUIPos(playerID, pos2, pos1);
-
-                // update every players balance
-                for (int i = 0; i < totalPlayers; i++) {
-                    guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
+                normalExecution(playerID);
                 }
             }
-            if (propertyPlayerController.getPlayerArray()[playerID].isJailed()){
+            if (propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
                 //message to jailed player
                 //guiController.
-                System.out.println("Du er fængslet. vent en tur!");
-                propertyPlayerController.getPlayerArray()[playerID].setFree();
+                if (!propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
+                    System.out.println("Du er fængslet. vent en tur!");
+                    propertyPlayerController.getPlayerArray()[playerID].setFree();
+                }
+                if (propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
+                    System.out.println("Du brugte dit frikort til at komme ud af fængslet");
+                    propertyPlayerController.getPlayerArray()[playerID].setFree();
+                    propertyPlayerController.getPlayerArray()[playerID].spendFreeCard();
+                    normalExecution(playerID);
+
+                }
             }
         }
+
+    private void normalExecution(int playerID) {
+        guiController.wantToRoll("test" + playerID);
+        movePlayer(playerID);
+        int pos1 = propertyPlayerController.getPlayerPosition(playerID);
+        SuperField landedField = field[pos1];
+        doField(landedField, playerID, playerTurn);
+
+        // In some cases the player pos gets changed by doField
+        int pos2 = propertyPlayerController.getPlayerPosition(playerID);
+        guiController.changePlayerGUIPos(playerID, pos2, pos1);
+
+        // update every players balance
+        for (int i = 0; i < totalPlayers; i++) {
+            guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
+        }
     }
+
+
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
@@ -132,7 +147,7 @@ public class Controller {
         }
         else if (!(propertyPlayerController.getOwnership(landedField.getID()) == playerID)) {
             int owner = propertyPlayerController.getOwnership(fieldID);
-            propertyPlayerController.payPlayerRent((OwnableField) landedField,owner, playerID, dice.getRememberDice());
+            propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
         }
     }
 
@@ -150,7 +165,7 @@ public class Controller {
             propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
         }
         if(card instanceof FreeCard) {
-            propertyPlayerController.setFree(playerID);
+            propertyPlayerController.getPlayerArray()[playerID].gainFreeCard();
         }
         guiController.readCard(card.getCardDescription());
     }
