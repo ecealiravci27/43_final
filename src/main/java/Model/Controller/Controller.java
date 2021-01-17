@@ -130,12 +130,16 @@ public class Controller {
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
         if (landedField instanceof VacantField) {
-            if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
-                VacantField chosenfield = guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
-                if(chosenfield != null) {
-                    propertyPlayerController.buyHouse(playerID, chosenfield);
-                    guiController.buildHouse(chosenfield.getID(), propertyPlayerController.getHouses(chosenfield.getID()));
-                }
+            doVacantField(playerID);
+        }
+    }
+
+    public void doVacantField(int playerID) {
+        if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
+            VacantField chosenfield = guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
+            if(chosenfield != null) {
+                propertyPlayerController.buyHouse(playerID, chosenfield);
+                guiController.buildHouse(chosenfield.getID(), propertyPlayerController.getHouses(chosenfield.getID()));
             }
         }
     }
