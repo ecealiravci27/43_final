@@ -9,14 +9,12 @@ import Model.Fields.*;
 public class Controller {
     private Dice dice;
     private CardPile cardPile;
-    private int playerAmount;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
     private boolean endGame;
     private int totalPlayers = 0;
     Board board;
     SuperField[] field;
-    private int playerTurn;
 
     public Controller(){
         this.cardPile = new CardPile();
@@ -44,15 +42,16 @@ public class Controller {
                     counter++;
                 }
                 if (counter == (totalPlayers - 1)) {
+                    guiController.message("Game over!");
                     break;
                 }
-                doTurn(k, turn);
+                doTurn(k);
                 turn++;
                 }
             }
         }
 
-    private void doTurn(int playerID, int playerTurn) {
+    private void doTurn(int playerID) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
                 normalExecution(playerID);
@@ -80,7 +79,7 @@ public class Controller {
         movePlayer(playerID);
         int pos1 = propertyPlayerController.getPlayerPosition(playerID);
         SuperField landedField = field[pos1];
-        doField(landedField, playerID, playerTurn);
+        doField(landedField, playerID);
 
         // In some cases the player pos gets changed by doField
         int pos2 = propertyPlayerController.getPlayerPosition(playerID);
@@ -94,7 +93,7 @@ public class Controller {
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
-            propertyPlayerController.changeAccount(4000, playerID);
+            propertyPlayerController.changeAccount(-4000, playerID);
         }
     }
 
@@ -113,10 +112,7 @@ public class Controller {
         passStart(pos_1, pos_2, ID);
     }
 
-    private void doField(SuperField landedField, int playerID, int turn){
-//        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
-//            propertyPlayerController.changeAccount(4000, playerID);
-//        }
+    private void doField(SuperField landedField, int playerID){
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField) {
@@ -127,9 +123,6 @@ public class Controller {
         }
         if (landedField instanceof SpecialField){
             doSpecialField((SpecialField) landedField,playerID,fieldID);
-        }
-        if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
-            guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
         }
     }
 
