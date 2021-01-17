@@ -69,13 +69,12 @@ public class Controller {
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
                     propertyPlayerController.getPlayerArray()[playerID].spendFreeCard();
                     normalExecution(playerID);
-
                 }
             }
         }
 
     private void normalExecution(int playerID) {
-        guiController.wantToRoll("test" + playerID);
+        guiController.wantToRoll(playerID);
         movePlayer(playerID);
         int pos1 = propertyPlayerController.getPlayerPosition(playerID);
         SuperField landedField = field[pos1];
