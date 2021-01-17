@@ -102,7 +102,7 @@ public class GUIController {
             } else if(field instanceof Model.Fields.ShippingField) {
                 FieldColor color = colors.get("shipping");
                 int rent = ((ShippingField) field).getRent(0, 1);
-                System.out.println("RENTTTTTTTTTTTTTTT = " + rent);
+                System.out.println("RENT = " + rent);
                 int price = ((ShippingField) field).getFieldPrice();
                 String desc = "";
                 for (int a = 0; a < 4; a++) {

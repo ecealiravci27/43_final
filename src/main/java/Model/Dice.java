@@ -4,7 +4,6 @@ package Model;//This class' main functionality is giving a random number of dice
 public class Dice {
     int diceOutcome;
     int temp;
-    int eyeSum;
 
     public Dice(){
         this.diceOutcome = 0;

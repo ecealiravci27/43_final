@@ -4,9 +4,7 @@ import Model.Fields.*;
 
 public class Board {
 
-    private Model.Fields.SuperField[] fields;
-    private int totalFields;
-    private Object SuperField;
+    private SuperField[] fields;
 
     public Board(){
         this.fields = setupField();
@@ -17,10 +15,6 @@ public class Board {
     }
 
     public SuperField getFielobject(int id) {
-
-//        while (id > 40) {
-//            id = id - 41;
-//        }
         return fields[id];
     }
     private SuperField[] setupField(){
