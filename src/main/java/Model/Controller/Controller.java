@@ -90,7 +90,7 @@ public class Controller {
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
-            propertyPlayerController.changeAccount(-4000, playerID);
+            propertyPlayerController.changeAccount(4000, playerID);
         }
     }
 
