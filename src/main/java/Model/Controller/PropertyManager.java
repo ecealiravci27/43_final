@@ -1,9 +1,11 @@
-package Model.Property;
+package Model.Controller;
 
 import Model.Board;
 import Model.Fields.OwnableField;
 import Model.Fields.SuperField;
 import Model.Fields.VacantField;
+import Model.Property.HouseOwnable;
+import Model.Property.Ownable;
 
 public class PropertyManager {
 
@@ -126,11 +128,13 @@ public class PropertyManager {
     }
 
     public void addHouse(int fieldID) {
-        ((HouseOwnable) properties[fieldID]).addHouse();
+        Ownable house = getOwnable(fieldID);
+        ((HouseOwnable) house).addHouse();
     }
 
     public int getHouses(int fieldID) {
-        return ((HouseOwnable) properties[fieldID]).getNumberOfHouses();
+        Ownable house = getOwnable(fieldID);
+        return ((HouseOwnable) house).getNumberOfHouses();
     }
 
 
