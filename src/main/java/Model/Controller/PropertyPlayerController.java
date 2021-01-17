@@ -9,12 +9,10 @@ import Model.Property.PropertyManager;
 public class PropertyPlayerController {
 
     private SuperField[] field;
-    private final PropertyManager propertyManager;
     private Player[] playerArray;
-
+    private final PropertyManager propertyManager;
 
     public PropertyPlayerController(int playerAmount, Board board) {
-
         this.playerArray = setupPlayer(playerAmount);
         this.field = setupSuperFieldArray(board);
         this.propertyManager = new PropertyManager(field);
@@ -146,9 +144,7 @@ public class PropertyPlayerController {
                 if (ownablesID[i] == field[j].getID()) {
 
                     if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
-
                         if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
-
                             counter++;
                         }
                     }

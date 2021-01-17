@@ -62,11 +62,11 @@ public class Controller {
                 //message to jailed player
                 //guiController.
                 if (!propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
-                    System.out.println("Du er fængslet. vent en tur!");
+                    guiController.message("Du er fængslet. vent en tur!");
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
                 }
                 if (propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
-                    System.out.println("Du brugte dit frikort til at komme ud af fængslet");
+                    guiController.message("Du brugte dit frikort til at komme ud af fængslet");
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
                     propertyPlayerController.getPlayerArray()[playerID].spendFreeCard();
                     normalExecution(playerID);
@@ -91,8 +91,6 @@ public class Controller {
             guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
         }
     }
-
-
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
