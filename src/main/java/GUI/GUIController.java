@@ -154,6 +154,17 @@ public class GUIController {
         return Integer.parseInt(chosenElement);
     }
 
+    public String setupName(String txt) {
+        String chosenName = GUI.getUserString(txt);
+        String lowercase = chosenName.toLowerCase();
+        for (int i = 0; i < gPlayers.length; i++) {
+            if (gPlayers[i] != null && (gPlayers[i].getName().toLowerCase().equals(lowercase) || gPlayers[i].getName().equals(""))) {
+                return setupName("Navnet er allerede taget, prøv et andet.");
+            }
+        }
+        return chosenName;
+    }
+
     public GUI_Car setupCar(Color color) {
         return new GUI_Car(color, color, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
     }
@@ -185,7 +196,7 @@ public class GUIController {
         gPlayers = new GUI_Player[players.length];
         for (int i = 0; i < players.length; i++) {
             Color color = choosePlayerColor();
-            gPlayers[i] = new GUI_Player("test" + i, players[i].getBalance(), setupCar(color));
+            gPlayers[i] = new GUI_Player(setupName("Vælg navn"), players[i].getBalance(), setupCar(color));
             GUI.addPlayer(gPlayers[i]);
             GUI.getFields()[0].setCar(gPlayers[i], true);
         }
@@ -209,7 +220,7 @@ public class GUIController {
         colors.put("blå", Color.blue);
         colors.put("orange", Color.orange);
         colors.put("lilla", new Color(128, 0, 128));
-        
+
         return colors;
 //        playerColors = new String[6];
 //        int i = 0;
@@ -243,9 +254,9 @@ public class GUIController {
         return chosenButton.equals("Ja");
     }
 
-    public void wantToRoll(String name) {
+    public void wantToRoll(int ID) {
         GUI.getUserButtonPressed(
-                 name + "'s tur",
+                gPlayers[ID].getName() + "'s tur",
                 "Roll"
         );
     }
