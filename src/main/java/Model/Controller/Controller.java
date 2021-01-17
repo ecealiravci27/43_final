@@ -170,7 +170,7 @@ public class Controller {
         if(card instanceof FreeCard) {
             propertyPlayerController.getPlayerArray()[playerID].gainFreeCard();
         }
-        guiController.readCard(card.getCardDescription());
+        guiController.message(card.getCardDescription());
     }
 
     private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){

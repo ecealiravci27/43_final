@@ -250,9 +250,9 @@ public class GUIController {
         );
     }
 
-    public void readCard(String desc) {
+    public void message(String msg) {
         GUI.getUserButtonPressed(
-                desc,
+                msg,
                 "Ok"
         );
     }
