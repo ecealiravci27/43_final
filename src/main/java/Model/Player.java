@@ -4,7 +4,6 @@ public class Player {
 
     private int playerPosition;
     private int playerID;
-    private String name;
     private final Piece playerPiece;
     private Account playerAccount;
     private boolean bankrupt;

@@ -48,7 +48,7 @@ public class PropertyManager {
             field = board[i];
 
             if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE,((VacantField) field).getTypeIndex());
+                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE);
                 curPos++;
             } else if((field instanceof Model.Fields.CoorporationField)) {
                 properties[curPos] = new Ownable(field.getID(), Ownable.COORP_TYPE);
