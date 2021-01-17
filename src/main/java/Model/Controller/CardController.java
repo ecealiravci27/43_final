@@ -18,7 +18,7 @@ public class CardController {
                 System.out.println("Moving piece " + ((MoveCard) card).getMovePiece());
             } else {
                 // movefield here
-                System.out.println("Moving field " + ((MoveCard) card).getMoveToField());
+                System.out.println("Moving field " + ((MoveCard) card).getMovePiece());
             }
         }
     }

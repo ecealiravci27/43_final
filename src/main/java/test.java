@@ -135,14 +135,14 @@ public class test {
     @Test
     public void returnPieceMoveToFieldEight() {
         MoveCard moveCard = new MoveCard("test", 5, 8);
-        assertEquals(8, moveCard.getMoveToField());
+        assertEquals(8, moveCard.getMovePiece());
     }
 
     //amt set to 1, returning 1
     @Test
     public void returnPieceMoveToFieldOne() {
         MoveCard moveCard = new MoveCard("test", 5, 1);
-        assertEquals(1, moveCard.getMoveToField());
+        assertEquals(1, moveCard.getMovePiece());
     }
 
     //getType method, moveType set to 3
