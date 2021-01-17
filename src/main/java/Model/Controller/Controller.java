@@ -9,14 +9,11 @@ import Model.Fields.*;
 public class Controller {
     private Dice dice;
     private CardPile cardPile;
-    private int playerAmount;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
-    private boolean endGame;
     private int totalPlayers = 0;
     Board board;
     SuperField[] field;
-    private int playerTurn;
 
     public Controller(){
         this.cardPile = new CardPile();
