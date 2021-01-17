@@ -228,4 +228,11 @@ public class PropertyPlayerController {
     public void setFree(int playerID) {
         playerArray[playerID].setFree();
     }
+
+    public void buyHouse(int playerID, VacantField field) {
+
+        playerArray[playerID].reduceBalance(field.getHouse_price());
+
+        propertyManager.setOwnerShip(playerID, field.getID());
+    }
 }
