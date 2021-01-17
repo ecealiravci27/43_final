@@ -137,9 +137,20 @@ public class PropertyPlayerController {
 
         int[] ownablesID = new int[propertyManager.getOwnedHouseOwnables(playerID).length];
 
+        for (int i = 0; i < ownablesID.length; i++) {
+
+            System.out.println("this is i " + i);
+
+            System.out.println("OwnablesID int = " + ownablesID);
+
+            System.out.println("Ownables INDEX " + ownablesID[i]);
+        }
+
         VacantField[] canBuyHousesOn;
 
         if (!(ownablesID.length == 0)) {
+
+            System.out.println("OwnablesID.length = " + ownablesID.length);
 
             for (int i = 0; i < ownablesID.length; i++) {
 
