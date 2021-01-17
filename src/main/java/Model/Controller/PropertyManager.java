@@ -100,6 +100,8 @@ public class PropertyManager {
         }
 
 
+
+
 //    public static void main(String[] args) {
 //        SuperField[] board = new Board().setupField();
 //        //System.out.println(setupBoard(board));

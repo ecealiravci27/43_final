@@ -8,11 +8,11 @@ public class VacantField extends OwnableField {
     private final String Color;
     String[] Colors = new String[]{ "Blue","Orange", "light-yellow", "purple", "gray", "red", "white", "yellow"};
 
-    public VacantField(String name, String description, int ID, int price, int typeIndex, int rent, int one_house_rent, int two_house_rent,int three_house_rent, int four_house_rent, int five_house_rent, int house_price) {
+    public VacantField(String name, String description, int ID, int price, int typeIndex, int rent, int one_house_rent, int two_house_rent,int three_house_rent, int four_house_rent, int house_price) {
         super(name, description, ID, price, rent);
         this.typeIndex = typeIndex;
         this.Color = Colors[typeIndex];
-        this.house_rent = new int[]{one_house_rent, two_house_rent, three_house_rent, four_house_rent, five_house_rent};
+        this.house_rent = new int[]{one_house_rent, two_house_rent, three_house_rent, four_house_rent};
         this.house_price = house_price;
         }
 

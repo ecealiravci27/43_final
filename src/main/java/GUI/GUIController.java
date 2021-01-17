@@ -93,7 +93,7 @@ public class GUIController {
                 int housePrice = ((VacantField) field).getHouse_price();
                 //int houseRent = ((VacantField) field).get
                 String desc = "Leje: " + rent + "\nHus Pris:" + housePrice;
-                for (int a = 0; a < 4; a++) {
+                for (int a = 0; a <= 3; a++) {
                     desc = desc + "\n" + (a+1) + "xHus Leje: " + ((VacantField) field).getRent(0, (a+1));;
                 }
                 //String desc = "Rent: " + rent + "\nHouse Price: " + housePrice + "\nHouse Rent: 10";
@@ -175,7 +175,7 @@ public class GUIController {
 
         // if element doesn't exist
         for (String string: array) {
-            if(string == element) {
+            if(string.equals(element)) {
                 found = true;
             }
         }
@@ -309,7 +309,7 @@ public class GUIController {
         );
 
         for (int i = 0; i < fields.length; i++) {
-            if (chosenElement == fields[i].getFieldName()) {
+            if (chosenElement.equals(fields[i].getFieldName())) {
                 chosenField = fields[i];
                 break;
             }

@@ -31,14 +31,14 @@ public class test {
     //Testing VacantField getRent method below when owned_houses 0 and rent is 4:
     @Test
     public void changeRentByTierZero() {
-        VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 4,5,6,7,8,9,1);
+        VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 4,5,6,7,8,9);
         assertEquals(4, vacantField.getRent(0,0));
     }
 
     //when owned_houses is 8 and rent is 8:
     @Test
     public void changeRentByTierThree() {
-        VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 8,5,6,7,8,9,1);
+        VacantField vacantField = new VacantField("test", "test", 1, 2, 3, 8,5,6,7,8,9);
         assertEquals(9, vacantField.getRent(3,8));
     }
 

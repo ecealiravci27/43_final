@@ -97,6 +97,7 @@ public class Controller {
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
             propertyPlayerController.changeAccount(4000, playerID);
+            guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
         }
     }
 
@@ -105,8 +106,8 @@ public class Controller {
 //        guiController.changePlayerGUIPos(ID, 38, 0);
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
-        System.out.println(dice_1);
-        System.out.println(dice_2);
+        System.out.println(" Dice 1 : " + dice_1);
+        System.out.println(" Dice 2 " + dice_2);
         int eyesum = dice_1 + dice_2;
         dice.setDice(eyesum);
         guiController.showDice(dice_1, dice_2);
@@ -127,7 +128,7 @@ public class Controller {
             doCard(playerID);
         }
         if (landedField instanceof SpecialField){
-            doSpecialField((SpecialField) landedField,playerID,fieldID);
+            doSpecialField((SpecialField) landedField,playerID);
         }
         if (landedField instanceof VacantField) {
             doVacantField(playerID);
@@ -144,8 +145,8 @@ public class Controller {
         }
     }
 
-    private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
-        propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
+    private void doSpecialField(SpecialField landedField, int playerID){
+        propertyPlayerController.doSpecialField(landedField, playerID);
     }
 
     public void propertytest(OwnableField landedField, int playerID, int fieldID) {
@@ -169,7 +170,6 @@ public class Controller {
             propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
         }
     }
-
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
         if(card instanceof MoveCard){
@@ -177,8 +177,10 @@ public class Controller {
             propertyPlayerController.movePiece(((MoveCard) card).getMovePiece(), playerID);
         }
             if ((((MoveCard) card).getType()) == 2) {
-                propertyPlayerController.setPiece(((MoveCard) card).getMovePiece(), playerID);
+                propertyPlayerController.setPiece(((MoveCard) card).getMoveToField(), playerID);
             }
+            guiController.changePlayerGUIPos();
+            doField(field[propertyPlayerController.getPlayerPosition(playerID)], playerID);
         }
         if(card instanceof MoneyCard){
             propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);

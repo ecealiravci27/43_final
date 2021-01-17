@@ -38,7 +38,7 @@ public class PropertyPlayerController {
         return getPlayer(playerID).getOldPlayerPosition();
     }
 
-    public void doSpecialField(SpecialField landedField, int playerID, int fieldID){
+    public void doSpecialField(SpecialField landedField, int playerID){
         String type = landedField.getType();
 
         //parking and visit fields do nothing
@@ -134,7 +134,9 @@ public class PropertyPlayerController {
                 if (j == superField.getID()) {
                     if (isAffordable(playerID, ((VacantField) superField).getHouse_price())) {
                         if (propertyManager.isGroupOwned(playerID, ((VacantField) superField).getTypeIndex())) {
-                            index++;
+                            if (propertyManager.getHouses(superField.getID()) < 4) {
+                                index++;
+                            }
                         }
                     }
                 }
@@ -150,8 +152,10 @@ public class PropertyPlayerController {
                 if (j == superField.getID()) {
                     if (isAffordable(playerID, ((VacantField) superField).getHouse_price())) {
                         if (propertyManager.isGroupOwned(playerID, ((VacantField) superField).getTypeIndex())) {
-                            houses[counter] = ((VacantField) superField);
-                            counter++;
+                            if (propertyManager.getHouses(superField.getID()) < 4) {
+                                houses[counter] = ((VacantField) superField);
+                                counter++;
+                            }
                         }
                     }
                 }
