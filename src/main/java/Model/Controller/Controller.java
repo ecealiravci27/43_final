@@ -44,12 +44,15 @@ public class Controller {
                     counter++;
                 }
                 if (counter == (totalPlayers - 1)) {
+                    guiController.message(" Game ends ");
                     break;
                 }
                 doTurn(k);
                 turn++;
                 }
             }
+        guiController.message(" too many turns ");
+        System.out.println(" too many turns ");
         }
 
     private void doTurn(int playerID) {
@@ -98,6 +101,8 @@ public class Controller {
     }
 
     private void movePlayer(int ID) {
+//        propertyPlayerController.movePiece(38, ID);
+//        guiController.changePlayerGUIPos(ID, 38, 0);
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
         System.out.println(dice_1);
@@ -124,10 +129,26 @@ public class Controller {
         if (landedField instanceof SpecialField){
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
+        if (landedField instanceof VacantField) {
+            if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
+                VacantField chosenfield = guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
+                if(chosenfield != null) {
+                    propertyPlayerController.buyHouse(playerID, chosenfield);
+                    guiController.buildHouse(chosenfield.getID(), propertyPlayerController.getHouses(chosenfield.getID()));
+                }
+            }
+        }
     }
 
     private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
         propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
+    }
+
+    public void propertytest(OwnableField landedField, int playerID, int fieldID) {
+        if (guiController.wantToBuy(landedField.getFieldName())) {
+            propertyPlayerController.purchaseProperty(playerID,landedField);
+            guiController.setPropertyBorder(playerID, fieldID);
+        }
     }
 
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
