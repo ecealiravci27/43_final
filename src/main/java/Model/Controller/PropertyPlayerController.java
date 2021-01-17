@@ -4,7 +4,6 @@ import Model.Board;
 import Model.Player;
 import Model.Property.HouseOwnable;
 import Model.Property.Ownable;
-import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
 
@@ -110,27 +109,6 @@ public class PropertyPlayerController {
         return playerArray;
     }
 
-//    public boolean canPurchaseHouse(int playerID, VacantField field) {
-//        boolean canBuild =  true;
-//
-//        //Checks if player is the owner of the property
-//        if (playerID == propertyManager.getPropertyObject(field.getID()).getOwner()) {
-//            canBuild = false;
-//        }
-//
-//        //Checks if the player owns all of the fields of that indexType
-//        if (!propertyManager.isGroupOwned(playerID, field.getTypeIndex())) {
-//
-//        }
-//            canBuild = false;
-//        }
-//
-//        if (!isAffordable(playerID,field.getHouse_price())) {
-//            canBuild = false;
-//        }
-//        return canBuild;
-//    }
-
     public VacantField[] getCanBuildArray(int playerID) {
 
         int counter = 0;
@@ -214,21 +192,5 @@ public class PropertyPlayerController {
             canAfford = false;
         }
         return canAfford;
-    }
-
-    public void sellHouse(int playerID, VacantField field) {
-        ((HouseOwnable) propertyManager.getOwnable(field.getID())).removeHouse();
-        playerArray[playerID].addBalance(field.getHouse_price()/2);
-    }
-
-    public void setFree(int playerID) {
-        playerArray[playerID].setFree();
-    }
-
-    public void buyHouse(int playerID, VacantField field) {
-
-        playerArray[playerID].reduceBalance(field.getHouse_price());
-
-        propertyManager.setOwnerShip(playerID, field.getID());
     }
 }

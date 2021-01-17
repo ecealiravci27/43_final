@@ -10,17 +10,11 @@ public class HouseOwnable extends Ownable {
         this.group = group;
     }
 
-    public void setNumberOfHouses(int numberOfHouses) {
-        this.numberOfHouses = numberOfHouses;
-    }
 
     public int getNumberOfHouses() {
         return numberOfHouses;
     }
 
-    public void addHouse() {
-        numberOfHouses++;
-    }
 
     public void removeHouse() {
         numberOfHouses--;

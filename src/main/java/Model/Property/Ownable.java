@@ -40,8 +40,4 @@ package Model.Property;
 
             return typeInt;
         }
-
-        public boolean getAvailability() {
-            return available;
-        }
     }
