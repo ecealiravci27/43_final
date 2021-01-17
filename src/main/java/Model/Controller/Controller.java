@@ -46,13 +46,13 @@ public class Controller {
                 if (counter == (totalPlayers - 1)) {
                     break;
                 }
-                doTurn(k, turn);
+                doTurn(k);
                 turn++;
                 }
             }
         }
 
-    private void doTurn(int playerID, int playerTurn) {
+    private void doTurn(int playerID) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
                 normalExecution(playerID);
