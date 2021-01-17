@@ -272,8 +272,9 @@ public class GUIController {
         gPlayers[playerID].setBalance(balance);
     }
 
-    public String wantToBuildHouse(VacantField[] fields) {
+    public VacantField wantToBuildHouse(VacantField[] fields) {
         String[] names = new String[fields.length + 1];
+        VacantField chosenField = null;
 
         for (int i = 0; i < fields.length; i++) {
             names[i] = fields[i].getFieldName();
@@ -286,7 +287,13 @@ public class GUIController {
                 names
         );
 
-        return chosenElement;
+        for (int i = 0; i < fields.length; i++) {
+            if (chosenElement == fields[i].getFieldName()) {
+                chosenField = fields[i];
+                break;
+            }
+        }
+        return chosenField;
     }
 
     public void buildHouse(int ID, int amt) {

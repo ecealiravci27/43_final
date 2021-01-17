@@ -131,7 +131,6 @@ public class Controller {
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
         if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
-
             guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
         }
     }
