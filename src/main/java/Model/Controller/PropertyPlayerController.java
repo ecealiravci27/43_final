@@ -137,39 +137,44 @@ public class PropertyPlayerController {
 
         int[] ownablesID = new int[propertyManager.getOwnedHouseOwnables(playerID).length];
 
-        for (int i = 0; i < ownablesID.length; i++) {
+        if (!(ownablesID.length == 0)) {
 
-            for (int j = 0; j < field.length; j++) {
+            for (int i = 0; i < ownablesID.length; i++) {
 
-                if (ownablesID[i] == field[j].getID()) {
+                for (int j = 0; j < field.length; j++) {
 
-                    if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
-                        if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
-                            counter++;
+                    if (ownablesID[i] == field[j].getID()) {
+                        System.out.println("Printing IDs for comparison : " + ownablesID[i] + " " + field[j].getID());
+
+                        if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
+                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
+                                counter++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            VacantField[] canBuyHousesOn = new VacantField[counter];
+
+            for (int i = 0; i < ownablesID.length; i++) {
+
+                for (int j = 0; j < field.length; j++) {
+
+                    if (ownablesID[i] == field[j].getID()) {
+
+                        if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
+
+                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
+
+                                canBuyHousesOn[i] = ((VacantField) field[j]);
+                            }
                         }
                     }
                 }
             }
         }
 
-        VacantField[] canBuyHousesOn = new VacantField[counter];
-
-        for (int i = 0; i < ownablesID.length; i++) {
-
-            for (int j = 0; j < field.length; j++) {
-
-                if (ownablesID[i] == field[j].getID()) {
-
-                    if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
-
-                        if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
-
-                            canBuyHousesOn[i] = ((VacantField) field[j]);
-                        }
-                    }
-                }
-            }
-        }
         return canBuyHousesOn;
     }
 

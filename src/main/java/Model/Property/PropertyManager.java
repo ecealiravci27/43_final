@@ -144,7 +144,11 @@ public class PropertyManager {
             if (playerID == properties[j].getOwner()) {
                 if(ownAblesID.length > 0)
                 ownAblesID[index] = properties[j].getID();
-                index++;
+
+                if (index < counter-1) {
+
+                    index++;
+                }
             }
         }
         return ownAblesID;

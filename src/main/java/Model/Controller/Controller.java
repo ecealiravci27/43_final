@@ -124,7 +124,8 @@ public class Controller {
         if (landedField instanceof SpecialField){
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
-        if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
+        if (landedField instanceof VacantField) {
+            if (propertyPlayerController.getCanBuildArray(playerID).length > 0)
             guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
         }
     }
