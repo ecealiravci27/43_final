@@ -8,12 +8,6 @@ public class SpecialField extends SuperField{
         super(name, description, ID);
         this.taxes = taxes;
         this.Type = type;
-
-        if(type.equals("start")) {
-            this.group = 0;
-        } else if(type.equals("tax")) {
-            this.group = 1;
-        }
     }
 
     public String getType() {

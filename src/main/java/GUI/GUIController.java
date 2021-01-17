@@ -32,13 +32,16 @@ public class GUIController {
         Color cGray = new Color(128, 128, 128);
         Color cOrange = new Color(221, 107, 32);
         Color cWhite = new Color(255, 255, 255);
-        Color cPrison = new Color(113, 128, 150);
         Color cBrew = new Color(39, 103, 73);
         Color cChance = new Color(204, 204, 204);
         Color cYellow = new Color(246, 224, 94);
         Color cPurple = new Color(48, 25, 52);
         Color cBlue = new Color(49, 130, 209);
-        Color cGreen = new Color(102,204,0);
+        Color cTeal = new Color(0, 128, 128);
+        Color cCyan = new Color(0, 255, 255, 100);
+        Color cBeige = new Color(245,245,220);
+        Color cOlive = new Color(85,107,47);
+        Color cSlate = new Color(112,128,144);
 
         // Specialfield
         colors.put("start", new FieldColor(cRed, cBlack));
@@ -55,19 +58,18 @@ public class GUIController {
 
         // brew
         colors.put("brew", new FieldColor(cBrew, cWhite));
-        //String[] Colors = new String[]{ "Blue","Orange", "light-yellow", "purple", "gray", "red", "white", "yellow"};
 
         // Shipping
         colors.put("shipping", new FieldColor(cWhite, cBlack));
 
         colors.put("vacant.0", new FieldColor(cBlue, cBlack));
         colors.put("vacant.1", new FieldColor(cOrange, cBlack));
-        colors.put("vacant.2", new FieldColor(cYellow, cBlack));
-        colors.put("vacant.3", new FieldColor(cPurple, cWhite));
-        colors.put("vacant.4", new FieldColor(cGray, cBlack));
-        colors.put("vacant.5", new FieldColor(cRed, cBlack));
-        colors.put("vacant.6", new FieldColor(cWhite, cBlack));
-        colors.put("vacant.7", new FieldColor(cGreen, cBlack));
+        colors.put("vacant.2", new FieldColor(cSlate, cWhite));
+        colors.put("vacant.3", new FieldColor(cCyan, cBlack));
+        colors.put("vacant.4", new FieldColor(cPurple, cWhite));
+        colors.put("vacant.5", new FieldColor(cOlive, cWhite));
+        colors.put("vacant.6", new FieldColor(cBeige, cBlack));
+        colors.put("vacant.7", new FieldColor(cTeal, cBlack));
 
         //colors.put()
         for (int i = 0; i < board.length; i++) {
@@ -90,7 +92,11 @@ public class GUIController {
                 int price = ((VacantField) field).getFieldPrice();
                 int housePrice = ((VacantField) field).getHouse_price();
                 //int houseRent = ((VacantField) field).get
-                String desc = "Rent: " + rent + "\nHouse Price: " + housePrice + "\nHouse Rent: 10";
+                String desc = "Leje: " + rent + "\nHus Pris:" + housePrice;
+                for (int a = 0; a < 4; a++) {
+                    desc = desc + "\n" + (a+1) + "xHus Leje: " + ((VacantField) field).getRent(0, (a+1));;
+                }
+                //String desc = "Rent: " + rent + "\nHouse Price: " + housePrice + "\nHouse Rent: 10";
 
                 FieldColor color = colors.get("vacant." + ((VacantField) field).getTypeIndex());
                 System.out.println(((VacantField) field).getColor());
@@ -98,15 +104,15 @@ public class GUIController {
                 //new GUI_Street(,)
             } else if(field instanceof Model.Fields.ChanceField) {
                 FieldColor color = colors.get("chance");
-                gfields[i] = new GUI_Chance(field.getFieldName(), field.getFieldDescription(), field.getFieldDescription(), color.FG, color.BG);
+                gfields[i] = new GUI_Chance("?", field.getFieldName(), field.getFieldDescription(), color.FG, color.BG);
             } else if(field instanceof Model.Fields.ShippingField) {
                 FieldColor color = colors.get("shipping");
                 int rent = ((ShippingField) field).getRent(0, 1);
-                System.out.println("RENTTTTTTTTTTTTTTT = " + rent);
+                System.out.println("RENT = " + rent);
                 int price = ((ShippingField) field).getFieldPrice();
                 String desc = "";
                 for (int a = 0; a < 4; a++) {
-                    desc = desc + "\n" + (a+1) + "x" + field.getFieldName() + " Rent:"  + ((ShippingField) field).getRent(0, (a+1));;
+                    desc = desc + "\n" + (a+1) + "x" + field.getFieldName() + " Leje:"  + ((ShippingField) field).getRent(0, (a+1));;
                 }
 
                 gfields[i] = new GUI_Shipping("default", field.getFieldName(), "Pris: " + price, desc, String.valueOf(rent), color.FG, color.BG);
@@ -114,7 +120,7 @@ public class GUIController {
                 FieldColor color = colors.get("brew");
                 int rent = ((CoorporationField) field).getFieldRent();
                 int price = ((CoorporationField) field).getFieldPrice();
-                String desc = "Renten er afhænging af øjekast og om hvorvidt du ejer Tuborg og Carlsberg";
+                String desc = "Lejen er 100 gange øjesummen hvis du kun ejer enten tuborg eller carlsberg.\nLejen er det dobbelte hvis du ejer begge";
 
                 gfields[i] = new GUI_Brewery("default", field.getFieldName(), "Pris: " + price, desc, String.valueOf(rent), color.FG, color.BG);
             }
@@ -203,7 +209,7 @@ public class GUIController {
         colors.put("blå", Color.blue);
         colors.put("orange", Color.orange);
         colors.put("lilla", new Color(128, 0, 128));
-
+        
         return colors;
 //        playerColors = new String[6];
 //        int i = 0;
@@ -217,7 +223,7 @@ public class GUIController {
 
     public Color choosePlayerColor() {
         String chosenElement = GUI.getUserSelection(
-                "Choose color",
+                "Vælg farve",
                 options
         );
         options = popElement(chosenElement, options);
@@ -231,15 +237,15 @@ public class GUIController {
 
     public boolean wantToBuy(String propertyname) {
         String chosenButton = GUI.getUserButtonPressed(
-                "Do you want to buy: " + propertyname,
-                "Yes", "No"
+                "Vil du gerne købe: " + propertyname,
+                "Ja", "Nej"
         );
-        return chosenButton.equals("Yes");
+        return chosenButton.equals("Ja");
     }
 
     public void wantToRoll(String name) {
         GUI.getUserButtonPressed(
-                 name + "'s turn",
+                 name + "'s tur",
                 "Roll"
         );
     }
@@ -266,7 +272,27 @@ public class GUIController {
         gPlayers[playerID].setBalance(balance);
     }
 
-    public void updateOwnableDescription(String name) {
-        GUI.getFields()[1].setDescription(name);
+    public String wantToBuildHouse(VacantField[] fields) {
+        String[] names = new String[fields.length + 1];
+
+        for (int i = 0; i < fields.length; i++) {
+            names[i] = fields[i].getFieldName();
+        }
+
+        names[fields.length + 1] = "Afbryd";
+
+        String chosenElement = GUI.getUserSelection(
+                "Vælg hvor du gerne vil bygge et hus",
+                names
+        );
+
+        return chosenElement;
+    }
+
+    public void buildHouse(int ID, int amt) {
+        GUI_Field field = GUI.getFields()[ID];
+        if (field instanceof GUI_Street) {
+            ((GUI_Street) field).setHouses(amt);
+        }
     }
 }

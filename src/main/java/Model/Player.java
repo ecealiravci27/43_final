@@ -7,7 +7,7 @@ public class Player {
     private String name;
     private final Piece playerPiece;
     private Account playerAccount;
-    private boolean bancrupt;
+    private boolean bankrupt;
     private boolean jailed;
     private int oldPlayerPosition;
     private boolean freeCard;
@@ -17,7 +17,7 @@ public class Player {
         this.playerPiece = new Piece();
         this.playerPosition = 0;
         this.playerAccount = new Account(30000);
-        this.bancrupt = false;
+        this.bankrupt = false;
         this.jailed = false;
         this.freeCard = false;
     }
@@ -33,7 +33,7 @@ public class Player {
     }
 
     public void bankrupt(){
-        bancrupt = true;
+        bankrupt = true;
     }
 
     public void setPiece(int position){
@@ -51,13 +51,18 @@ public class Player {
     }
 
     public void addBalance(int change) {
-
         playerAccount.addBalance(change);
+        if (getBalance() == 0){
+            bankrupt();
+        }
     }
 
     public void reduceBalance(int change) {
 
         playerAccount.reduceBalance(change);
+        if (getBalance() == 0){
+            bankrupt();
+        }
     }
 
     public void setBalance(int change) {
@@ -71,7 +76,7 @@ public class Player {
     }
 
     public boolean isBankrupt(){
-        return bancrupt;
+        return bankrupt;
     }
 
     public void setName(String name) {

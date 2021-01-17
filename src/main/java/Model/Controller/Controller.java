@@ -35,28 +35,22 @@ public class Controller {
     }
 
     private void play() {
-        endGame = false;
-        while (!endGame) {
-            //number of rounds
-            int turn = 0;
-            for (int i = 0; i < 1000; i++) {
-                for (int k = 0; k < totalPlayers; k++) {
-                    doTurn(k, turn);
-                    turn++;
+        //number of rounds
+        int turn = 0;
+        int counter = 0;
+        for (int i = 0; i < 1000; i++) {
+            for (int k = 0; k < totalPlayers; k++) {
+                if (propertyPlayerController.isBankrupt(k)) {
+                    counter++;
                 }
-                for (int j = 0; j< totalPlayers ; j++) {
-                    int counter = 0;
-                    if(propertyPlayerController.isBankrupt(j)){
-                        counter++;
-                    }
-                    if (counter == (totalPlayers - 1)) {
-                        endGame = true;
-                        break;
-                    }
+                if (counter == (totalPlayers - 1)) {
+                    break;
+                }
+                doTurn(k, turn);
+                turn++;
                 }
             }
         }
-    }
 
     private void doTurn(int playerID, int playerTurn) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
