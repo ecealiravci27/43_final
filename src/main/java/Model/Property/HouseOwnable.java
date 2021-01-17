@@ -15,11 +15,6 @@ public class HouseOwnable extends Ownable {
         return numberOfHouses;
     }
 
-
-    public void removeHouse() {
-        numberOfHouses--;
-    }
-
     public int getGroup() {
         return group;
     }
