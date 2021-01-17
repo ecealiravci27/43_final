@@ -142,13 +142,11 @@ public class PropertyManager {
 
         for (int j = 0; j < properties.length; j++) {
             if (properties[j] instanceof HouseOwnable && playerID == properties[j].getOwner()) {
-                if(ownAblesID.length > 0)
 
                 ownAblesID[index] = properties[j].getID();
 
                 System.out.println("getOwnedHouseOwnables value in index : " + ownAblesID[index] + " number on index " + index );
                 if (index < counter-1) {
-
                     index++;
                 }
             }

@@ -138,6 +138,13 @@ public class Controller {
         propertyPlayerController.doSpecialField(landedField, playerID, fieldID);
     }
 
+    public void propertytest(OwnableField landedField, int playerID, int fieldID) {
+        if (guiController.wantToBuy(landedField.getFieldName())) {
+            propertyPlayerController.purchaseProperty(playerID,landedField);
+            guiController.setPropertyBorder(playerID, fieldID);
+        }
+    }
+
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
         if (!propertyPlayerController.isOwned(landedField.getID())) {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){

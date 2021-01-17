@@ -284,17 +284,30 @@ public class GUIController {
     }
 
     public VacantField wantToBuildHouse(VacantField[] fields) {
-        String[] names = new String[fields.length + 1];
+        int counter = 0;
+
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i] == null) continue;
+            counter++;
+        }
+
+        String[] names = new String[counter];
         VacantField chosenField = null;
 
         System.out.println(" Fields.length : " + fields.length);
 
         for (int i = 0; i < fields.length; i++) {
+            if (fields[i] == null) continue;
             System.out.println(" fields[i] " + fields[i]);
             System.out.println(" fields[i]" + fields[i].getFieldName());
             names[i] = fields[i].getFieldName();
         }
 
+
+        for (int i = 0; i < names.length; i++) {
+            System.out.println("index = " + i);
+            System.out.println("navn = " + names[i]);
+        }
        // names[names.length] = "Afbryd";
 
         String chosenElement = GUI.getUserSelection(
