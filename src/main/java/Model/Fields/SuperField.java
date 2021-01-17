@@ -4,7 +4,6 @@ public abstract class SuperField {
     protected String fieldName;
     protected String fieldDescription;
     protected int ID;
-    protected int group;
 
     public SuperField(String name, String description, int ID){
         this.fieldName = name;

@@ -3,7 +3,7 @@ import Model.Cards.MoneyCard;
 import Model.Cards.MoveCard;
 import Model.Board;
 import Model.Piece;
-import Model.Property.PropertyManager;
+import Model.Controller.PropertyManager;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

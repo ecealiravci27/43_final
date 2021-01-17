@@ -4,7 +4,6 @@ import Model.Board;
 import Model.Player;
 import Model.Property.HouseOwnable;
 import Model.Property.Ownable;
-import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
 

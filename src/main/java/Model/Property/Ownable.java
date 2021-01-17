@@ -16,9 +16,6 @@ package Model.Property;
             this.typeInt = typeInt;
         }
 
-        public void seizeProperty(int playerNumber) {
-            owner = playerNumber;
-        }
 
         public void setOwner(int ID) {
             owner = ID;
@@ -41,7 +38,4 @@ package Model.Property;
             return typeInt;
         }
 
-        public boolean getAvailability() {
-            return available;
-        }
     }

@@ -79,16 +79,6 @@ public class Player {
         return bankrupt;
     }
 
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    public String getName(int ID) {
-
-        return name;
-    }
-
     public void jail() {
         if (!freeCard) {
             this.jailed = true;

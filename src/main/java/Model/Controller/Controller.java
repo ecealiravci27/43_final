@@ -11,8 +11,8 @@ public class Controller {
     private CardPile cardPile;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
-    private boolean endGame;
     private int totalPlayers = 0;
+    private boolean endGame = true;
     Board board;
     SuperField[] field;
 
@@ -34,7 +34,6 @@ public class Controller {
 
     private void play() {
         //number of rounds
-        int turn = 0;
         int counter = 0;
         for (int i = 0; i < 1000; i++) {
             for (int k = 0; k < totalPlayers; k++) {
@@ -46,7 +45,6 @@ public class Controller {
                     break;
                 }
                 doTurn(k);
-                turn++;
                 }
             }
         }
