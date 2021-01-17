@@ -175,20 +175,25 @@ public class Controller {
         if(card instanceof MoveCard){
             if ((((MoveCard) card).getType()) == 1){
             propertyPlayerController.movePiece(((MoveCard) card).getMovePiece(), playerID);
-        }
+            }
             if ((((MoveCard) card).getType()) == 2) {
                 propertyPlayerController.setPiece(((MoveCard) card).getMoveToField(), playerID);
             }
-            guiController.changePlayerGUIPos();
+            guiController.message(card.getCardDescription());
+            //guiController.changePlayerGUIPos();
             doField(field[propertyPlayerController.getPlayerPosition(playerID)], playerID);
+        } else {
+            guiController.message(card.getCardDescription());
+            if(card instanceof MoneyCard){
+                propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
+            }
+            if(card instanceof FreeCard) {
+                propertyPlayerController.getPlayerArray()[playerID].gainFreeCard();
+            }
+
         }
-        if(card instanceof MoneyCard){
-            propertyPlayerController.changeAccount(((MoneyCard) card).getChangeMoney(), playerID);
-        }
-        if(card instanceof FreeCard) {
-            propertyPlayerController.getPlayerArray()[playerID].gainFreeCard();
-        }
-        guiController.message(card.getCardDescription());
+
+
     }
 
     private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
