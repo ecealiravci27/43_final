@@ -8,7 +8,7 @@ import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
 
-    private SuperField[] field;
+    private final SuperField[] field;
     private final PropertyManager propertyManager;
     private Player player;
     private int playerAmount;

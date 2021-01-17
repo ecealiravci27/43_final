@@ -121,6 +121,10 @@ public class Controller {
         if (landedField instanceof SpecialField){
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
+        if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
+
+            guiController.
+        }
     }
 
     private void doSpecialField(SpecialField landedField, int playerID, int fieldID){
@@ -138,7 +142,7 @@ public class Controller {
         }
         else if (!(propertyPlayerController.getOwnership(landedField.getID()) == playerID)) {
             int owner = propertyPlayerController.getOwnership(fieldID);
-            propertyPlayerController.payPlayerRent((OwnableField) landedField,owner, playerID, dice.getRememberDice());
+            propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
         }
     }
 
@@ -167,4 +171,6 @@ public class Controller {
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);
         return new PropertyPlayerController(totalPlayers, board);
     }
+
+
 }
