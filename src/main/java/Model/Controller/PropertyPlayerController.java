@@ -4,7 +4,6 @@ import Model.Board;
 import Model.Player;
 import Model.Property.HouseOwnable;
 import Model.Property.Ownable;
-import Model.Property.PropertyManager;
 
 public class PropertyPlayerController {
 
@@ -24,10 +23,6 @@ public class PropertyPlayerController {
 
     public void changeAccount(int money, int ID){
         playerArray[ID].addBalance(money);
-    }
-
-    public int getOwnedEntities(int playerID, int fieldID){
-        return propertyManager.numberOfOwned(playerID, fieldID);
     }
 
     public void setPiece(int position, int ID){
@@ -97,9 +92,6 @@ public class PropertyPlayerController {
 
     private Player getPlayer(int playerID) {
         return playerArray[playerID];
-    }
-    public void bankruptPlayer(int playerID){
-        getPlayer(playerID).bankrupt();
     }
 
     public int getPlayerMoney (int ID){
@@ -214,21 +206,5 @@ public class PropertyPlayerController {
             canAfford = false;
         }
         return canAfford;
-    }
-
-    public void sellHouse(int playerID, VacantField field) {
-        ((HouseOwnable) propertyManager.getOwnable(field.getID())).removeHouse();
-        playerArray[playerID].addBalance(field.getHouse_price()/2);
-    }
-
-    public void setFree(int playerID) {
-        playerArray[playerID].setFree();
-    }
-
-    public void buyHouse(int playerID, VacantField field) {
-
-        playerArray[playerID].reduceBalance(field.getHouse_price());
-
-        propertyManager.setOwnerShip(playerID, field.getID());
     }
 }

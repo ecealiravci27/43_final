@@ -1,9 +1,11 @@
-package Model.Property;
+package Model.Controller;
 
 import Model.Board;
 import Model.Fields.OwnableField;
 import Model.Fields.SuperField;
 import Model.Fields.VacantField;
+import Model.Property.HouseOwnable;
+import Model.Property.Ownable;
 
 public class PropertyManager {
 
@@ -97,15 +99,6 @@ public class PropertyManager {
         return entities;
         }
 
-
-//    public static void main(String[] args) {
-//        SuperField[] board = new Board().setupField();
-//        //System.out.println(setupBoard(board));
-//        Property[] properties = new PropertyManager().setupProperty(board);
-//        //System.out.println(properties);
-//        isGroupOwned(1, 2, properties);
-//    }
-
     public void setOwnerShip(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
@@ -114,17 +107,6 @@ public class PropertyManager {
             }
         }
     }
-
-    public void removeOwnership(int fieldID,  Ownable[] properties) {
-        int owner = 0;
-        int i;
-        for (i = 0; i < properties.length; i++) {
-            if(properties[i].getID() == fieldID) {
-                properties[i].setOwner(owner);
-            }
-        }
-    }
-
 
     public int[] getOwnedHouseOwnables(int playerID) {
 
@@ -149,43 +131,6 @@ public class PropertyManager {
         }
         return ownAblesID;
     }
-
-
-    //Incomplete methods for buying houses, probably won't have time to complete
-//    public HouseOwnable[] getGroupOwnables(int groupIndex) {
-//
-//        int counter = 0;
-//
-//        for (int i = 0; i < properties.length; i++) {
-//
-//            if (((HouseOwnable) properties[i]).getGroup() == groupIndex) {
-//
-//                counter++;
-//            }
-//        }
-//
-//        HouseOwnable[] houseOwnables = new HouseOwnable[counter];
-//
-//        for (int j = 0; j < properties.length; j++) {
-//
-//            if (((HouseOwnable) properties[j]).getGroup() == groupIndex) {
-//
-//                houseOwnables[j] = ((HouseOwnable) properties[j]);
-//            }
-//        }
-//        return houseOwnables;
-//    }
-//
-//
-//    public boolean yesCanBuildOn(int playerID, HouseOwnable[] houseOwnablesArray) {
-//
-//        HouseOwnable[] houseOwnables = new HouseOwnable[houseOwnablesArray.length];
-//
-//        for (int i = 0; i < houseOwnablesArray.length; i++) {
-//
-//            if (houseOwnablesArray[i].getNumberOfHouses() <= houseOwnablesArray[i++].getNumberOfHouses()+1)
-//        }
-//    }
 }
 
 
