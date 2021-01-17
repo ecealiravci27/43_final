@@ -70,7 +70,6 @@ public class Controller {
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
                     propertyPlayerController.getPlayerArray()[playerID].spendFreeCard();
                     normalExecution(playerID);
-
                 }
             }
         }
@@ -80,7 +79,7 @@ public class Controller {
         movePlayer(playerID);
         int pos1 = propertyPlayerController.getPlayerPosition(playerID);
         SuperField landedField = field[pos1];
-        doField(landedField, playerID, playerTurn);
+        doField(landedField, playerID);
 
         // In some cases the player pos gets changed by doField
         int pos2 = propertyPlayerController.getPlayerPosition(playerID);
@@ -113,10 +112,7 @@ public class Controller {
         passStart(pos_1, pos_2, ID);
     }
 
-    private void doField(SuperField landedField, int playerID, int turn){
-//        if(passStart(playerID) && turn > propertyPlayerController.getPlayerArray().length){
-//            propertyPlayerController.changeAccount(4000, playerID);
-//        }
+    private void doField(SuperField landedField, int playerID){
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
         if (landedField instanceof OwnableField) {
