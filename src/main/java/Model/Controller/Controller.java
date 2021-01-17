@@ -44,7 +44,6 @@ public class Controller {
                     counter++;
                 }
                 if (counter == (totalPlayers - 1)) {
-                    endGame = true;
                     break;
                 }
                 doTurn(k, turn);
