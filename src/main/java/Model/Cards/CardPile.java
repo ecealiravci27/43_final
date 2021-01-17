@@ -43,10 +43,5 @@ public class CardPile {
             swap(a,b);
         }
     }
-
-    public static void main(String[] args) {
-        CardPile cardPile = new CardPile();
-        cardPile.drawCard();
-    }
 }
 

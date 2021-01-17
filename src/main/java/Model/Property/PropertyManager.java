@@ -189,20 +189,6 @@ public class PropertyManager {
 //            if (houseOwnablesArray[i].getNumberOfHouses() <= houseOwnablesArray[i++].getNumberOfHouses()+1)
 //        }
 //    }
-
-    
-    
-    
-    
-    
-    
-    
-    
-//Temporary main method for testing
-
-    public static void main(String[] args) {
-
-    }
 }
 
 
