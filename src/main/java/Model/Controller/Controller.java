@@ -101,6 +101,8 @@ public class Controller {
     }
 
     private void movePlayer(int ID) {
+//        propertyPlayerController.movePiece(38, ID);
+//        guiController.changePlayerGUIPos(ID, 38, 0);
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
         System.out.println(dice_1);
@@ -128,9 +130,13 @@ public class Controller {
             doSpecialField((SpecialField) landedField,playerID,fieldID);
         }
         if (landedField instanceof VacantField) {
-            if (propertyPlayerController.getCanBuildArray(playerID).length > 0)
-
-            guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
+            if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
+                VacantField chosenfield = guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
+                if(chosenfield != null) {
+                    propertyPlayerController.buyHouse(playerID, chosenfield);
+                    guiController.buildHouse(chosenfield.getID(), propertyPlayerController.getHouses(chosenfield.getID()));
+                }
+            }
         }
     }
 

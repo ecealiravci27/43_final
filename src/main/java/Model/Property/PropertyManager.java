@@ -125,6 +125,14 @@ public class PropertyManager {
         }
     }
 
+    public void addHouse(int fieldID) {
+        ((HouseOwnable) properties[fieldID]).addHouse();
+    }
+
+    public int getHouses(int fieldID) {
+        return ((HouseOwnable) properties[fieldID]).getNumberOfHouses();
+    }
+
 
     public int[] getOwnedHouseOwnables(int playerID) {
 

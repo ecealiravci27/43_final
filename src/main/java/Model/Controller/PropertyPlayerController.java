@@ -158,6 +158,7 @@ public class PropertyPlayerController {
                     if (isAffordable(playerID, ((VacantField) superField).getHouse_price())) {
                         if (propertyManager.isGroupOwned(playerID, ((VacantField) superField).getTypeIndex())) {
                             houses[counter] = ((VacantField) superField);
+                            counter++;
                         }
                     }
                 }
@@ -166,83 +167,6 @@ public class PropertyPlayerController {
 
         return houses;
     }
-
-//    public VacantField[] getCanBuildArray(int playerID) {
-//
-//        int counter = 0;
-//
-//        int[] ownablesID = propertyManager.getOwnedHouseOwnables(playerID);
-//
-//        for (int i = 0; i < ownablesID.length; i++) {
-//
-//            System.out.println("this is i " + i);
-//
-//            System.out.println("getCanBuildArray : OwnablesID value in index = " + ownablesID[i]);
-//
-//            System.out.println("Ownables INDEX " + ownablesID[i]);
-//        }
-//
-//        VacantField[] canBuyHousesOn;
-//
-//        if (!(ownablesID.length == 0)) {
-//
-//            System.out.println("OwnablesID.length = " + ownablesID.length);
-//
-//            for (int i = 0; i < ownablesID.length; i++) {
-//
-//                for (int j = 0; j < field.length; j++) {
-//
-//                    if (ownablesID[i] == field[j].getID()) {
-//                        System.out.println("Printing IDs for comparison : " + ownablesID[i] + " " + field[j].getID());
-//
-//                        if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
-//
-//                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
-//
-//                                counter++;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            canBuyHousesOn = new VacantField[counter];
-//
-//            for (int k = 0; k < counter; k++) {
-//
-//                for (int m = 0; m < field.length; m++) {
-//
-//                    if (ownablesID[k] == field[m].getID()) {
-//
-//                        if (isAffordable(playerID,((VacantField) field[m]).getHouse_price())) {
-//
-//                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[m]).getTypeIndex())) {
-//
-//                                canBuyHousesOn[k] = ((VacantField) field[m]);
-//
-//                                System.out.println(" printing object " + field[m]);
-//
-//                                System.out.println(" this is k : " + k);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        } else {
-//
-//            canBuyHousesOn = new VacantField[0];
-//        }
-//
-//        for (int d = 0; d < canBuyHousesOn.length; d++) {
-//
-//            System.out.println(" this is length of canBuildHouseArray " + canBuyHousesOn.length);
-//
-//            System.out.println(" canBuildHouseArray element " + d + " = " + canBuyHousesOn[d]);
-//        }
-//
-//        return canBuyHousesOn;
-//    }
-
 
     public int getRent(OwnableField field, int playerID, int eyeSum){
         int rent = 0;
@@ -299,6 +223,10 @@ public class PropertyPlayerController {
 
         playerArray[playerID].reduceBalance(field.getHouse_price());
 
-        propertyManager.setOwnerShip(playerID, field.getID());
+        propertyManager.addHouse(field.getID());
+    }
+
+    public int getHouses(int fieldID) {
+        return propertyManager.getHouses(fieldID);
     }
 }
