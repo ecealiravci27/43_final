@@ -2,7 +2,7 @@ package Model.Property;
 
 public class HouseOwnable extends Ownable {
     private int numberOfHouses;
-    private int group;
+    private final int group;
 
     public HouseOwnable(int ID, int type, int group) {
         super(ID, type);

@@ -9,10 +9,12 @@ import Model.Property.PropertyManager;
 public class PropertyPlayerController {
 
     private SuperField[] field;
-    private Player[] playerArray;
     private final PropertyManager propertyManager;
+    private Player[] playerArray;
+
 
     public PropertyPlayerController(int playerAmount, Board board) {
+
         this.playerArray = setupPlayer(playerAmount);
         this.field = setupSuperFieldArray(board);
         this.propertyManager = new PropertyManager(field);
