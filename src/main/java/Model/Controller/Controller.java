@@ -132,7 +132,7 @@ public class Controller {
         }
         if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
 
-            //guiController.
+            guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
         }
     }
 
