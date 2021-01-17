@@ -160,7 +160,9 @@ public class PropertyPlayerController {
                         System.out.println("Printing IDs for comparison : " + ownablesID[i] + " " + field[j].getID());
 
                         if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
+
                             if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
+
                                 counter++;
                             }
                         }
@@ -182,7 +184,9 @@ public class PropertyPlayerController {
 
                                 canBuyHousesOn[k] = ((VacantField) field[m]);
 
-                                System.out.println(" printing object " + field[m].getID());
+                                System.out.println(" printing object " + field[m]);
+
+                                System.out.println(" this is k : " + k);
                             }
                         }
                     }
@@ -191,6 +195,13 @@ public class PropertyPlayerController {
         } else {
 
             canBuyHousesOn = new VacantField[0];
+        }
+
+        for (int d = 0; d < canBuyHousesOn.length; d++) {
+
+            System.out.println(" this is length of canBuildHouseArray " + canBuyHousesOn.length);
+
+            System.out.println(" canBuildHouseArray element " + d + " = " + canBuyHousesOn[d]);
         }
 
         return canBuyHousesOn;

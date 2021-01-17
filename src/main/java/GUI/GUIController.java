@@ -295,7 +295,7 @@ public class GUIController {
             names[i] = fields[i].getFieldName();
         }
 
-        names[names.length] = "Afbryd";
+       // names[names.length] = "Afbryd";
 
         String chosenElement = GUI.getUserSelection(
                 "Vælg hvor du gerne vil bygge et hus",
