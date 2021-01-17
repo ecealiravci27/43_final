@@ -135,13 +135,13 @@ public class PropertyPlayerController {
 
         int counter = 0;
 
-        int[] ownablesID = new int[propertyManager.getOwnedHouseOwnables(playerID).length];
+        int[] ownablesID = propertyManager.getOwnedHouseOwnables(playerID);
 
         for (int i = 0; i < ownablesID.length; i++) {
 
             System.out.println("this is i " + i);
 
-            System.out.println("OwnablesID int = " + ownablesID);
+            System.out.println("getCanBuildArray : OwnablesID value in index = " + ownablesID[i]);
 
             System.out.println("Ownables INDEX " + ownablesID[i]);
         }
@@ -170,17 +170,19 @@ public class PropertyPlayerController {
 
             canBuyHousesOn = new VacantField[counter];
 
-            for (int i = 0; i < ownablesID.length; i++) {
+            for (int k = 0; k < counter; k++) {
 
-                for (int j = 0; j < field.length; j++) {
+                for (int m = 0; m < field.length; m++) {
 
-                    if (ownablesID[i] == field[j].getID()) {
+                    if (ownablesID[k] == field[m].getID()) {
 
-                        if (isAffordable(playerID,((VacantField) field[j]).getHouse_price())) {
+                        if (isAffordable(playerID,((VacantField) field[m]).getHouse_price())) {
 
-                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[j]).getTypeIndex())) {
+                            if (propertyManager.isGroupOwned(playerID,((VacantField) field[m]).getTypeIndex())) {
 
-                                canBuyHousesOn[i] = ((VacantField) field[j]);
+                                canBuyHousesOn[k] = ((VacantField) field[m]);
+
+                                System.out.println(" printing object " + field[m].getID());
                             }
                         }
                     }

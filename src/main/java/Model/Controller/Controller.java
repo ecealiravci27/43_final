@@ -44,12 +44,15 @@ public class Controller {
                     counter++;
                 }
                 if (counter == (totalPlayers - 1)) {
+                    guiController.message(" Game ends ");
                     break;
                 }
                 doTurn(k);
                 turn++;
                 }
             }
+        guiController.message(" too many turns ");
+        System.out.println(" too many turns ");
         }
 
     private void doTurn(int playerID) {
@@ -126,6 +129,7 @@ public class Controller {
         }
         if (landedField instanceof VacantField) {
             if (propertyPlayerController.getCanBuildArray(playerID).length > 0)
+
             guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
         }
     }

@@ -287,11 +287,15 @@ public class GUIController {
         String[] names = new String[fields.length + 1];
         VacantField chosenField = null;
 
+        System.out.println(" Fields.length : " + fields.length);
+
         for (int i = 0; i < fields.length; i++) {
+            System.out.println(" fields[i] " + fields[i]);
+            System.out.println(" fields[i]" + fields[i].getFieldName());
             names[i] = fields[i].getFieldName();
         }
 
-        names[fields.length + 1] = "Afbryd";
+        names[names.length] = "Afbryd";
 
         String chosenElement = GUI.getUserSelection(
                 "Vælg hvor du gerne vil bygge et hus",
