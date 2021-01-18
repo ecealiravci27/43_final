@@ -1,3 +1,4 @@
+// This class keeps track of the players position, piece, balance and properties
 package Model;
 
 public class Player {
