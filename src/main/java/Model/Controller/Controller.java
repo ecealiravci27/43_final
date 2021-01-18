@@ -15,6 +15,7 @@ public class Controller {
     Board board;
     SuperField[] field;
 
+    //extracts methods from several classes
     public Controller(){
         this.cardPile = new CardPile();
         this.board = new Board();
@@ -24,11 +25,13 @@ public class Controller {
         this.dice = new Dice();
     }
 
+    //allows the game to start by calling the play() method
     public void startGame() {
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
         play();
     }
 
+    //sets conditions for when the game starts and ends
     private void play() {
         boolean endgame = false;
         //number of rounds
@@ -49,6 +52,7 @@ public class Controller {
             }
         }
     }
+    //creates the turn for a player including jail conditions
     private void doTurn(int playerID) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
@@ -61,6 +65,8 @@ public class Controller {
                     guiController.message("Du er fængslet. vent en tur!");
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
                 }
+
+                //message to freed player
                 if (propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
                     guiController.message("Du brugte dit frikort til at komme ud af fængslet");
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
@@ -74,7 +80,7 @@ public class Controller {
 
     }
 
-
+    //removes ownership of a property by removing the border on the GUI when a player goes bankrupt
     private void bankruptExecution(int playerID){
         int[] owned = propertyPlayerController.getOwned(playerID);
         propertyPlayerController.removeOwnerShip(playerID);
@@ -83,6 +89,7 @@ public class Controller {
         }
     }
 
+    //sets the player positions and changes the positons
     private void normalExecution(int playerID) {
         guiController.wantToRoll(playerID);
         movePlayer(playerID);
@@ -94,12 +101,13 @@ public class Controller {
         int pos2 = propertyPlayerController.getPlayerPosition(playerID);
         guiController.changePlayerGUIPos(playerID, pos2, pos1);
 
-        // update every players balance
+        // updates every players balance
         for (int i = 0; i < totalPlayers; i++) {
             guiController.updateBalance(i, propertyPlayerController.getPlayerMoney(i));
         }
     }
 
+    //allows player to receive 4000 kr. when passing by the start field
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
             propertyPlayerController.changeAccount(4000, playerID);
@@ -107,6 +115,7 @@ public class Controller {
         }
     }
 
+    //moves the player from old position to a new position based on a dice roll
     private void movePlayer(int ID) {
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
@@ -122,6 +131,7 @@ public class Controller {
         passStart(pos_1, pos_2, ID);
     }
 
+    //conditions for what happens when landing on a specific type of field
     private void doField(SuperField landedField, int playerID){
         int fieldID = landedField.getID();
         int EyeSum = dice.getRememberDice();
@@ -139,6 +149,7 @@ public class Controller {
         }
     }
 
+    //conditions for what happens if you land on a vacant field (fields you can build houses on)
     public void doVacantField(int playerID) {
         if (propertyPlayerController.getCanBuildArray(playerID).length > 0) {
             VacantField chosenfield = guiController.wantToBuildHouse(propertyPlayerController.getCanBuildArray(playerID));
@@ -148,11 +159,12 @@ public class Controller {
             }
         }
     }
-
+    //conditions for what happens if you land on a special field (non-ownable fields such as chance field)
     private void doSpecialField(SpecialField landedField, int playerID){
         propertyPlayerController.doSpecialField(landedField, playerID);
     }
 
+    //conditions for what happens if you land on a property field (ownable fields that you cant build houses on such as shipping fields)
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
         if (!propertyPlayerController.isOwned(landedField.getID())) {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
@@ -168,6 +180,7 @@ public class Controller {
         }
     }
 
+    //conditions for what happens depending on which card is drawn
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
         if(card instanceof MoveCard){
@@ -191,6 +204,7 @@ public class Controller {
         }
     }
 
+    //sets minimum and maximum amount of players
     private PropertyPlayerController setupPropertyPlayerController (Board board){
         int maxPlayers = 6;
         int minPlayers = 2;

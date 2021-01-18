@@ -15,6 +15,7 @@ public class PropertyManager {
         this.properties = setupProperty(board);
     }
 
+
     public Ownable getOwnable(int fieldID) {
 
         int i;
