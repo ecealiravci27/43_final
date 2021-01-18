@@ -30,11 +30,14 @@ public class VacantField extends OwnableField {
         }
     }
 
+    //returns the price of each house that can be built on the fields
     public int getHouse_price(){
         return house_price;
     }
 
+    //returns the color of each field
     public String getColor(){ return Color;}
 
+    //returns the streets defined as typeIndex. If an entire row of colors is owned by the same player (one street) it will have a type index depending on which street is owned.
     public int getTypeIndex(){ return typeIndex;}
 }
