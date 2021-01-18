@@ -74,7 +74,6 @@ public class GUIController {
         for (int i = 0; i < board.length; i++) {
             field = board[i];
             if(field instanceof Model.Fields.SpecialField) {
-                System.out.println(((SpecialField) field).getType());
                 FieldColor color = colors.get(((SpecialField) field).getType());
                 if(((SpecialField) field).getType().equals("start")) {
                     gfields[i] = new GUI_Start(field.getFieldName(), "", field.getFieldDescription(), color.FG, color.BG);
@@ -98,7 +97,6 @@ public class GUIController {
                 //String desc = "Rent: " + rent + "\nHouse Price: " + housePrice + "\nHouse Rent: 10";
 
                 FieldColor color = colors.get("vacant." + ((VacantField) field).getTypeIndex());
-                System.out.println(((VacantField) field).getColor());
                 gfields[i] = new GUI_Street(field.getFieldName(), "Pris: " + price , desc , String.valueOf(rent), color.FG, color.BG);
                 //new GUI_Street(,)
             } else if(field instanceof Model.Fields.ChanceField) {
@@ -107,7 +105,6 @@ public class GUIController {
             } else if(field instanceof Model.Fields.ShippingField) {
                 FieldColor color = colors.get("shipping");
                 int rent = ((ShippingField) field).getRent(0, 1);
-                System.out.println("RENT = " + rent);
                 int price = ((ShippingField) field).getFieldPrice();
                 String desc = "";
                 for (int a = 0; a < 4; a++) {
@@ -200,8 +197,6 @@ public class GUIController {
     public void changePlayerGUIPos(int playerID, int newpos, int oldpos) {
         GUI.getFields()[oldpos].setCar(gPlayers[playerID], false);
         GUI.getFields()[newpos].setCar(gPlayers[playerID], true);
-
-        System.out.printf("Changed guipos from: " + oldpos + " to newpos: " +newpos);
     }
 
     public HashMap<String, Color> setupPlayerColors() {
@@ -278,23 +273,12 @@ public class GUIController {
     public VacantField wantToBuildHouse(VacantField[] fields) {
         String[] names = new String[fields.length + 1];
         VacantField chosenField = null;
-
-        System.out.println(" Fields.length : " + fields.length);
-
         for (int i = 0; i < fields.length; i++) {
-            //if (fields[i] == null) continue;
-            System.out.println(" fields[i] " + fields[i]);
-            System.out.println(" fields[i]" + fields[i].getFieldName());
             names[i] = fields[i].getFieldName();
         }
-
         for (int i = 0; i < names.length; i++) {
-            System.out.println("index = " + i);
-            System.out.println("navn = " + names[i]);
         }
-
         names[names.length - 1] = "AFBRYD";
-
         String chosenElement = GUI.getUserSelection(
                 "Vælg hvor du gerne vil bygge et hus",
                 names

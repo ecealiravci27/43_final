@@ -111,8 +111,6 @@ public class Controller {
     private void movePlayer(int ID) {
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
-        System.out.println(" Dice 1 : " + dice_1);
-        System.out.println(" Dice 2 " + dice_2);
         int eyesum = dice_1 + dice_2;
         dice.setDice(eyesum);
         guiController.showDice(dice_1, dice_2);
@@ -179,7 +177,6 @@ public class Controller {
                 propertyPlayerController.setPiece(((MoveCard) card).getMovePiece(), playerID);
             }
             guiController.message(card.getCardDescription());
-            //guiController.changePlayerGUIPos();
             doField(field[propertyPlayerController.getPlayerPosition(playerID)], playerID);
         } else {
             guiController.message(card.getCardDescription());

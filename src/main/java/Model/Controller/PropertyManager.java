@@ -72,8 +72,6 @@ public class PropertyManager {
                 }
             }
         }
-
-        System.out.println(owned);
         return owned;
     }
 
@@ -146,8 +144,6 @@ public class PropertyManager {
             if (properties[j] instanceof HouseOwnable && playerID == properties[j].getOwner()) {
 
                 ownAblesID[index] = properties[j].getID();
-
-                System.out.println("getOwnedHouseOwnables value in index : " + ownAblesID[index] + " number on index " + index);
                 if (index < counter - 1) {
                     index++;
                 }
