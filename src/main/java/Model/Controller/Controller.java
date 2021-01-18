@@ -5,6 +5,7 @@ import Model.Cards.*;
 import Model.Dice;
 import Model.Fields.*;
 
+//controls several parts of the game
 public class Controller {
     private Dice dice;
     private CardPile cardPile;
@@ -19,7 +20,7 @@ public class Controller {
         this.board = new Board();
         this.field = board.getField();
         this.guiController = new GUIController(field);
-        this.propertyPlayerController = setupPropertyPlayerCrontroller(board);
+        this.propertyPlayerController = setupPropertyPlayerController(board);
         this.dice = new Dice();
     }
 
@@ -190,7 +191,7 @@ public class Controller {
         }
     }
 
-    private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
+    private PropertyPlayerController setupPropertyPlayerController (Board board){
         int maxPlayers = 6;
         int minPlayers = 2;
         totalPlayers = guiController.totalplayers(minPlayers, maxPlayers);

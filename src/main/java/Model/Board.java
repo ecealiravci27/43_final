@@ -57,7 +57,7 @@ public class Board {
         fields[35] = new ShippingField("Scandlines", "", 35, 4000,   500);
         fields[36] = new ChanceField("Prøv Lykken", "Træk et tilfældigt kort. Hvad som helst kan ske.", 36, true);
         fields[37] = new VacantField("Frederiksberggade", "", 37, 7000, 3, 700, 3500, 10000, 22000, 26000, 30000);
-        fields[38] = new SpecialField("Betal\nindkomst-\nskat", "2000", 38, 2000, "tax");
+        fields[38] = new SpecialField("Betal\nekstraordinær-\nstatsskat", "2000", 38, 2000, "tax");
         fields[39] = new VacantField("Rådhuspladsen", "", 39, 8000, 3,1000, 4000, 12000, 28000, 34000, 40000);
 
         return fields;

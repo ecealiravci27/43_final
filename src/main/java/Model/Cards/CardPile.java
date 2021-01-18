@@ -1,5 +1,7 @@
 package Model.Cards;
 
+//this class contains the chance card pile
+
 public class CardPile {
     SuperCard[] cards;
     int counter;
@@ -9,6 +11,7 @@ public class CardPile {
 
     }
 
+    //the following method sets up each individual card inside a cardpile array called cards and calls a method that shuffles the card positions inside of the array
     public SuperCard[] setupCardPile() {
         cards = new SuperCard[7];
         cards[0]  = new MoneyCard(" De har vundet i klasselotteriet! Modtag 1000 kr.", 1000);
@@ -20,13 +23,15 @@ public class CardPile {
         cards[6] = new FreeCard("Løsladelseskort: Du kan komme ud af fængslet!");
         shuffleDeck();
         return cards;
-
     }
+
+    //the following method allows the player to draw a card from the cardpile
     public SuperCard drawCard() {
         counter = (counter%cards.length);
         return cards[counter];
     }
 
+    //this method swaps positions inside array
     public void swap(int a, int b){
         SuperCard card_a = cards[a];
         SuperCard card_b = cards[b];
@@ -34,6 +39,7 @@ public class CardPile {
         cards[b] = card_a;
     }
 
+    //the following method shuffles the deck of cards by using the swap() method on random indexes from the card pile array
     public void shuffleDeck(){
         int a,b;
         for (int i = 0; i < 1000; i++) {
