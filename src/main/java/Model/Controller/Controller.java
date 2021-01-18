@@ -74,7 +74,7 @@ public class Controller {
     }
 
 
-    public void bankruptExecution(int playerID){
+    private void bankruptExecution(int playerID){
         int[] owned = propertyPlayerController.getOwned(playerID);
         propertyPlayerController.removeOwnerShip(playerID);
         for (int i = 0; i < owned.length; i++) {
