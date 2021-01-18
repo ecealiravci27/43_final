@@ -30,11 +30,6 @@ public class Account {
         }
     }
 
-    //method sets balance to given value (change).
-    public void setBalance(int change){
-        balance = change;
-    }
-
     //method returns balance
     public int getBalance(){return balance;}
 }

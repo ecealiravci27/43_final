@@ -75,7 +75,7 @@ public class Controller {
     }
 
 
-    public void bankruptExecution(int playerID){
+    private void bankruptExecution(int playerID){
         int[] owned = propertyPlayerController.getOwned(playerID);
         propertyPlayerController.removeOwnerShip(playerID);
         for (int i = 0; i < owned.length; i++) {
@@ -102,7 +102,7 @@ public class Controller {
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
-            propertyPlayerController.changeAccount(-4000, playerID);
+            propertyPlayerController.changeAccount(4000, playerID);
             guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
         }
     }
