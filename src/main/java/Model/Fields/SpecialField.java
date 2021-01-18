@@ -1,5 +1,6 @@
 package Model.Fields;
 
+//all fields that arent ownable, such as chance fields
 public class SpecialField extends SuperField{
     private int taxes;
     private String Type;
@@ -10,10 +11,12 @@ public class SpecialField extends SuperField{
         this.Type = type;
     }
 
+    //non ownable fields have different types, and this returns the type
     public String getType() {
         return Type;
     }
 
+    //returns the taxes (taxed fields)
     public int getTaxes(){
         return taxes;
     }

@@ -1,5 +1,6 @@
 package Model.Fields;
 
+//all fields that is a coorporation, and inherits from OwnableField
 public class CoorporationField extends OwnableField {
 
     private final int multiplier_for_one;
@@ -11,6 +12,7 @@ public class CoorporationField extends OwnableField {
         this.getMultiplier_for_two = 200;
     }
 
+    //conditions for how much the rent is multiplied (values specified in constructor), depending on how many of the coorporations are owned by the same player
     @Override
     public int getRent(int eyesum, int owned_coorporations) {
         int tempRent = 0;
