@@ -20,7 +20,6 @@ public class PropertyManager {
         int i;
 
         for (i = 0; i < properties.length; i++) {
-
             if (properties[i].getID() == fieldID) {
                 break;
             }
@@ -31,8 +30,8 @@ public class PropertyManager {
     public int getTotalPropertyFields(SuperField[] board) {
         int counter = 0;
 
-        for (SuperField f: board)
-            if(f instanceof OwnableField)
+        for (SuperField f : board)
+            if (f instanceof OwnableField)
                 counter++;
 
         return counter;
@@ -47,13 +46,13 @@ public class PropertyManager {
 
             field = board[i];
 
-            if(field instanceof Model.Fields.VacantField) {
-                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE,((VacantField) field).getTypeIndex());
+            if (field instanceof Model.Fields.VacantField) {
+                properties[curPos] = new HouseOwnable(field.getID(), Ownable.VACANT_TYPE, ((VacantField) field).getTypeIndex());
                 curPos++;
-            } else if((field instanceof Model.Fields.CoorporationField)) {
+            } else if ((field instanceof Model.Fields.CoorporationField)) {
                 properties[curPos] = new Ownable(field.getID(), Ownable.COORP_TYPE);
                 curPos++;
-            } else if((field instanceof Model.Fields.ShippingField)) {
+            } else if ((field instanceof Model.Fields.ShippingField)) {
                 properties[curPos] = new Ownable(field.getID(), Ownable.SHIPPING_TYPE);
                 curPos++;
             }
@@ -66,8 +65,8 @@ public class PropertyManager {
         boolean owned = true;
 
         for (int i = 0; i < properties.length; i++) {
-            if(properties[i] instanceof HouseOwnable) {
-                if(properties[i].getOwner() != owner && ((HouseOwnable) properties[i]).getGroup() == groupID) {
+            if (properties[i] instanceof HouseOwnable) {
+                if (properties[i].getOwner() != owner && ((HouseOwnable) properties[i]).getGroup() == groupID) {
                     owned = false;
                     break;
                 }
@@ -82,7 +81,7 @@ public class PropertyManager {
         int type = 0;
         int entities = 0;
 
-        for (int i = 0; i < properties.length ; i++) {
+        for (int i = 0; i < properties.length; i++) {
 
             if (properties[i].getID() == fieldID) {
                 type = properties[i].getType();
@@ -97,33 +96,22 @@ public class PropertyManager {
             }
         }
         return entities;
-        }
-
-
-
-
-//    public static void main(String[] args) {
-//        SuperField[] board = new Board().setupField();
-//        //System.out.println(setupBoard(board));
-//        Property[] properties = new PropertyManager().setupProperty(board);
-//        //System.out.println(properties);
-//        isGroupOwned(1, 2, properties);
-//    }
+    }
 
     public void setOwnerShip(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
-            if(properties[i].getID() == fieldID) {
+            if (properties[i].getID() == fieldID) {
                 properties[i].setOwner(owner);
             }
         }
     }
 
-    public void removeOwnership(int fieldID,  Ownable[] properties) {
-        int owner = 0;
+    public void removeOwnership(int fieldID) {
+        int owner = 10;
         int i;
         for (i = 0; i < properties.length; i++) {
-            if(properties[i].getID() == fieldID) {
+            if (properties[i].getID() == fieldID) {
                 properties[i].setOwner(owner);
             }
         }
@@ -159,52 +147,39 @@ public class PropertyManager {
 
                 ownAblesID[index] = properties[j].getID();
 
-                System.out.println("getOwnedHouseOwnables value in index : " + ownAblesID[index] + " number on index " + index );
-                if (index < counter-1) {
+                System.out.println("getOwnedHouseOwnables value in index : " + ownAblesID[index] + " number on index " + index);
+                if (index < counter - 1) {
                     index++;
                 }
             }
         }
-
         return ownAblesID;
     }
 
+    public int[] getOwnedOwnables(int playerID) {
 
-    //Incomplete methods for buying houses, probably won't have time to complete
-//    public HouseOwnable[] getGroupOwnables(int groupIndex) {
-//
-//        int counter = 0;
-//
-//        for (int i = 0; i < properties.length; i++) {
-//
-//            if (((HouseOwnable) properties[i]).getGroup() == groupIndex) {
-//
-//                counter++;
-//            }
-//        }
-//
-//        HouseOwnable[] houseOwnables = new HouseOwnable[counter];
-//
-//        for (int j = 0; j < properties.length; j++) {
-//
-//            if (((HouseOwnable) properties[j]).getGroup() == groupIndex) {
-//
-//                houseOwnables[j] = ((HouseOwnable) properties[j]);
-//            }
-//        }
-//        return houseOwnables;
-//    }
-//
-//
-//    public boolean yesCanBuildOn(int playerID, HouseOwnable[] houseOwnablesArray) {
-//
-//        HouseOwnable[] houseOwnables = new HouseOwnable[houseOwnablesArray.length];
-//
-//        for (int i = 0; i < houseOwnablesArray.length; i++) {
-//
-//            if (houseOwnablesArray[i].getNumberOfHouses() <= houseOwnablesArray[i++].getNumberOfHouses()+1)
-//        }
-//    }
+        int counter = 0;
+        int index = 0;
+
+        for (int i = 0; i < properties.length; i++) {
+
+            if (playerID == properties[i].getOwner()) {
+                counter++;
+            }
+        }
+        int[] ownAblesID = new int[counter];
+
+        for (int j = 0; j < properties.length; j++) {
+            if (properties[j] instanceof HouseOwnable && playerID == properties[j].getOwner()) {
+
+                ownAblesID[index] = properties[j].getID();
+                if (index < counter - 1) {
+                    index++;
+                }
+            }
+        }
+        return ownAblesID;
+    }
 }
 
 

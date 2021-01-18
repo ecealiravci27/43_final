@@ -278,6 +278,17 @@ public class GUIController {
             ((GUI_Brewery) field).setBorder(gPlayers[playerID].getPrimaryColor());
         }
     }
+    public void removePlayerBorder(int playerID, int fieldID) {
+        Color cBlack = new Color(0, 0, 0);
+        GUI_Field field = GUI.getFields()[fieldID];
+        if (field instanceof GUI_Shipping) {
+            ((GUI_Shipping) field).setBorder(cBlack);
+        } else if (field instanceof GUI_Street) {
+            ((GUI_Street) field).setBorder(cBlack);
+        } else if (field instanceof GUI_Brewery) {
+            ((GUI_Brewery) field).setBorder(cBlack);
+        }
+    }
 
     public void updateBalance(int playerID, int balance) {
         gPlayers[playerID].setBalance(balance);

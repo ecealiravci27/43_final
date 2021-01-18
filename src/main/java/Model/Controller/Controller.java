@@ -9,14 +9,11 @@ import Model.Fields.*;
 public class Controller {
     private Dice dice;
     private CardPile cardPile;
-    private int playerAmount;
     private PropertyPlayerController propertyPlayerController;
     private GUIController guiController;
-    private boolean endGame;
     private int totalPlayers = 0;
     Board board;
     SuperField[] field;
-    private int playerTurn;
 
     public Controller(){
         this.cardPile = new CardPile();
@@ -27,34 +24,33 @@ public class Controller {
         this.dice = new Dice();
     }
 
-
-
     public void startGame() {
         guiController.GUIPlayers(propertyPlayerController.getPlayerArray());
         play();
     }
 
     private void play() {
+        boolean endgame = false;
         //number of rounds
-        int turn = 0;
-        int counter = 0;
-        for (int i = 0; i < 1000; i++) {
-            for (int k = 0; k < totalPlayers; k++) {
-                if (propertyPlayerController.isBankrupt(k)) {
-                    counter++;
-                }
-                if (counter == (totalPlayers - 1)) {
-                    guiController.message(" Game ends ");
-                    break;
-                }
-                doTurn(k);
-                turn++;
+        while (!endgame) {
+            int turn = 0;
+            int counter = 0;
+            for (int i = 0; i < 1000; i++) {
+                for (int k = 0; k < totalPlayers; k++) {
+                    if (propertyPlayerController.isBankrupt(k)) {
+                        counter++;
+                    }
+                    if (counter == (totalPlayers - 1)) {
+                        guiController.message(" Game ends ");
+                        endgame = true;
+                        break;
+                    }
+                    doTurn(k);
+                    turn++;
                 }
             }
-        guiController.message(" too many turns ");
-        System.out.println(" too many turns ");
         }
-
+    }
     private void doTurn(int playerID) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
             if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
@@ -75,7 +71,20 @@ public class Controller {
                     normalExecution(playerID);
                 }
             }
+        if(propertyPlayerController.isBankrupt(playerID)){
+            bankruptExecution(playerID);
         }
+
+    }
+
+
+    public void bankruptExecution(int playerID){
+        int[] owned = propertyPlayerController.getOwned(playerID);
+        propertyPlayerController.removeOwnerShip(playerID);
+        for (int i = 0; i < owned.length; i++) {
+            guiController.removePlayerBorder(playerID, owned[i]);
+        }
+    }
 
     private void normalExecution(int playerID) {
         guiController.wantToRoll(playerID);
@@ -96,14 +105,12 @@ public class Controller {
 
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
-            propertyPlayerController.changeAccount(4000, playerID);
+            propertyPlayerController.changeAccount(-4000, playerID);
             guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
         }
     }
 
     private void movePlayer(int ID) {
-//        propertyPlayerController.movePiece(38, ID);
-//        guiController.changePlayerGUIPos(ID, 38, 0);
         int dice_1 = dice.rollDice();
         int dice_2 = dice.rollDice();
         System.out.println(" Dice 1 : " + dice_1);
@@ -149,13 +156,6 @@ public class Controller {
         propertyPlayerController.doSpecialField(landedField, playerID);
     }
 
-    public void propertytest(OwnableField landedField, int playerID, int fieldID) {
-        if (guiController.wantToBuy(landedField.getFieldName())) {
-            propertyPlayerController.purchaseProperty(playerID,landedField);
-            guiController.setPropertyBorder(playerID, fieldID);
-        }
-    }
-
     private  void doPropertyField(OwnableField landedField, int playerID, int fieldID){
         if (!propertyPlayerController.isOwned(landedField.getID())) {
             if(propertyPlayerController.isAffordable(playerID, landedField.getFieldPrice())){
@@ -170,6 +170,7 @@ public class Controller {
             propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
         }
     }
+
     private void doCard(int playerID){
         SuperCard card = cardPile.drawCard();
         if(card instanceof MoveCard){
@@ -177,7 +178,7 @@ public class Controller {
             propertyPlayerController.movePiece(((MoveCard) card).getMovePiece(), playerID);
             }
             if ((((MoveCard) card).getType()) == 2) {
-                propertyPlayerController.setPiece(((MoveCard) card).getMoveToField(), playerID);
+                propertyPlayerController.setPiece(((MoveCard) card).getMovePiece(), playerID);
             }
             guiController.message(card.getCardDescription());
             //guiController.changePlayerGUIPos();
@@ -190,10 +191,7 @@ public class Controller {
             if(card instanceof FreeCard) {
                 propertyPlayerController.getPlayerArray()[playerID].gainFreeCard();
             }
-
         }
-
-
     }
 
     private PropertyPlayerController setupPropertyPlayerCrontroller (Board board){
