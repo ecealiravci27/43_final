@@ -50,10 +50,6 @@ public class Controller {
     }
     private void doTurn(int playerID) {
         if (!propertyPlayerController.isBankrupt(playerID)) {
-            if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
-                normalExecution(playerID);
-                }
-            }
             if (propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
                 //message to jailed player
                 if (!propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
@@ -67,6 +63,12 @@ public class Controller {
                     normalExecution(playerID);
                 }
             }
+
+            else if (!propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
+                normalExecution(playerID);
+            }
+        }
+
         if(propertyPlayerController.isBankrupt(playerID)){
             bankruptExecution(playerID);
         }
