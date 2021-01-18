@@ -32,7 +32,6 @@ public class Controller {
         boolean endgame = false;
         //number of rounds
         while (!endgame) {
-            int turn = 0;
             int counter = 0;
             for (int i = 0; i < 1000; i++) {
                 for (int k = 0; k < totalPlayers; k++) {
@@ -45,7 +44,6 @@ public class Controller {
                         break;
                     }
                     doTurn(k);
-                    turn++;
                 }
             }
         }
