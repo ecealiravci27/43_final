@@ -1,3 +1,4 @@
+// This class contains the board with the 40 different fields.
 package Model;
 
 import Model.Fields.*;
@@ -17,6 +18,8 @@ public class Board {
     public SuperField getFielobject(int id) {
         return fields[id];
     }
+
+    //The Fields specified in a Field array
     private SuperField[] setupField(){
         fields = new SuperField[40];
         fields[0] = new SpecialField("START", "Tjen 4000 hver gang du passere dette felt", 0, 0, "start");

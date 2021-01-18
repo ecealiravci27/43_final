@@ -1,3 +1,5 @@
+//class to run the Matador game.
+
 package Model;
 import Model.Controller.Controller;
 

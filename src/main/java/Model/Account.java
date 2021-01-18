@@ -1,11 +1,8 @@
+//This is an account meant to keep track of, and change variables concerning a persons balance in matador
+
 package Model;
 
 public class Account {
-
-    /**
-     * This is an account meant to keep track of, and change variables concerning a persons balance in matador
-     */
-
 
     //local variable made
     private int balance;
@@ -15,7 +12,7 @@ public class Account {
         this.balance = balance;
     }
 
-    //method changes balance variable by a given value (change). balance can not go under 0.
+    //method changes balance variable by a given value (change). Balance can not go under 0.
     public void addBalance(int change){
         balance = balance + change;
         if (balance < 0){
