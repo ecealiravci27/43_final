@@ -56,7 +56,6 @@ public class Controller {
             }
             if (propertyPlayerController.getPlayerArray()[playerID].isJailed()) {
                 //message to jailed player
-                //guiController.
                 if (!propertyPlayerController.getPlayerArray()[playerID].hasFreeCard()) {
                     guiController.message("Du er fængslet. vent en tur!");
                     propertyPlayerController.getPlayerArray()[playerID].setFree();
