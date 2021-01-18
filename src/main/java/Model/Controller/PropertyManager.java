@@ -16,8 +16,8 @@ public class PropertyManager {
     }
 
     public Ownable getOwnable(int fieldID) {
-
         int i;
+
 
         for (i = 0; i < properties.length; i++) {
             if (properties[i].getID() == fieldID) {
@@ -61,6 +61,7 @@ public class PropertyManager {
         return properties;
     }
 
+    //returns boolean regarding if a group is owned, group meaning a street
     public boolean isGroupOwned(int owner, int groupID) {
         boolean owned = true;
 
@@ -75,6 +76,7 @@ public class PropertyManager {
         return owned;
     }
 
+    //returns number of owned entities of a given players specified fields' type
     public int numberOfOwned(int owner, int fieldID) {
         int type = 0;
         int entities = 0;
@@ -96,6 +98,7 @@ public class PropertyManager {
         return entities;
     }
 
+    //sets the corresponding field to fieldID to have the specified owner
     public void setOwnerShip(int owner, int fieldID) {
         int i;
         for (i = 0; i < properties.length; i++) {
@@ -105,6 +108,7 @@ public class PropertyManager {
         }
     }
 
+    //sets the corresponding Field owner of a field to 10, the default value of bank
     public void removeOwnership(int fieldID) {
         int owner = 10;
         int i;
@@ -124,8 +128,8 @@ public class PropertyManager {
         Ownable house = getOwnable(fieldID);
         return ((HouseOwnable) house).getNumberOfHouses();
     }
-
-
+    //Returns an int array of the ID's of a specific players Houseownables
+    // meaning the ID's equivalent to the ID's of the corresponding HouseOwnableFields
     public int[] getOwnedHouseOwnables(int playerID) {
 
         int counter = 0;
@@ -152,6 +156,10 @@ public class PropertyManager {
         return ownAblesID;
     }
 
+
+
+//Returns an int array of the ID's of a specific players ownables
+// meaning the ID's equivalent to the ID's of the corresponding OwnableFields
     public int[] getOwnedOwnables(int playerID) {
 
         int counter = 0;
