@@ -4,9 +4,8 @@ public class Player {
 
     private int playerPosition;
     private int playerID;
-    private String name;
     private final Piece playerPiece;
-    private Account playerAccount;
+    private final Account playerAccount;
     private boolean bankrupt;
     private boolean jailed;
     private int oldPlayerPosition;
@@ -65,10 +64,6 @@ public class Player {
         }
     }
 
-    public void setBalance(int change) {
-
-        playerAccount.setBalance(change);
-    }
     public int getBalance() {
 
         return playerAccount.getBalance();
@@ -79,15 +74,6 @@ public class Player {
         return bankrupt;
     }
 
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    public String getName(int ID) {
-
-        return name;
-    }
 
     public void jail() {
         if (!freeCard) {

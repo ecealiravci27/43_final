@@ -1,5 +1,4 @@
 package Model.Controller;
-
 import GUI.GUIController;
 import Model.Board;
 import Model.Cards.*;

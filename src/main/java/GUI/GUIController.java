@@ -1,6 +1,5 @@
 package GUI;
 
-import Model.Board;
 import Model.Fields.*;
 import Model.Player;
 import gui_fields.*;
@@ -134,12 +133,6 @@ public class GUIController {
         GUI.setDice(roll, roll2);
     }
 
-//    public static void main(String[] args) {
-//        SuperField[] board = new Board().setupField();
-//        //System.out.println(setupBoard(board));
-//        GUI gui = new GUI(setupBoard(board));
-//        //GUI gui = new GUI();
-//    }
     public int totalplayers(int min, int max) {
         String[] options = new String[max - min + 1];
 
@@ -222,14 +215,6 @@ public class GUIController {
         colors.put("lilla", new Color(128, 0, 128));
 
         return colors;
-//        playerColors = new String[6];
-//        int i = 0;
-//        playerColors[i++] = "rød";
-//        playerColors[i++] = "gul";
-//        playerColors[i++] = "grøn";
-//        playerColors[i++] = "blå";
-//        playerColors[i++] = "orange";
-//        playerColors[i++] = "lilla";
     }
 
     public Color choosePlayerColor() {
@@ -241,10 +226,6 @@ public class GUIController {
         return playerColors.get(chosenElement);
     }
 
-//    public void setPlayerColor(String color, int ID) {
-//        return playerColors.get(color);
-//        gPlayers[ID].getCar().setPrimaryColor(playerColors.get(color));
-//    }
 
     public boolean wantToBuy(String propertyname) {
         String chosenButton = GUI.getUserButtonPressed(

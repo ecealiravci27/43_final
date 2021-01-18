@@ -195,11 +195,6 @@ public class PropertyPlayerController {
         return owned;
     }
 
-    public void sellHouse(int playerID, VacantField field) {
-        ((HouseOwnable) propertyManager.getOwnable(field.getID())).removeHouse();
-        playerArray[playerID].addBalance(field.getHouse_price()/2);
-    }
-
     public void buyHouse(int playerID, VacantField field) {
 
         playerArray[playerID].reduceBalance(field.getHouse_price());
