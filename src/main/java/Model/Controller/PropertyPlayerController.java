@@ -38,6 +38,7 @@ public class PropertyPlayerController {
         return getPlayer(playerID).getOldPlayerPosition();
     }
 
+    //Completes the actions of a special field
     public void doSpecialField(SpecialField landedField, int playerID){
         String type = landedField.getType();
 
@@ -107,6 +108,8 @@ public class PropertyPlayerController {
         propertyManager.removeOwnership(playerID);
     }
 
+    //This method returns an array of fields of which the specific player can buy
+    // at least one house on anyone of them
     public VacantField[] getCanBuildArray(int playerID) {
         int[] ownableID = propertyManager.getOwnedHouseOwnables(playerID);
         VacantField[] houses;
@@ -176,6 +179,7 @@ public class PropertyPlayerController {
         }
     }
 
+    //Gives ownership of an Ownable (property) and pays for the price of the ownable
     public void purchaseProperty(int playerID, OwnableField propertyField) {
         playerArray[playerID].reduceBalance(propertyField.getFieldPrice());
         propertyManager.setOwnerShip(playerID,propertyField.getID());

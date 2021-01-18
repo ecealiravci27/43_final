@@ -77,6 +77,7 @@ public class PropertyManager {
         return owned;
     }
 
+    //Returns number of Ownables that
     public int numberOfOwned(int owner, int fieldID) {
         int type = 0;
         int entities = 0;
@@ -127,7 +128,8 @@ public class PropertyManager {
         return ((HouseOwnable) house).getNumberOfHouses();
     }
 
-
+    //Returns an int array of the ID's of a specific players ownables
+    // meaning the ID's equivalent to the ID's of the corresponding OwnableFields
     public int[] getOwnedHouseOwnables(int playerID) {
 
         int counter = 0;
@@ -156,6 +158,7 @@ public class PropertyManager {
         return ownAblesID;
     }
 
+    //
     public int[] getOwnedOwnables(int playerID) {
 
         int counter = 0;
