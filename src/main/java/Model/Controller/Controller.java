@@ -170,6 +170,7 @@ public class Controller {
     //allows player to receive 4000 kr. when passing by the start field
     private void passStart(int oldpos, int newpos, int playerID){
         if(newpos <= 12 && oldpos > field.length - 12){
+            guiController.message("Du har nu kørt en runde og modtager derfor 4000kr");
             propertyPlayerController.changeAccount(4000, playerID);
             guiController.updateBalance(playerID, propertyPlayerController.getPlayerMoney(playerID));
         }
