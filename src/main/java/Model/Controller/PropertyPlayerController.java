@@ -26,6 +26,10 @@ public class PropertyPlayerController {
         playerArray[ID].addBalance(money);
     }
 
+    public void testReducebalance(int money, int ID) {
+        playerArray[ID].reduceBalance(money);
+    }
+
     public void setPiece(int position, int ID){
         playerArray[ID].setPiece(position);
     }

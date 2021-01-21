@@ -53,9 +53,6 @@ public class Controller {
         array[i++] = 5;
         array[i++] = 5;
 
-//        array[i++] = 5;
-//        array[i++] = 2;
-
         array[i++] = 10;
         array[i++] = 10;
 
@@ -73,38 +70,6 @@ public class Controller {
 
         array[i++] = 1;
         array[i++] = 1;
-
-//        array[i++] = 6;
-//        array[i++] = 5;
-//
-//        array[i++] = 1;
-//        array[i++] = 1;
-//
-//        array[i++] = 1;
-//        array[i++] = 7;
-//
-//        array[i++] = 9;
-//        array[i++] = 1;
-//
-//        array[i++] = 2;
-//        array[i++] = 3;
-//
-//        array[i++] = 2;
-//        array[i++] = 5;
-//
-//        array[i++] = 5;
-//        array[i++] = 3;
-//
-//        array[i++] = 2;
-//        array[i++] = 7;
-//
-//        array[i++] = 6;
-//        array[i++] = 1;
-//
-//        array[i++] = 1;
-//        array[i++] = 5;
-//
-//        array[i++] = 2;
     }
     //extracts methods from several classes
     public Controller(){
@@ -210,6 +175,18 @@ public class Controller {
         }
     }
 
+    public void testBankrupt(int counter, int ID) {
+        if (counter == 36 || counter == 38) {
+            propertyPlayerController.testReducebalance(propertyPlayerController.getPlayerMoney(ID) - 50, ID);
+        }
+
+        if (counter == 40 || counter == 42) {
+            propertyPlayerController.setPiece(1, ID);
+            int pos_1 = propertyPlayerController.getOldPlayerPosition(ID);
+            int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+            guiController.changePlayerGUIPos(ID, pos_2, pos_1);
+        }
+    }
     //moves the player from old position to a new position based on a dice roll
     private void movePlayer(int ID) {
         int dice_1 = array[counter];
@@ -217,15 +194,23 @@ public class Controller {
         int dice_2 = array[counter];
         counter++;
         System.out.println("dice 1 = " + dice_1 + " dice_2 = " + dice_2);
+        System.out.println("counter = " + counter);
+        System.out.println(array.length);
 
-        int eyesum = dice_1 + dice_2;
-        dice.setDice(eyesum);
-        guiController.showDice(dice_1, dice_2);
-        propertyPlayerController.movePiece(eyesum, ID);
-        int pos_1 = propertyPlayerController.getOldPlayerPosition(ID);
-        int pos_2 = propertyPlayerController.getPlayerPosition(ID);
-        guiController.changePlayerGUIPos(ID, pos_2, pos_1);
-        passStart(pos_1, pos_2, ID);
+
+        if (counter < 36) {
+            int eyesum = dice_1 + dice_2;
+            dice.setDice(eyesum);
+            guiController.showDice(dice_1, dice_2);
+            propertyPlayerController.movePiece(eyesum, ID);
+            int pos_1 = propertyPlayerController.getOldPlayerPosition(ID);
+            int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+            guiController.changePlayerGUIPos(ID, pos_2, pos_1);
+            passStart(pos_1, pos_2, ID);
+        } else {
+            testBankrupt(counter, ID);
+        }
+
     }
 
     //conditions for what happens when landing on a specific type of field
