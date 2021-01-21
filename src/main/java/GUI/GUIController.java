@@ -153,8 +153,11 @@ public class GUIController {
     public String setupName(String txt) {
         String chosenName = GUI.getUserString(txt);
         String lowercase = chosenName.toLowerCase();
+        if (chosenName.trim().isEmpty()) {
+            return setupName("Ugyldigt navn, prøv igen.");
+        }
         for (int i = 0; i < gPlayers.length; i++) {
-            if (gPlayers[i] != null && (gPlayers[i].getName().toLowerCase().equals(lowercase) || gPlayers[i].getName().equals(""))) {
+            if (gPlayers[i] != null && (gPlayers[i].getName().toLowerCase().equals(lowercase))) {
                 return setupName("Navnet er allerede taget, prøv et andet.");
             }
         }
@@ -179,9 +182,18 @@ public class GUIController {
         }
 
         if (!found) return array;
+        // 0, 1, 2, 3
+        // Grøn, gul, rød, blå
+        // Valgt farve: Rød
+        // Hvis grøn != Rød newarray[0] = grøn
+        // Hvis Rød != Rød
+        // Hvis blå != rød newarray[2] = blå
+
+        // Green
 
         String[] newArray = new String[array.length - 1];
         for (String string: array) {
+            // Gul
             if(string != element) {
                 newArray[counter] = string;
                 counter++;
@@ -226,20 +238,14 @@ public class GUIController {
 
     // Dropdown menu for player color
     public Color choosePlayerColor() {
-        String chosenElement = GUI.getUserSelection(
-                "Vælg farve",
-                options
-        );
+        String chosenElement = GUI.getUserSelection("Vælg farve", options);
         options = popElement(chosenElement, options);
         return playerColors.get(chosenElement);
     }
 
     // Asks the player if they want to buy a property
     public boolean wantToBuy(String propertyname) {
-        String chosenButton = GUI.getUserButtonPressed(
-                "Vil du gerne købe: " + propertyname,
-                "Ja", "Nej"
-        );
+        String chosenButton = GUI.getUserButtonPressed("Vil du gerne købe: " + propertyname, "Ja", "Nej");
         return chosenButton.equals("Ja");
     }
 
@@ -253,9 +259,7 @@ public class GUIController {
 
     // Dynamic message that can be used to display information that the player needs to acknowledge
     public void message(String msg) {
-        GUI.getUserButtonPressed(
-                msg,
-                "Ok"
+        GUI.getUserButtonPressed(msg, "Ok"
         );
     }
 
@@ -293,17 +297,12 @@ public class GUIController {
         String[] names = new String[fields.length + 1];
         VacantField chosenField = null;
 
-
-
         // Add the objects names to string array
         for (int i = 0; i < fields.length; i++) {
             names[i] = fields[i].getFieldName();
         }
         names[names.length - 1] = "AFBRYD";
-        String chosenElement = GUI.getUserSelection(
-                "Vælg hvor du gerne vil bygge et hus",
-                names
-        );
+        String chosenElement = GUI.getUserSelection("Vælg hvor du gerne vil bygge et hus", names);
 
         // Gets the field object that we have chosen from chosenElement
         for (int i = 0; i < fields.length; i++) {

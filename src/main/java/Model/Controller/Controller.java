@@ -259,6 +259,12 @@ public class Controller {
     //conditions for what happens if you land on a special field (non-ownable fields such as chance field)
     private void doSpecialField(SpecialField landedField, int playerID){
         propertyPlayerController.doSpecialField(landedField, playerID);
+
+        if (landedField.getType() == "tax") {
+            guiController.message("Du skal betale " + landedField.getTaxes() + " i skat");
+        } else if (landedField.getType() == "prison") {
+            guiController.message(landedField.getFieldDescription());
+        }
     }
 
     //conditions for what happens if you land on a property field (ownable fields that you cant build houses on such as shipping fields)
