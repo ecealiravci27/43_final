@@ -178,6 +178,13 @@ public class Controller {
     public void testBankrupt(int counter, int ID) {
         if (counter == 36 || counter == 38) {
             propertyPlayerController.testReducebalance(propertyPlayerController.getPlayerMoney(ID) - 50, ID);
+            propertyPlayerController.setPiece(10, ID);
+            int pos_1 = propertyPlayerController.getOldPlayerPosition(ID);
+            int pos_2 = propertyPlayerController.getPlayerPosition(ID);
+            guiController.changePlayerGUIPos(ID, pos_2, pos_1);
+
+
+
         }
 
         if (counter == 40 || counter == 42) {
