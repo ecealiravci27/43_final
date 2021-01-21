@@ -14,7 +14,98 @@ public class Controller {
     private int totalPlayers = 0;
     Board board;
     SuperField[] field;
+    int[] array = new int[50];
+    int counter = 0;
 
+    public void test() {
+        int i = 0;
+
+        array[i++] = 0;
+        array[i++] = 1;
+
+        array[i++] = 0;
+        array[i++] = 1;
+
+        array[i++] = 1;
+        array[i++] = 1;
+
+        array[i++] = 2;
+        array[i++] = 1;
+
+        array[i++] = 1;
+        array[i++] = 1;
+
+        array[i++] = 1;
+        array[i++] = 0;
+
+        array[i++] = 5;
+        array[i++] = 5;
+
+        array[i++] = 5;
+        array[i++] = 2;
+
+        array[i++] = 3;
+        array[i++] = 2;
+
+        array[i++] = 1;
+        array[i++] = 2;
+
+        array[i++] = 5;
+        array[i++] = 5;
+
+//        array[i++] = 5;
+//        array[i++] = 2;
+
+        array[i++] = 10;
+        array[i++] = 10;
+
+        array[i++] = 1;
+        array[i++] = 2;
+
+        array[i++] = 1;
+        array[i++] = 1;
+
+        array[i++] = 1;
+        array[i++] = 1;
+
+        array[i++] = 3;
+        array[i++] = 2;
+
+        array[i++] = 1;
+        array[i++] = 1;
+
+//        array[i++] = 6;
+//        array[i++] = 5;
+//
+//        array[i++] = 1;
+//        array[i++] = 1;
+//
+//        array[i++] = 1;
+//        array[i++] = 7;
+//
+//        array[i++] = 9;
+//        array[i++] = 1;
+//
+//        array[i++] = 2;
+//        array[i++] = 3;
+//
+//        array[i++] = 2;
+//        array[i++] = 5;
+//
+//        array[i++] = 5;
+//        array[i++] = 3;
+//
+//        array[i++] = 2;
+//        array[i++] = 7;
+//
+//        array[i++] = 6;
+//        array[i++] = 1;
+//
+//        array[i++] = 1;
+//        array[i++] = 5;
+//
+//        array[i++] = 2;
+    }
     //extracts methods from several classes
     public Controller(){
         this.cardPile = new CardPile();
@@ -35,6 +126,7 @@ public class Controller {
     private void play() {
         boolean endgame = false;
         //number of rounds
+        test();
         while (!endgame) {
             int counter = 0;
             for (int i = 0; i < 1000; i++) {
@@ -85,8 +177,9 @@ public class Controller {
     //removes ownership of a property by removing the border on the GUI when a player goes bankrupt
     private void bankruptExecution(int playerID){
         int[] owned = propertyPlayerController.getOwned(playerID);
-        propertyPlayerController.removeOwnerShip(playerID);
+
         for (int i = 0; i < owned.length; i++) {
+            propertyPlayerController.removeOwnerShip(owned[i]);
             guiController.removePlayerBorder(playerID, owned[i]);
         }
     }
@@ -119,8 +212,12 @@ public class Controller {
 
     //moves the player from old position to a new position based on a dice roll
     private void movePlayer(int ID) {
-        int dice_1 = dice.rollDice();
-        int dice_2 = dice.rollDice();
+        int dice_1 = array[counter];
+        counter++;
+        int dice_2 = array[counter];
+        counter++;
+        System.out.println("dice 1 = " + dice_1 + " dice_2 = " + dice_2);
+
         int eyesum = dice_1 + dice_2;
         dice.setDice(eyesum);
         guiController.showDice(dice_1, dice_2);
@@ -175,8 +272,13 @@ public class Controller {
             }
         }
         else if (!(propertyPlayerController.getOwnership(landedField.getID()) == playerID)) {
+            System.out.println("payplayerrent" + landedField.getFieldName());
             int owner = propertyPlayerController.getOwnership(fieldID);
-            propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
+            System.out.println("owner = " + owner);
+            System.out.println("playerid = " + playerID);
+
+            int rent = propertyPlayerController.payPlayerRent(landedField,owner, playerID, dice.getRememberDice());
+            guiController.message("Du skal betale " + rent + "kr" );
         }
     }
 

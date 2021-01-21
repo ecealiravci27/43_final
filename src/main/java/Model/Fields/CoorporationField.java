@@ -20,7 +20,7 @@ public class CoorporationField extends OwnableField {
             tempRent = eyesum * multiplier_for_one;
         }
         if (owned_coorporations == 2){
-            tempRent = (2*rent)* getMultiplier_for_two;
+            tempRent = eyesum * getMultiplier_for_two;
         }
         return tempRent;
     }

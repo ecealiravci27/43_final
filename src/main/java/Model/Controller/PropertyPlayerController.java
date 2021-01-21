@@ -157,16 +157,17 @@ public class PropertyPlayerController {
             rent = field.getRent(eyeSum,numberOfHouses);
         }
         //Rent for a Shipping or Corperation field
-        else if ((field instanceof CoorporationField)){
+        else if ((field instanceof CoorporationField) || (field instanceof ShippingField)){
             rent = field.getRent(eyeSum,propertyManager.numberOfOwned(playerID,field.getID()));
         }
         return rent;
     }
-    public void payPlayerRent(OwnableField field, int owner, int playerID, int eyeSum) {
+    public int payPlayerRent(OwnableField field, int owner, int playerID, int eyeSum) {
         int rent;
-        rent = getRent(field, playerID, eyeSum);
+        rent = getRent(field, owner, eyeSum);
+        System.out.println("rent = " + rent);
         Ownable propertyObject = propertyManager.getOwnable(field.getID());
-        if (playerArray[playerID].getBalance() < rent) {
+        if (playerArray[playerID].getBalance() <= rent) {
             playerArray[owner].addBalance(playerArray[playerID].getBalance());
             playerArray[playerID].reduceBalance(rent);
             playerArray[playerID].bankrupt();
@@ -174,6 +175,7 @@ public class PropertyPlayerController {
             playerArray[owner].addBalance(rent);
             playerArray[playerID].reduceBalance(rent);
         }
+        return rent;
     }
 
     public void purchaseProperty(int playerID, OwnableField propertyField) {

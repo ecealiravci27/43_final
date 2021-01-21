@@ -28,7 +28,9 @@ public class CardPile {
     //the following method allows the player to draw a card from the cardpile
     public SuperCard drawCard() {
         counter = (counter%cards.length);
-        return cards[counter];
+        SuperCard card = cards[counter];
+        counter++;
+        return card;
     }
 
     //this method swaps positions inside array
